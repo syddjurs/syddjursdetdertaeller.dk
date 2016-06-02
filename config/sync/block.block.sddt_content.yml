@@ -1,0 +1,22 @@
+uuid: ea047216-2e5b-42cd-b4fb-d55cad91c8b8
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sddt
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: sddt_content
+theme: sddt
+region: content
+weight: -2
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Primært sideindhold'
+  provider: system
+  label_display: '0'
+visibility: {  }

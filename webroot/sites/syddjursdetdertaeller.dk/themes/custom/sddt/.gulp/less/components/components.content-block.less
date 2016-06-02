@@ -1,0 +1,84 @@
+/**
+ * Component: Content-block
+ */
+
+.content-block {
+  padding: 60px 0;
+
+  // If there are 2 content blocks right after each other, add a border-top to the inner block
+  + .content-block {
+    padding-top: 0;
+
+    .content-block__inner {
+      padding-top: 60px;
+      border-top: 1px solid @color-gray;
+    }
+  }
+
+  + .content-block {
+    .content-block--nested .content-block__inner {
+      padding-top: 0;
+      border-top: 0;
+    }
+  }
+
+  // Modifiers
+  &--nested {
+    padding: 0;
+    margin-bottom: 30px;
+
+    @media (min-width:@screen-md) {margin-bottom: 0;}
+
+  }
+  &--image-with-button {
+    position: relative;
+
+    .content-block__inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 5;
+      color: @color-white;
+      padding: 20px;
+
+      @media (min-width:@screen-sm) {padding: 40px;}
+    }
+
+    .content-block-cta {
+      position: absolute;
+      margin-top: 0;
+      text-align: left;
+      bottom: 20px;
+      right: 20px;
+
+      @media (min-width:@screen-sm) {
+        bottom: 40px;
+        right: 40px;
+      }
+    }
+  }
+
+  figure {margin-bottom: 30px;}
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+}
+
+.content-block-cta {
+  margin-top: 30px;
+  text-align: center;
+
+  &__label {
+    margin-top: 10px;
+    display: block;
+  }
+
+  &__button {
+    min-width: 200px;
+    margin-bottom: 20px;
+  }
+}

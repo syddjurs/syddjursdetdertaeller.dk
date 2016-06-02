@@ -1,0 +1,8 @@
+name: Novicell Error Pages
+description: Creates 403 and 404 pages
+package: Novicell
+type: module
+version: 8.x-1.0
+core: 8.x
+dependencies:
+  - novicell

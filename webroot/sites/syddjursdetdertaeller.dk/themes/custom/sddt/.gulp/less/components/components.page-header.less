@@ -1,0 +1,18 @@
+/**
+ * Component: Page header
+ */
+
+.page-header {
+  margin-bottom: 30px;
+
+  padding-top: 90px;
+  @media (min-width:@screen-md){ padding-top: 160px;}
+
+  &__title {font-size: 24px;}
+  &__lead {margin-bottom: 0;}
+}
+
+body.user-logged-in .page-header {
+  padding-top: 30px;
+  @media (min-width:@screen-md){ padding-top: 60px;}
+}

@@ -1,0 +1,90 @@
+/*
+ * Main stylesheet
+ *
+ * This is where we make sure all stylesheets are combined properly and imported
+ * Please refrain from writing any actual code in this file, other than imports
+ */
+
+/*!
+
+PROJECT NAME
+
+Proud authors:      www.novicell.dk
+People behind:      Lars Hesselberg, @hesselberg
+
+!*/
+
+
+/**
+ * Class notation:  BEM - https://css-tricks.com/bem-101/
+ *
+ * Quick example of BEM class notation:
+ *
+ * BLOCK:           breadcrumb
+ * ELEMENT:         breadcrumb__link
+ * MODIFIER:        breadcrumb__link—-active
+ *
+ *
+ * So, for the markup it would look something like:
+ *
+ * <div class="breadcrumb">                                                      <---- BLOCK
+ *     <a class="breadcrumb__link" href="#">Home</a>                             <---- ELEMENT below the BLOCK
+ *     <span class="breadcrumb__link breadcrumb__link--active">Page</span>       <---- Also an ELEMENT, but to make it look active, we add the MODIFIER 'active'
+ * </div>
+ */
+
+/* Fonts -- either self hosted or via Google.
+/* ONLY for testing purposes, please async load your fonts!
+********************/
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
+
+
+/* Settings
+********************/
+@import "settings/settings.variables.less";
+
+
+/* Mixins
+********************/
+@import "mixins/mixins.vendor-prefixes.less";
+@import "mixins/mixins.grid.less";
+@import "mixins/mixins.grid-framework.less";
+@import "mixins/mixins.gradients.less";
+@import "mixins/mixins.clearfix.less";
+@import "mixins/mixins.buttons.less";
+
+
+/* Base
+********************/
+@import "base/base.normalize.less";
+@import "base/base.browserfixes.less";
+@import "base/base.less";
+@import "base/base.icons.less";
+@import "base/base.typography.less";
+@import "base/base.utilities.less";
+@import "base/base.grid.less";
+@import "base/base.buttons.less";
+@import "base/base.forms.less";
+@import "base/base.tables.less";
+@import "base/base.drupal.less";
+
+
+/* Components
+********************/
+@import "components/components.breadcrumb.less";
+@import "components/components.cookie-info.less";
+@import "components/components.content-block.less";
+@import "components/components.cookie-info.less";
+@import "components/components.local-tasks.less";
+@import "components/components.mobile-navigation.less";
+@import "components/components.notifications.less";
+@import "components/components.overlay.less";
+@import "components/components.page-header.less";
+@import "components/components.site-footer.less";
+@import "components/components.site-global-header.less";
+@import "components/components.site-header.less";
+@import "components/components.site-navigation.less";
+@import "components/components.site-search.less";
+
+/* Views
+********************/

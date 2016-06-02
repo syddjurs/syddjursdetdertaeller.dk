@@ -1,0 +1,70 @@
+<?php
+
+use Drupal\Core\Config\Config;
+use Drupal\node\Entity\Node;
+
+/**
+ * Implements hook_install
+ */
+function nc_error_pages_install() {
+  // If 403 and 404 error pages is already created we do not create them
+  $config = \Drupal::configFactory()->get('system.site');
+  if(empty($config->get('page.404')) && empty($config->get('page.403'))) {
+    _nc_create_error_pages();
+  }
+
+  // Just to keep track of the error pages we save their paths
+  // In a custom config store
+  /*\Drupal::configFactory()->getEditable('nc.errorpages')
+    ->set('page.403', $config->get('page.403'))
+    ->set('page.404', $config->get('page.404'))
+    ->save();*/
+}
+
+/**
+ * Implements hook_uninstall
+ */
+function nc_error_pages_uninstall() {
+  \Drupal::configFactory()->reset('nc.errorpages');
+}
+
+/**
+ * Funtion to create the error pages
+ */
+function _nc_create_error_pages() {
+  // Create 404 page
+  $page_404 = Node::create([
+    'nid' => NULL,
+    'type' => 'page',
+    'title' => '404',
+    'uid' => 1,
+    'status' => TRUE,
+    'path' => '/404'
+
+  ]);
+
+  // Create 403 page
+  $page_403 = Node::create([
+    'nid' => NULL,
+    'type' => 'page',
+    'title' => '403',
+    'uid' => 1,
+    'status' => TRUE,
+    'path' => '/403'
+
+  ]);
+
+  // Save custom error pages
+  $page_404->save();
+  $page_403->save();
+
+  // Get path from alias
+  $site_403 = \Drupal::service('path.alias_manager')->getPathByAlias('/403');
+  $site_404 = \Drupal::service('path.alias_manager')->getPathByAlias('/404');
+
+  // Save the configuration
+  \Drupal::configFactory()->getEditable('system.site')
+    ->set('page.403', $site_403)
+    ->set('page.404', $site_404)
+    ->save();
+}

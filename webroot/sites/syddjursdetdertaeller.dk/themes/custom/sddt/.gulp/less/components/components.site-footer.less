@@ -1,0 +1,95 @@
+/**
+ * Component: Site footer
+ */
+
+.site-footer {
+    background-color: @color-gray-dark;
+    border-top: 4px solid @color-secondary;
+    padding: 40px 0;
+    color: @color-white;
+
+    &__site-link {
+        font-size: 16px;
+        color: @color-white;
+        margin-top: 30px;
+        display: block;
+        text-align: right;
+
+        &:hover {color: @color-white;}
+    }
+
+    &__title {
+        text-transform: uppercase;
+        display: block;
+        color: @color-gray-light;
+        font-weight: 500;
+        margin-bottom: 5px;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 30px;
+
+        @media (min-width:@screen-md) {margin-bottom: 0;}
+    }
+
+    &__link {
+        display: block;
+        line-height: 30px;
+        color: @color-white;
+
+        &:hover {color: @color-white;}
+    }
+}
+
+.site-footer-contact {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+
+    @media (min-width:@screen-md) {margin-bottom: 0;}
+
+    &__name {font-weight: 500;}
+
+    &__name,
+    &__email,
+    &__address {
+        //display: block;
+        line-height: 30px;
+    }
+
+    &__email-link {
+        color: @color-white;
+
+        &:hover {color: @color-white;}
+    }
+}
+
+.site-footer-customer-service {
+    &__phone,
+    &__opening-hours {
+        display: block;
+        line-height: 30px;
+    }
+
+    &__phone-number {
+        color: @color-white;
+
+        &:hover {color: @color-white;}
+    }
+}
+
+.site-footer-social-medias {
+    margin-top: 30px;
+
+    &__link {
+        color: @color-white;
+        margin-right: 15px;
+
+        &:hover {
+            color: @color-white;
+            text-decoration: none;
+        }
+    }
+}

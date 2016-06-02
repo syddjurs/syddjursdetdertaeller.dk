@@ -1,0 +1,3 @@
+webroot/sites/*/files
+webroot/sites/*/settings.*.php
+webroot/drush/*

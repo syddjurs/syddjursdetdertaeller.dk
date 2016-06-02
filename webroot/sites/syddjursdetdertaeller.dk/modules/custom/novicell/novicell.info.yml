@@ -1,0 +1,6 @@
+name: Novicell Base
+description: Novicell Base Module
+package: Novicell
+type: module
+version: 8.x-1.0
+core: 8.x

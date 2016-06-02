@@ -1,0 +1,27 @@
+uuid: 0a23e23d-3537-47da-a592-34469b65650c
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sddt
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: sddt_page_title
+theme: sddt
+region: content
+weight: -5
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: Sidetitel
+  provider: core
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: true
+    context_mapping: {  }

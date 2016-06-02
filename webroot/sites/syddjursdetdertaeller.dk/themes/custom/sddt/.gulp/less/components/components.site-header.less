@@ -1,0 +1,90 @@
+/**
+ * Component: Site header
+ * Logo, menu, sticky feature
+ */
+
+ .site-header {
+  position: relative;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, .9);
+  border-bottom: 4px solid @color-secondary;
+  padding: 10px 0;
+  .transition(padding-left .3s);
+
+  @media (max-width:@screen-sm-max) {position: fixed;}
+
+  &.js-fixed {
+    position: fixed;
+    top: 0;
+
+    .site-navigation {margin-top: 0;}
+    .site-navigation__counter {
+      top: -8px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 8px;
+    }
+    .logo__image {
+      width: 58px;
+      height: 18px;
+    }
+    .logo__branch {font-size: 15px;}
+  }
+
+  @media (min-width:@screen-md) {
+    padding: 10px 0 0;
+    top: 42px; // 42px off from the global header
+  }
+
+  @media (max-width:420px) {
+    &.js-menu-open {padding-left: 50%;}
+  }
+}
+
+.logo {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  top: 7px;
+  float: left;
+
+  &:hover {text-decoration: none;}
+
+  @media (min-width:@screen-md) {top: 0;}
+
+  &__image {
+    display: inline-block;
+    width: 58px;
+    height: 18px;
+    .transition(all .3s);
+
+    @media (min-width:@screen-md) {
+      width: 115px;
+      height: 35px;
+    }
+  }
+
+  &__branch {
+    display: inline-block;
+    color: @color-text;
+    line-height: 1;
+    font-size: 15px;
+    .transition(all .3s);
+
+    @media (min-width:@screen-md) {font-size: 30px;}
+  }
+
+  // Mobile variant, for the mobile navigation
+  &--mobile {
+    margin-bottom: 10px;
+    float: none;
+    top: 0;
+
+    .logo__image {width: 76px;}
+    .logo__branch {font-size: 22px;}
+  }
+}

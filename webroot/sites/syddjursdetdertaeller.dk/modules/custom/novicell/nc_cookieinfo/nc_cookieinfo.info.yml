@@ -1,0 +1,8 @@
+name: Novicell Cookieinfo
+description: Add a cookieinfo box at the bottom of the page
+package: Novicell
+type: module
+version: 8.x-1.0
+core: 8.x
+dependencies:
+  - novicell

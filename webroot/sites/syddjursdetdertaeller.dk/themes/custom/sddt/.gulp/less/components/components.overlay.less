@@ -1,0 +1,70 @@
+/**
+ * Component: Overlay
+ */
+
+.overlay-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  outline: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, .75);
+}
+
+#js-overlay-content {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 3301;
+  display: none;
+
+  @media (min-width:@screen-sm) {
+    width: 50%;
+    height: 50%;
+  }
+}
+
+.js-overlay-inner {
+  background: @color-white;
+  height: 100%;
+  overflow: hidden;
+  padding: 40px 0;
+  border-radius: 0;
+}
+
+.js-overlay-inner-scroll {
+  overflow-y: auto;
+  height: 100%;
+  padding: 0 40px;
+}
+
+.js-overlay-close {
+  background-color: @color-primary;
+  height: 60px;
+  width: 60px;
+  line-height: 60px;
+  border:0;
+  position: absolute;
+  top: 0;
+  right: -60px;
+  cursor: pointer;
+  color: @color-white;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+
+  &:hover {
+    text-decoration: none;
+    color: @color-white;
+    background-color: darken(@color-primary, 10%);
+  }
+}

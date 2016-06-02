@@ -1,0 +1,25 @@
+sddt.xs:
+  label: 'Extra small'
+  mediaQuery: 'and (min-width : 320px)'
+  weight: 0
+  multipliers:
+    - 1x
+    - 2x
+sddt.sm:
+  label: 'Small'
+  mediaQuery: 'and (min-width : 768px)'
+  weight: 1
+  multipliers:
+    - 1x
+sddt.md:
+  label: 'Medium'
+  mediaQuery: 'and (min-width : 992px) '
+  weight: 2
+  multipliers:
+    - 1x
+sddt.lg:
+  label: 'Large'
+  mediaQuery: 'and (min-width : 1200px)'
+  weight: 3
+  multipliers:
+    - 1x

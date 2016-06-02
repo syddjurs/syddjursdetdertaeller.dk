@@ -1,0 +1,70 @@
+/**
+ * Component: Notifications
+ */
+
+.notification-container {}
+
+.notification {
+  background-color: @color-notification-bg;
+  border: 1px solid @color-notification-border;
+  color: @color-notification-text;
+  padding: 20px;
+  border-radius: 2px;
+  font-size: 14px;
+  margin: 20px 0;
+  position: relative;
+
+  // Close button
+  &__close {
+    background-color: @color-notification-border;
+    color: @color-notification-text;
+    border: 0;
+    padding: 0;
+    height: 20px;
+    width: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-weight: bold;
+    border-radius: 0 0 0 25%;
+
+    &:focus {outline: none;}
+  }
+
+  // Modifiers
+  &--status {
+    background-color: @color-success-bg;
+    border: 1px solid @color-success-border;
+    color: @color-success-text;
+
+    .notification__close {
+      background-color: @color-success-border;
+      color: @color-success-text;
+    }
+  }
+
+  &--warning {
+    background-color: @color-warning-bg;
+    border: 1px solid @color-warning-border;
+    color: @color-warning-text;
+
+    .notification__close {
+      background-color: @color-warning-border;
+      color: @color-warning-text;
+    }
+  }
+
+  &--error {
+    background-color: @color-error-bg;
+    border: 1px solid @color-error-border;
+    color: @color-error-text;
+
+    .notification__close {
+      background-color: @color-error-border;
+      color: @color-error-text;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+master:
+  version: VERSION
+  css:
+    theme:
+      css/master.min.css: {}
+  js:
+    scripts/vendor.min.js: {} # Enable if vendor js files in used
+    scripts/master.min.js: {}
+  dependencies:
+    - core/jquery

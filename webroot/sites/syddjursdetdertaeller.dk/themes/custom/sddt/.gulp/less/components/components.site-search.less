@@ -1,0 +1,46 @@
+/**
+ * Components: Site search
+ */
+
+ .site-search {
+  position: relative;
+
+  @media (min-width:@screen-md) {
+    float: right;
+    margin-right: 10px;
+  }
+
+  &__input {
+    background-color: #d8d8d8;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border: 0;
+    .box-shadow(none);
+    border-radius: 2px;
+    height: 25px;
+    padding: 4px 50px 4px 6px;
+    line-height: 1;
+    opacity: .9;
+    font-size: 12px;
+    display: block;
+
+    &:focus {outline: none;}
+
+    &:focus,
+    &:hover {opacity: 1;}
+
+    @media (min-width:@screen-md) {width: 165px;}
+  }
+
+  &__button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: 0;
+    font-size: 14px;
+    padding: 0 12px;
+    height: 25px;
+
+    &:focus {outline: none;}
+  }
+}

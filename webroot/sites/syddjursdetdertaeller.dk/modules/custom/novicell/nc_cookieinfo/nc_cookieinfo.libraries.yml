@@ -1,0 +1,11 @@
+nc_cookieinfo:
+  version: 1
+  css:
+      theme:
+        css/nc_cookieinfo.css: {}
+  js:
+    js/nc_cookieinfo.js: {}
+  dependencies:
+    - core/jquery
+    #- core/jquery.once
+    - core/drupal

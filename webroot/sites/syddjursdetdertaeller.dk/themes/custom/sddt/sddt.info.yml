@@ -1,0 +1,25 @@
+name: 'Syddjurs - det der tæller'
+type: theme
+description: 'Responsive theme'
+package: Novicell
+
+libraries:
+  - sddt/master
+#  - core/jquery
+#  - core/jquery.once
+#  - core/drupal
+
+
+# Define regions
+regions:
+  global_header: 'Global Header'
+  header: 'Header'
+  highlighted: 'Highlighted'
+  content: 'Main content'
+  sidebar_first: 'First sidebar'
+  sidebar_second: 'Second sidebar'
+  footer: 'Footer'
+  footer_below: 'Below footer'
+
+version: VERSION
+core: '8.x'

@@ -1,0 +1,29 @@
+uuid: 0dad9823-5e2f-423c-a4fd-34dfd6b37d77
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_section
+    - node.type.page
+  module:
+    - entity_reference_revisions
+id: node.page.field_section
+field_name: field_section
+entity_type: node
+bundle: page
+label: Bånd
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      single_section_text: single_section_text
+    target_bundles_drag_drop:
+      single_section_text:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

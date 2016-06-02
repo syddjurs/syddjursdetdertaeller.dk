@@ -1,0 +1,30 @@
+{% set classes = [
+  'card-thumbnail'
+] %}
+
+<div{{ attributes.addClass(classes) }}>
+  <figure class="card-thumbnail-media">
+    <div class="card-thumbnail-info js-tooltip">
+      <button class="card-thumbnail-info__trigger js-tooltip-trigger">i</button>
+      <div class="card-thumbnail-info-content js-tooltip-content">
+        <button class="card-thumbnail-info-content__close js-tooltip-trigger">X</button>
+        <span class="card-thumbnail-info-content__title">{{ label }}</span>
+        <p class="card-thumbnail-info-content__description">{{ opinion }}</p>
+        {% if expanded_view %}
+        <a class="card-thumbnail-info-content__link" href="{{ path('entity.node.canonical', {'node': node.id}) }}">{{ 'Read more about'|t }} {{ label }}</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="card-thumbnail-media__channel">
+      <img src="{{ cdn }}/{{ sid }}/233x147.png">
+    </div>
+  </figure>
+  <div class="card-thumbnail-controls">
+    <div class="card-thumbnail-controls__cta">
+      <span class="card-thumbnail-controls__link">{{ link_label }}</span>
+    </div>
+    <div class="card-thumbnail-controls-price">
+      <span class="card-thumbnail-controls-price__value product-price">{% if prices.mittv %}{{ prices.mittv|number_format(0, '.', ',') }},-{% elseif prices.fritvalg %}{{ prices.fritvalg|number_format(0, '.', ',') }},-{% endif %}</span>
+    </div>
+  </div>
+</div>

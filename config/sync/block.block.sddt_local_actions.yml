@@ -1,0 +1,20 @@
+uuid: 7f8f5910-622d-4abd-8e0d-15a15cedc081
+langcode: da
+status: true
+dependencies:
+  theme:
+    - sddt
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: sddt_local_actions
+theme: sddt
+region: content
+weight: -3
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Primære adminsitratorhandlinger'
+  provider: core
+  label_display: '0'
+visibility: {  }

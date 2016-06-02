@@ -1,0 +1,196 @@
+<?php
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+function sddt_image_style_from_field(&$variables, $field) {
+  if (!empty($variables['content'][$field][0]['#item']) && $item = $variables['content'][$field][0]['#item']) {
+    $style = ImageStyle::load($variables['content'][$field][0]['#image_style']);
+    $uri = $item->get('entity')
+      ->getTarget()
+      ->getValue()
+      ->getFileUri();
+    if (!empty($uri)) {
+      $url = $style->buildUrl($uri);
+    }
+    else {
+      $url = '';
+    }
+    $variables['styled_image'][$field] = array(
+      'url' => $url,
+    );
+  }
+}
+
+function sddt_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if ($variables['elements']['#plugin_id'] == 'system_main_block') {
+    $current_path = \Drupal::request()->getPathInfo();
+    $path_args = explode('/', $current_path);
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['elements']['#id'] . '__' . $path_args[1];
+  }
+
+  if (!isset($variables['elements']['#configuration']['region'])) {
+    $block_id = $variables['elements']['#id'];
+    $block = \Drupal\block\Entity\Block::load($block_id);
+    $variables['region'] = $block->getRegion();
+    $suggestions[] = 'block__' . $variables['region'];
+    if (isset($block_id)) {
+      $suggestions[] = 'block__' . $variables['region'] . '__' . $block_id;
+    }
+  }
+
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $block_content = $variables['elements']['content']['#block_content'];
+    if ($bundle = $block_content->bundle()) {
+      $suggestions[] = 'block__' . $bundle;
+    }
+  }
+}
+
+function sddt_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if (isset($variables['element'])) {
+    $element = $variables['element'];
+    switch ($hook) {
+      case 'input':
+        $suggestions[] = 'input__' . $element['#name'];
+      case 'form_element':
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $element['#type'] . (!empty($element['#name']) ? '__' . $element['#name'] : '');
+        break;
+      case 'form':
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $element['#form_id'];
+        break;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_alter
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function sddt_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'search_block_form':
+      $form['keys']['#attributes']['class'] = array('site-search__input');
+      $form['keys']['#type'] = 'textfield';
+      $form['keys']['#title_display'] = 'hidden';
+      unset($form['keys']['#theme_wrappers']);
+      unset($form['actions']['#theme_wrappers']);
+      $form['actions']['submit']['#search'] = TRUE;
+      break;
+    case 'search_form':
+      $form['#attributes']['class'] = 'search-results-form';
+      unset($form['basic']['#attributes']['class']);
+      unset($form['help_link']);
+
+      $form['basic']['keys'] = array(
+        '#type' => 'textfield',
+        '#title' => $form['basic']['keys']['#title'],
+        '#title_display' => 'hidden',
+        '#default_value' => $form['basic']['keys']['#default_value'],
+        '#attributes' => array(
+          'class' => array('input', 'search-results-form__input'),
+          'placeholder' => $form['basic']['keys']['#title']
+        ),
+        '#wrapper_attributes' => array('class' => array('search-results-form__input-container'))
+      );
+
+      $form['basic']['submit']['#weight'] = -1;
+      $form['basic']['submit']['#attributes']['class'] = array(
+        'button',
+        'search-results-form__button'
+      );
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_HOOK (input)
+ * @param $variables
+ */
+function sddt_preprocess_input(&$variables) {
+  if (in_array($variables['theme_hook_original'],['input__textfield','input__password'])) {
+    $variables['attributes']['class'][] = 'input';
+  }
+
+  if ($variables['theme_hook_original'] == 'input__submit') {
+    $variables['attributes']['class'][] = 'button';
+  }
+
+  if ($variables['theme_hook_original'] == 'input__submit' && isset($variables['element']['#search'])) {
+    $variables['attributes']['class'] = array('site-search__button');
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_HOOK (input)
+ * @param $variables
+ */
+function sddt_preprocess_form(&$variables) {
+  switch ($variables['attributes']['id']) {
+    case 'search-block-form':
+      $variables['attributes']['class'][] = 'site-search';
+      $variables['attributes']['id'] = 'js-site-search';
+      break;
+  }
+}
+
+/**
+ * Implementing hook_preprocess_HOOK (paragraph)
+ * @param $variables
+ */
+function sddt_preprocess_paragraph(&$variables) {
+  $paragraph = $variables['paragraph'];
+
+  switch ($paragraph->bundle()) {
+    case 'top_banner_hero':
+      $variables['attributes']['class'][] = 'hero';
+      sddt_image_style_from_field($variables, 'field_image');
+      break;
+    case 'single_section_text':
+      // Set attributes
+      $variables['attributes']['class'][] = 'content-block';
+//      $variables['attributes']['class'][] = 'col--xs-12';
+//      $variables['attributes']['class'][] = 'col--md-6';
+//      $variables['alignment'] = ($paragraph->field_align_right->value == 1) ? 'right' : 'left';
+//      $variables['content']['field_link'][0]['#attributes']['class'] = array(
+//        'button',
+//        'button--secondary'
+//      );
+//      if ($fid = $paragraph->field_image->target_id) {
+//        $file = File::load($fid);
+//        $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
+//        $variables['attributes']['class'][] = 'splash';
+//        $variables['attributes']['style'][] = 'background-image: url(' . $path . ');';
+//      }
+//      $variables['button'] = [
+//        '#title' => t('See all questions and answers'),
+//        '#type' => 'link',
+//        '#url' => Url::fromUserInput('/kundeservice/tv/faq'),
+//        '#attributes' => array(
+//          'class' => array('button', 'button--secondary')
+//        )
+//      ];
+      break;
+  }
+}
+
+function sddt_preprocess_block(&$variables) {
+  if (isset($variables['content']['#block_content'])) {
+    $block = $variables['content']['#block_content'];
+
+    if ($block->bundle() == 'hero_tv') {
+      if ($fid = $block->field_banner->target_id) {
+        $file = File::load($fid);
+        $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
+        $variables['attributes']['class'][] = 'hero';
+        $variables['hero_image'] = $path;
+        $variables['content']['field_button'][0]['#attributes']['class'] = array(
+          'button',
+          'button--large',
+          'content-block-cta__button',
+        );
+      }
+    }
+  }
+}

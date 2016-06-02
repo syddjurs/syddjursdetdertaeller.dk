@@ -1,0 +1,23 @@
+{{ page.global_header }}
+<div id="js-site-header" class="site-header">
+  <div class="container">
+    <a class="logo" href="/">
+      <img class="logo__image" src="/{{ directory }}/images/logo.png" alt="Logo">
+      <span class="logo__branch"></span>
+    </a>
+    {{ page.header }}
+    <button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
+      <span class="mobile-navigation-button__icon"></span>
+    </button>
+  </div>
+</div>
+{% include directory ~ '/templates/navigation/mobile-navigation.html.twig' %}
+{{ page.highlighted }}
+{{ page.help }}
+{{ page.content }}
+<footer class="site-footer">
+  <div class="container">
+    {{ page.footer }}
+    {{ page.footer_below }}
+  </div>
+</footer>
