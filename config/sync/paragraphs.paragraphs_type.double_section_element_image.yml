@@ -1,0 +1,6 @@
+uuid: 24122444-9f4b-42ff-9243-58f72d2028d6
+langcode: da
+status: true
+dependencies: {  }
+id: double_section_element_image
+label: '1/2: Billede'

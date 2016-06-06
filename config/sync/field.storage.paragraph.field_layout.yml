@@ -1,0 +1,30 @@
+uuid: f6b85d25-ab8a-49d2-ae62-d8a38d6763f3
+langcode: da
+status: true
+dependencies:
+  module:
+    - options
+    - paragraphs
+id: paragraph.field_layout
+field_name: field_layout
+entity_type: paragraph
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: white
+      label: Hvid
+    -
+      value: orange
+      label: Orange
+    -
+      value: red
+      label: Rød
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

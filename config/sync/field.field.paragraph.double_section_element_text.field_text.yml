@@ -1,0 +1,21 @@
+uuid: 4065c63b-ae4a-451c-a1c2-2d9cf3e3dc8c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - text
+id: paragraph.double_section_element_text.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: double_section_element_text
+label: Tekst
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

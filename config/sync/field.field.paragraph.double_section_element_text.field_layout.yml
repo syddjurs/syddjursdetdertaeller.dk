@@ -1,0 +1,23 @@
+uuid: dba5da47-558f-4aad-b4c9-285d3f609ace
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_layout
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - options
+id: paragraph.double_section_element_text.field_layout
+field_name: field_layout
+entity_type: paragraph
+bundle: double_section_element_text
+label: Layout
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string

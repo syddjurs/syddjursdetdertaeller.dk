@@ -1,0 +1,23 @@
+uuid: 5de9404c-e6d3-40d1-accf-e0d7a658a98a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_cta_button
+    - paragraphs.paragraphs_type.single_section_text
+  module:
+    - link
+id: paragraph.single_section_text.field_cta_button
+field_name: field_cta_button
+entity_type: paragraph
+bundle: single_section_text
+label: 'CTA knap'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 2
+field_type: link
