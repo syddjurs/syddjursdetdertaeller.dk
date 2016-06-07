@@ -6,9 +6,31 @@
       {#<span class="logo__branch"></span>#}
     </a>
 
-    <button class="navigation-button">
-      <img class="navigation-button__icon" src="/{{ directory }}/icons/burger-menu.svg" alt="Logo">
-    </button>
+    <div class="header-right">
+      <div class="social-media">
+        <p class="social-media__hashtag">#detdertæller</p>
+        <a Class="social-media__link" href="/">
+          <svg class="social-media__instagram">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#instagram-logo"></use>
+          </svg>
+        </a>
+        <a Class="social-media__link" href="/">
+          <svg class="social-media__facebook">
+            <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#facebook-logo"></use>
+          </svg>
+        </a>
+      </div>
+
+      <button class="navigation-button">
+        <svg class="navigation-button__icon">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>
+        </svg>
+      </button>
+
+      <button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
+        <span class="mobile-navigation-button__icon"></span>
+      </button>
+    </div>
 
     {{ page.header }}
     {#<button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
