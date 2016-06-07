@@ -12,7 +12,8 @@ var sddt = sddt || {};
 // Document ready
 jQuery(function () {
 // sddt.polyfills.init();
-// sddt.navigation.init();
+sddt.navigation.init();
+sddt.overlay.init();
 // sddt.overlay.init();
 // sddt.animations.init();
 // sddt.tooltip.init();
