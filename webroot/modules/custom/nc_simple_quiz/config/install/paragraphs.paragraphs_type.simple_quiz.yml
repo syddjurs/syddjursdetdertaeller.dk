@@ -1,0 +1,5 @@
+langcode: da
+status: true
+dependencies: {  }
+id: simple_quiz
+label: 'Simple Quiz'

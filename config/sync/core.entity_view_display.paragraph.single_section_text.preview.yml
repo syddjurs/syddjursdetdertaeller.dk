@@ -5,7 +5,11 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.single_section_text.field_body
+    - field.field.paragraph.single_section_text.field_cta_button
     - field.field.paragraph.single_section_text.field_headline
+    - field.field.paragraph.single_section_text.field_image
+    - field.field.paragraph.single_section_text.field_insert_space
+    - field.field.paragraph.single_section_text.field_layout
     - paragraphs.paragraphs_type.single_section_text
 id: paragraph.single_section_text.preview
 targetEntityType: paragraph
@@ -22,4 +26,8 @@ content:
 hidden:
   created: true
   field_body: true
+  field_cta_button: true
+  field_image: true
+  field_insert_space: true
+  field_layout: true
   uid: true

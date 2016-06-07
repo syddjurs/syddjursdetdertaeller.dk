@@ -1,0 +1,6 @@
+uuid: cbeb8335-3ade-451a-aea9-4278b069022c
+langcode: da
+status: true
+dependencies: {  }
+id: double_section_element_text
+label: '1/2: Tekst'

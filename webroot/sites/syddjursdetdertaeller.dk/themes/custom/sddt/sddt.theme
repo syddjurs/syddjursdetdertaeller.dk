@@ -150,29 +150,49 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'single_section_text':
       // Set attributes
       $variables['attributes']['class'][] = 'content-block';
-//      $variables['attributes']['class'][] = 'col--xs-12';
-//      $variables['attributes']['class'][] = 'col--md-6';
-//      $variables['alignment'] = ($paragraph->field_align_right->value == 1) ? 'right' : 'left';
-//      $variables['content']['field_link'][0]['#attributes']['class'] = array(
-//        'button',
-//        'button--secondary'
-//      );
-//      if ($fid = $paragraph->field_image->target_id) {
-//        $file = File::load($fid);
-//        $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
-//        $variables['attributes']['class'][] = 'splash';
-//        $variables['attributes']['style'][] = 'background-image: url(' . $path . ');';
-//      }
-//      $variables['button'] = [
-//        '#title' => t('See all questions and answers'),
-//        '#type' => 'link',
-//        '#url' => Url::fromUserInput('/kundeservice/tv/faq'),
-//        '#attributes' => array(
-//          'class' => array('button', 'button--secondary')
-//        )
-//      ];
+      if(!empty($variables['content']['field_cta_button'][0]['#url']) && $variables['content']['field_cta_button'][0]['#url']->isExternal()){
+        $variables['content']['field_cta_button'][0]['#attributes']['target'] = array(
+          '_blank'
+        );
+      }
+      $variables['content']['field_cta_button'][0]['#attributes']['class'] = array(
+        'button',
+        'button--secondary'
+      );
       break;
+    case 'double_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'content-block';
+      break;
+    case 'double_section_element_image':
+    case 'double_section_element_text':
+      $variables['attributes']['class'][] = 'col--xs-12';
+      $variables['attributes']['class'][] = 'col--md-6';
+      break;
+
   }
+
+  if(isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)){
+    $variables['attributes']['class'][] = 'no-spacing';
+  }
+  if(!empty($paragraph->field_layout->value)){
+    $variables['attributes']['class'][] = 'layout-'.$paragraph->field_layout->value;
+  }
+
+//  if ($fid = $paragraph->field_image->target_id) {
+//    $file = File::load($fid);
+//    $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
+//    $variables['attributes']['class'][] = 'splash';
+//    $variables['attributes']['style'][] = 'background-image: url(' . $path . ');';
+//  }
+//  $variables['button'] = [
+//    '#title' => t('See all questions and answers'),
+//    '#type' => 'link',
+//    '#url' => Url::fromUserInput('/kundeservice/tv/faq'),
+//    '#attributes' => array(
+//      'class' => array('button', 'button--secondary')
+//    )
+//  ];
 }
 
 function sddt_preprocess_block(&$variables) {

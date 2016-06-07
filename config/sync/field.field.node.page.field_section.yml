@@ -22,8 +22,22 @@ settings:
   handler_settings:
     target_bundles:
       single_section_text: single_section_text
+      double_section: double_section
+      simple_quiz: simple_quiz
     target_bundles_drag_drop:
       single_section_text:
         enabled: true
-        weight: 2
+        weight: -9
+      double_section:
+        enabled: true
+        weight: -8
+      double_section_element_text:
+        weight: -7
+        enabled: false
+      double_section_element_image:
+        weight: -6
+        enabled: false
+      simple_quiz:
+        enabled: true
+        weight: 9
 field_type: entity_reference_revisions

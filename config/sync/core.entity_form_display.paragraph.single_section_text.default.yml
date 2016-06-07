@@ -4,9 +4,16 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.single_section_text.field_body
+    - field.field.paragraph.single_section_text.field_cta_button
     - field.field.paragraph.single_section_text.field_headline
+    - field.field.paragraph.single_section_text.field_image
+    - field.field.paragraph.single_section_text.field_insert_space
+    - field.field.paragraph.single_section_text.field_layout
+    - image.style.thumbnail
     - paragraphs.paragraphs_type.single_section_text
   module:
+    - image
+    - link
     - text
 id: paragraph.single_section_text.default
 targetEntityType: paragraph
@@ -14,20 +21,45 @@ bundle: single_section_text
 mode: default
 content:
   field_body:
-    weight: 1
+    weight: 3
     settings:
       rows: 9
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea_with_summary
+  field_cta_button:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
   field_headline:
-    weight: 0
+    weight: 2
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+  field_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_insert_space:
+    weight: 5
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_layout:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
 hidden:
   created: true
   uid: true

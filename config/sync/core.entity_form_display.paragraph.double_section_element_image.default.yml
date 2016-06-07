@@ -1,0 +1,25 @@
+uuid: b3ba4fc2-6536-4e2b-847e-5f3cd86f2566
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double_section_element_image.field_image
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.double_section_element_image
+  module:
+    - image
+id: paragraph.double_section_element_image.default
+targetEntityType: paragraph
+bundle: double_section_element_image
+mode: default
+content:
+  field_image:
+    weight: 0
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+hidden:
+  created: true
+  uid: true

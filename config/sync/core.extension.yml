@@ -24,12 +24,17 @@ module:
   help: 0
   history: 0
   image: 0
+  kint: 0
   language: 0
   link: 0
   locale: 0
   menu_ui: 0
   metatag: 0
+  nc_cookieinfo: 0
+  nc_error_pages: 0
+  nc_simple_quiz: 0
   node: 0
+  novicell: 0
   options: 0
   page_cache: 0
   paragraphs: 0

@@ -1,0 +1,35 @@
+uuid: 583e78dd-e459-4ede-b0d1-4f04b545f240
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double_section_element_text.field_image
+    - field.field.paragraph.double_section_element_text.field_layout
+    - field.field.paragraph.double_section_element_text.field_text
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - image
+    - text
+id: paragraph.double_section_element_text.default
+targetEntityType: paragraph
+bundle: double_section_element_text
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_text:
+    weight: 1
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  created: true
+  field_layout: true
+  uid: true

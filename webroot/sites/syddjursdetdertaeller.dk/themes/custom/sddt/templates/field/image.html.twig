@@ -10,4 +10,6 @@
  * @see template_preprocess_image()
  */
 #}
-<img{{ attributes|without('without')|without('height') }} />
+<figure>
+  <img {{ attributes|without('without')|without('height') }} />
+</figure>
