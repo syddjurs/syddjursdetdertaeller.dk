@@ -150,9 +150,6 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'single_section_text':
       // Set attributes
       $variables['attributes']['class'][] = 'content-block';
-      if($paragraph->field_insert_space->value == 0){
-        $variables['attributes']['class'][] = 'no-spacing';
-      }
       if(!empty($variables['content']['field_cta_button'][0]['#url']) && $variables['content']['field_cta_button'][0]['#url']->isExternal()){
         $variables['content']['field_cta_button'][0]['#attributes']['target'] = array(
           '_blank'
@@ -166,9 +163,6 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'double_section':
       // Set attributes
       $variables['attributes']['class'][] = 'content-block';
-      if($paragraph->field_insert_space->value == 0){
-        $variables['attributes']['class'][] = 'no-spacing';
-      }
       break;
     case 'double_section_element_image':
     case 'double_section_element_text':
