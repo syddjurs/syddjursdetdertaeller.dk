@@ -2,23 +2,21 @@
  * Component: Navigation
  */
 
-var sddt = sddt || {};
+ var sddt = sddt || {};
 
-sddt.navigation = sddt.navigation || function () {
-  var self = this;
-    
-  this.init = function () {
-    self.toggleMobileNavigation();
-    self.stickyHeader();
+ sddt.navigation = sddt.navigation || function() {
+  this.init = function() {
+    toggleMobileNavigation();
+    stickyHeader();
   };
 
-  this.stickyHeader = function () {
+  this.stickyHeader = function(){
     var siteHeight = jQuery('body').height(),
-      siteHeader = jQuery('#js-site-header'),
-      siteHeaderOriginalHeight = siteHeader.height();
+        siteHeader = jQuery('#js-site-header'),
+        siteHeaderOriginalHeight = siteHeader.height();
 
     if (window.innerWidth > 991) {
-      jQuery(window).scroll(function () {
+      jQuery(window).scroll(function(){
         if (siteHeader.length > 0) {
           if (jQuery(window).scrollTop() > (siteHeader.height() - (siteHeader.outerHeight() - siteHeader.innerHeight())) && jQuery(window).scrollTop() > siteHeaderOriginalHeight) {
             siteHeader.addClass('js-fixed');
@@ -31,9 +29,9 @@ sddt.navigation = sddt.navigation || function () {
     }
   };
 
-  this.toggleMobileNavigation = function () {
+  this.toggleMobileNavigation = function(){
     if (jQuery('#js-mobile-navigation').length > 0) {
-      jQuery('#js-mobile-navigation-open, #js-mobile-navigation-close').on('click', function () {
+      jQuery('#js-mobile-navigation-open, #js-mobile-navigation-close').on('click', function(){
         if (!jQuery('#js-mobile-navigation').hasClass('js-active')) {
           // Add active class to the menu
           jQuery('#js-mobile-navigation').addClass('js-active');
@@ -42,7 +40,7 @@ sddt.navigation = sddt.navigation || function () {
           jQuery('#js-site-header').addClass('js-menu-open');
 
           // Add a backdrop to the site
-          novicell.overlay.backdrop();
+          sddt.overlay.backdrop();
         }
         else {
           // Remove active class to the menu
@@ -52,7 +50,7 @@ sddt.navigation = sddt.navigation || function () {
           jQuery('#js-site-header').removeClass('js-menu-open');
 
           // Remove the backdrop
-          novicell.overlay.destroy();
+          sddt.overlay.destroy();
         }
       });
     }
@@ -64,16 +62,16 @@ sddt.navigation = sddt.navigation || function () {
   this.moveNavigationElements = function () {
     if (jQuery('#js-mobile-navigation').length > 0) {
       var siteHeader = jQuery('#js-site-header'),
-        siteSearch = jQuery('#js-site-search'),
-        siteNavigation = jQuery('#js-site-navigation'),
-        mobileNavigation = jQuery('#js-mobile-navigation'),
-        breadcrumb = jQuery('#js-breadcrumb');
+          siteSearch = jQuery('#js-site-search'),
+          siteNavigation = jQuery('#js-site-navigation'),
+          mobileNavigation = jQuery('#js-mobile-navigation'),
+          breadcrumb = jQuery('#js-breadcrumb');
 
-      setTimeout(function () {
+      setTimeout(function() {
         if (window.innerWidth < 992) {
-          /*
-           * Move elements to mobile view
-           */
+        /*
+         * Move elements to mobile view
+         */
           // Search
           siteSearch.appendTo(mobileNavigation);
 
@@ -94,5 +92,8 @@ sddt.navigation = sddt.navigation || function () {
     }
   };
 
-  return this;
+  return {
+    init: init,
+    moveNavigationElements: moveNavigationElements
+  };
 }();

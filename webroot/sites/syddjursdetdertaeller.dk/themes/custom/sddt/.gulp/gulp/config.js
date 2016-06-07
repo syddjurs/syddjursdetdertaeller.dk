@@ -35,12 +35,15 @@ module.exports = (function () {
                 name: "master",
                 ignorePlugins: ["jscs","minify"],
                 scripts: [
+                    projectPath + "scripts/components/components.navigation.js",
+                    projectPath + "scripts/components/components.overlay.js",
+                    projectPath + "scripts/components/components.scrollLock.js",
                     // projectPath + "scripts/components/novicell.js",
                     // projectPath + "scripts/components/novicell.debounce.js",
                     // projectPath + "scripts/components/novicell.visible.js",
                     // projectPath + "scripts/components/novicell.lazyloadResponsive.js",
                     // projectPath + "scripts/components/novicell.embed.js",
-                    projectPath + "scripts/components/novicell.overlay.js",
+                    // projectPath + "scripts/components/novicell.overlay.js",
                     // projectPath + "scripts/components/novicell.cookieinfo.js",
                     // projectPath + "scripts/components/novicell.map.js",
                     projectPath + "scripts/master.js"
