@@ -10,9 +10,9 @@ dependencies:
 _core:
   default_config_hash: Ea3cxQo9FjYVScZDVackg-6ID_GgTkdKORm_APgV-5I
 id: archive
-label: Archive
+label: Arkiv
 module: node
-description: 'All content, by month.'
+description: 'Alt indhold, efter måned.'
 tag: default
 base_table: node_field_data
 base_field: nid
@@ -32,7 +32,7 @@ display:
           distinct: false
           replica: false
           query_tags: {  }
-      title: 'Monthly archive'
+      title: Månedsarkiv
       access:
         type: perm
         options:
@@ -184,7 +184,7 @@ display:
       tags: {  }
   block_1:
     id: block_1
-    display_title: Block
+    display_title: Blok
     display_plugin: block
     position: 1
     display_options:

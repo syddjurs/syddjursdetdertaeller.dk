@@ -4,9 +4,9 @@ status: true
 dependencies: {  }
 _core:
   default_config_hash: zhtPXoRcC6REiepM0k16zw__FDW5YOXDR6U2WlldTrs
-name: 'Basic page'
+name: 'Simpel side'
 type: page
-description: 'Use <em>basic pages</em> for your static content, such as an ''About us'' page.'
+description: 'Brug <em>simple sider</em> til dit statiske indhold, som f.eks. en "om os"-side.'
 help: ''
 new_revision: false
 preview_mode: 1
