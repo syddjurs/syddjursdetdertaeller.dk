@@ -1,0 +1,8 @@
+name: Novicell Simple Quiz
+type: module
+description: Simple Quiz
+core: 8.x
+package: Novicell
+
+dependencies:
+  - paragraphs

@@ -1,0 +1,7 @@
+nc_simple_quiz.quiz:
+  path: '/test'
+  defaults:
+    _form: '\Drupal\nc_simple_quiz\Form\ncQuestionsForm'
+    _title: 'Test'
+  requirements:
+    _permission: 'access content'
