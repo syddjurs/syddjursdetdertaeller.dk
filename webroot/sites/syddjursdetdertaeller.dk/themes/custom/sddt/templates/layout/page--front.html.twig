@@ -2,13 +2,18 @@
 <div id="js-site-header" class="site-header">
   <div class="container">
     <a class="logo" href="/">
-      <img class="logo__image" src="/{{ directory }}/images/logo.png" alt="Logo">
-      <span class="logo__branch"></span>
+      <img class="logo__image" src="/{{ directory }}/images/logo.svg" alt="Logo">
+      {#<span class="logo__branch"></span>#}
     </a>
-    {{ page.header }}
-    <button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
-      <span class="mobile-navigation-button__icon"></span>
+
+    <button class="navigation-button">
+      <img class="navigation-button__icon" src="/{{ directory }}/icons/burger-menu.svg" alt="Logo">
     </button>
+
+    {{ page.header }}
+    {#<button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
+      <span class="mobile-navigation-button__icon"></span>
+    </button>#}
   </div>
 </div>
 {% include directory ~ '/templates/navigation/mobile-navigation.html.twig' %}
