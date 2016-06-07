@@ -4,3 +4,4 @@ webroot/drush/*
 **/.gulp/node_modules/
 **/.gulp/vendor/
 .idea/
+drupal-8.*
