@@ -1,0 +1,35 @@
+uuid: 0618a682-9951-417c-8844-f535663625b8
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.triple_section.field_insert_space
+    - field.field.paragraph.triple_section.field_section_element_3
+    - paragraphs.paragraphs_type.triple_section
+  module:
+    - entity_reference_revisions
+id: paragraph.triple_section.default
+targetEntityType: paragraph
+bundle: triple_section
+mode: default
+content:
+  field_insert_space:
+    type: boolean
+    weight: 1
+    label: hidden
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_section_element_3:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  uid: true

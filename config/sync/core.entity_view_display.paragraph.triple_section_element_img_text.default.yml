@@ -1,0 +1,43 @@
+uuid: 4f19cf6f-59c2-4673-a42a-74df3050d16c
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.triple_section_element_img_text.field_headline
+    - field.field.paragraph.triple_section_element_img_text.field_image
+    - field.field.paragraph.triple_section_element_img_text.field_layout
+    - field.field.paragraph.triple_section_element_img_text.field_text
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - image
+    - text
+id: paragraph.triple_section_element_img_text.default
+targetEntityType: paragraph
+bundle: triple_section_element_img_text
+mode: default
+content:
+  field_headline:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_text:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+hidden:
+  created: true
+  field_layout: true
+  uid: true

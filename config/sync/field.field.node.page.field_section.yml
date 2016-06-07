@@ -23,21 +23,28 @@ settings:
     target_bundles:
       single_section_text: single_section_text
       double_section: double_section
+      triple_section: triple_section
       simple_quiz: simple_quiz
     target_bundles_drag_drop:
       single_section_text:
         enabled: true
-        weight: -9
+        weight: -15
       double_section:
         enabled: true
-        weight: -8
-      double_section_element_text:
-        weight: -7
-        enabled: false
-      double_section_element_image:
-        weight: -6
-        enabled: false
+        weight: -14
+      triple_section:
+        enabled: true
+        weight: -13
       simple_quiz:
         enabled: true
-        weight: 9
+        weight: -12
+      double_section_element_text:
+        weight: -11
+        enabled: false
+      double_section_element_image:
+        weight: -10
+        enabled: false
+      triple_section_element_img_text:
+        weight: -9
+        enabled: false
 field_type: entity_reference_revisions

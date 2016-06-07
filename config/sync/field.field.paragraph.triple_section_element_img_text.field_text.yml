@@ -1,0 +1,21 @@
+uuid: 97b50933-c67f-4bbe-b8b7-8f6edcaded36
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_text
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - text
+id: paragraph.triple_section_element_img_text.field_text
+field_name: field_text
+entity_type: paragraph
+bundle: triple_section_element_img_text
+label: Tekst
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

@@ -21,7 +21,7 @@ bundle: single_section_text
 mode: default
 content:
   field_body:
-    weight: 3
+    weight: 4
     settings:
       rows: 9
       summary_rows: 3
@@ -29,34 +29,34 @@ content:
     third_party_settings: {  }
     type: text_textarea_with_summary
   field_cta_button:
-    weight: 4
+    weight: 5
     settings:
       placeholder_url: ''
       placeholder_title: ''
     third_party_settings: {  }
     type: link_default
   field_headline:
-    weight: 2
+    weight: 3
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
   field_image:
-    weight: 1
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
   field_insert_space:
-    weight: 5
+    weight: 0
     settings:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
   field_layout:
-    weight: 0
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     type: options_select

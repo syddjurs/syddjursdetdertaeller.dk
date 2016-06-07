@@ -1,0 +1,19 @@
+uuid: 438b8e9c-b244-4168-9138-736da2a3f305
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_headline
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+id: paragraph.triple_section_element_img_text.field_headline
+field_name: field_headline
+entity_type: paragraph
+bundle: triple_section_element_img_text
+label: Overskrift
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -169,6 +169,14 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       $variables['attributes']['class'][] = 'col--md-6';
       break;
+    case 'triple_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'content-block';
+      break;
+    case 'triple_section_element_img_text':
+      $variables['attributes']['class'][] = 'col--xs-12';
+      $variables['attributes']['class'][] = 'col--md-4';
+      break;
 
   }
 

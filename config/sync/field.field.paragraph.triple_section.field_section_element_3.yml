@@ -1,0 +1,47 @@
+uuid: 0a441aa2-412b-41bd-beca-086e89716d27
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_section_element_3
+    - paragraphs.paragraphs_type.triple_section
+  module:
+    - entity_reference_revisions
+id: paragraph.triple_section.field_section_element_3
+field_name: field_section_element_3
+entity_type: paragraph
+bundle: triple_section
+label: Båndelement
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      triple_section_element_img_text: triple_section_element_img_text
+    target_bundles_drag_drop:
+      triple_section_element_img_text:
+        enabled: true
+        weight: 8
+      double_section:
+        weight: 9
+        enabled: false
+      double_section_element_image:
+        weight: 10
+        enabled: false
+      double_section_element_text:
+        weight: 11
+        enabled: false
+      simple_quiz:
+        weight: 12
+        enabled: false
+      single_section_text:
+        weight: 13
+        enabled: false
+      triple_section:
+        weight: 14
+        enabled: false
+field_type: entity_reference_revisions

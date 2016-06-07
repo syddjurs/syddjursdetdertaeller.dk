@@ -1,0 +1,46 @@
+uuid: 189c15a4-fdce-4402-9602-4e3f1d58d8be
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.double_section_element_text.field_image
+    - field.field.paragraph.double_section_element_text.field_layout
+    - field.field.paragraph.double_section_element_text.field_text
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - image
+    - smart_trim
+id: paragraph.double_section_element_text.preview
+targetEntityType: paragraph
+bundle: double_section_element_text
+mode: preview
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_text:
+    weight: 1
+    label: hidden
+    settings:
+      trim_length: '60'
+      trim_type: chars
+      trim_suffix: ...
+      more_link: '0'
+      more_text: More
+      trim_options:
+        text: text
+      more_class: more-link
+      summary_handler: full
+    third_party_settings: {  }
+    type: smart_trim
+hidden:
+  created: true
+  field_layout: true
+  uid: true

@@ -1,0 +1,23 @@
+uuid: 5d4cfd1c-ab48-4ac1-8b5d-2193c9de7004
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_layout
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - options
+id: paragraph.triple_section_element_img_text.field_layout
+field_name: field_layout
+entity_type: paragraph
+bundle: triple_section_element_img_text
+label: Layout
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string

@@ -1,0 +1,28 @@
+uuid: 805de131-ea63-4d82-bc2d-a68cf1e5584e
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.triple_section.field_insert_space
+    - field.field.paragraph.triple_section.field_section_element_3
+    - paragraphs.paragraphs_type.triple_section
+  module:
+    - entity_reference_revisions
+id: paragraph.triple_section.preview
+targetEntityType: paragraph
+bundle: triple_section
+mode: preview
+content:
+  field_section_element_3:
+    type: entity_reference_revisions_entity_view
+    weight: 0
+    label: hidden
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_insert_space: true
+  uid: true

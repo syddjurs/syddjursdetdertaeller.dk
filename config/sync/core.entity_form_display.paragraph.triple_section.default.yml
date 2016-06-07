@@ -1,16 +1,16 @@
-uuid: 3896a902-1268-4fc7-b10e-6cf158f443d5
+uuid: 2f22f81f-364a-429e-bfd1-24a58e4f0f39
 langcode: da
 status: true
 dependencies:
   config:
-    - field.field.paragraph.double_section.field_insert_space
-    - field.field.paragraph.double_section.field_section_element
-    - paragraphs.paragraphs_type.double_section
+    - field.field.paragraph.triple_section.field_insert_space
+    - field.field.paragraph.triple_section.field_section_element_3
+    - paragraphs.paragraphs_type.triple_section
   module:
     - paragraphs
-id: paragraph.double_section.default
+id: paragraph.triple_section.default
 targetEntityType: paragraph
-bundle: double_section
+bundle: triple_section
 mode: default
 content:
   field_insert_space:
@@ -19,7 +19,7 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
-  field_section_element:
+  field_section_element_3:
     type: entity_reference_paragraphs
     weight: 1
     settings:

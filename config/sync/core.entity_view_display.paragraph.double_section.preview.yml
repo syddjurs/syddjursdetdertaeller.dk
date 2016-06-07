@@ -1,24 +1,25 @@
-uuid: 298613f3-212a-407e-84ff-55d2b8f002e3
+uuid: 82ba04d6-5272-4e67-9c75-d364782eccc7
 langcode: da
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.double_section.field_insert_space
     - field.field.paragraph.double_section.field_section_element
     - paragraphs.paragraphs_type.double_section
   module:
     - entity_reference_revisions
-id: paragraph.double_section.default
+id: paragraph.double_section.preview
 targetEntityType: paragraph
 bundle: double_section
-mode: default
+mode: preview
 content:
   field_section_element:
     type: entity_reference_revisions_entity_view
     weight: 0
     label: hidden
     settings:
-      view_mode: preview
+      view_mode: default
       link: ''
     third_party_settings: {  }
 hidden:
