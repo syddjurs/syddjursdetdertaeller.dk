@@ -7,3 +7,4 @@ nc_questions:
       js/nc_questions.js: {}
   dependencies:
     - core/jquery
+    - core/drupal.ajax
