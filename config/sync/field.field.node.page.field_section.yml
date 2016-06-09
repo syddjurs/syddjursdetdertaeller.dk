@@ -5,6 +5,10 @@ dependencies:
   config:
     - field.storage.node.field_section
     - node.type.page
+    - paragraphs.paragraphs_type.double_section
+    - paragraphs.paragraphs_type.simple_quiz
+    - paragraphs.paragraphs_type.single_section_text
+    - paragraphs.paragraphs_type.triple_section
   module:
     - entity_reference_revisions
 id: node.page.field_section

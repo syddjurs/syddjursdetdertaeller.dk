@@ -140,6 +140,7 @@ function sddt_preprocess_form(&$variables) {
  * @param $variables
  */
 function sddt_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
   $paragraph = $variables['paragraph'];
 
   switch ($paragraph->bundle()) {
@@ -150,15 +151,6 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'single_section_text':
       // Set attributes
       $variables['attributes']['class'][] = 'content-block';
-      if(!empty($variables['content']['field_cta_button'][0]['#url']) && $variables['content']['field_cta_button'][0]['#url']->isExternal()){
-        $variables['content']['field_cta_button'][0]['#attributes']['target'] = array(
-          '_blank'
-        );
-      }
-      $variables['content']['field_cta_button'][0]['#attributes']['class'] = array(
-        'button',
-        'button--secondary'
-      );
       break;
     case 'double_section':
       // Set attributes
@@ -180,9 +172,26 @@ function sddt_preprocess_paragraph(&$variables) {
 
   }
 
+  if(!empty($paragraph->hasField('field_cta_button'))){
+    foreach($paragraph->get('field_cta_button') as $key => $link){
+      if($link->isExternal()){
+        $variables['content']['field_cta_button'][$key]['#attributes'] = [
+          'target' => [
+            '_blank',
+          ],
+          'class' => [
+            'button',
+            'button--secondary',
+          ],
+        ];
+      }
+    }
+  }
+
   if(isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)){
     $variables['attributes']['class'][] = 'no-spacing';
   }
+
   if(!empty($paragraph->field_layout->value)){
     $variables['attributes']['class'][] = 'layout-'.$paragraph->field_layout->value;
   }
