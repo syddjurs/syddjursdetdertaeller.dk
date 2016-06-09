@@ -168,6 +168,7 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'double_section_element_text':
       $variables['attributes']['class'][] = 'col--xs-12';
       $variables['attributes']['class'][] = 'col--md-6';
+      $variables['attributes']['class'][] = 'no-gutter';
       break;
     case 'triple_section':
       // Set attributes
