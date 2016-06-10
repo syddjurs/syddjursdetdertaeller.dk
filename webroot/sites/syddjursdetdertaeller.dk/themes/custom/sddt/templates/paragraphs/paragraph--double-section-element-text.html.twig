@@ -37,8 +37,14 @@
  */
 #}
 <div{{ attributes }}>
-  {{ content.field_image }}
-  <div class="bla">
-    {{ content.field_text }}
+  <div class="content-block__text">
+    <div class="content-block__text-inner">
+      <div class="bla1">
+        {{ content.field_image }}
+      </div>
+      <div class="bla2">
+        {{ content.field_text }}
+      </div>
+    </div>
   </div>
 </div>

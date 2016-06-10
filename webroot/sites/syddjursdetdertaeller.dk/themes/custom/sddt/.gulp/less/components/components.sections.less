@@ -1,0 +1,44 @@
+// 1 section
+.bum {
+  border: 1px solid blue;
+}
+
+
+// 1/2 sections
+.field-section-element-2 {
+  display: flex;
+  width: 100%;
+
+  & > div {
+    width: 50%;
+    display: flex;
+  }
+}
+
+.content-block {
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 440px;
+    height: 100%;
+  }
+  &__text-inner {
+    max-width: 62%;
+    margin: 30px 0px;
+  }
+}
+
+
+
+// 1/3 sections
+.field-section-element-3 {
+  display: flex;
+  width: 100%;
+
+  & > div {
+    width: 33.333333%;
+    display: flex;
+  }
+}
+
