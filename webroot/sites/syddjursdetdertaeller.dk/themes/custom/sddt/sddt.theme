@@ -150,11 +150,11 @@ function sddt_preprocess_paragraph(&$variables) {
       break;
     case 'single_section_text':
       // Set attributes
-      $variables['attributes']['class'][] = 'content-block';
+      $variables['attributes']['class'][] = 'single-section';
       break;
     case 'double_section':
       // Set attributes
-      $variables['attributes']['class'][] = 'content-block';
+      $variables['attributes']['class'][] = 'double-section';
       //$variables['attributes']['class'][] = 'no-gutter-section';
       break;
     case 'double_section_element_image':
@@ -165,11 +165,12 @@ function sddt_preprocess_paragraph(&$variables) {
       break;
     case 'triple_section':
       // Set attributes
-      $variables['attributes']['class'][] = 'content-block';
+      $variables['attributes']['class'][] = 'triple-section';
       break;
     case 'triple_section_element_img_text':
       $variables['attributes']['class'][] = 'col--xs-12';
-      $variables['attributes']['class'][] = 'col--md-4';
+      $variables['attributes']['class'][] = 'triple-section__img';
+      //$variables['attributes']['class'][] = 'col--md-4';
       break;
 
   }

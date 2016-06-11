@@ -37,9 +37,14 @@
  */
 #}
 <div{{ attributes }}>
-  <figure>{{ content.field_image }}</figure>
-  {% if content.field_headline %}
-    <h3>{{ content.field_headline }}</h3>
-  {% endif %}
-  {{ content.field_text }}
+  {#<div{{ attributes }}{% if image_path %} style="background: url({{ image_path }}) 0 0 no-repeat; background-size: cover; height: 100%; width: 100%;"{% endif %}>#}
+    {#{%  if not image_path %}{{ content.field_image }}{% endif %}#}
+  {#</div>#}
+  <figure class="triple-section__img-inner">{{ content.field_image }}</figure>
+  <div class="triple-section__text">
+    {% if content.field_headline %}
+      <h3>{{ content.field_headline }}</h3>
+    {% endif %}
+    {{ content.field_text }}
+  </div>
 </div>

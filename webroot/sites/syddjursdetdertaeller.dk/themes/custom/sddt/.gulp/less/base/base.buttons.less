@@ -40,20 +40,20 @@
 
     // Default button
     & {
-        font-weight: 400;
+        font-weight: 700;
         font-family: @base-font-family;
         .transition(background .2s);
-        padding: 12px 22px;
-        border-radius: 100px;
+        padding: 7px 80px;
+        //border-radius: 100px;
         color: @color-text;
-        background: @color-primary;
+        background: @color-orange;
         border: 1px solid transparent;
 
         &:hover,
         &:focus,
         &.focus {
             color: @color-text;
-            background: darken(@color-primary, 10%);
+            background: darken(@color-orange, 10%);
             text-decoration: none;
         }
     }
@@ -61,13 +61,13 @@
     // Secondary button
     &--secondary {
         color: @color-white;
-        background: @color-secondary;
+        background: @color-orange;
 
         &:hover,
         &:focus,
         &.focus {
             color: @color-white;
-            background: darken(@color-secondary, 10%);
+            background: darken(@color-orange, 10%);
         }
     }
 

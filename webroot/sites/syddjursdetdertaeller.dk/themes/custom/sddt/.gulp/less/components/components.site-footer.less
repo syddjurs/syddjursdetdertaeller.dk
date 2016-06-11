@@ -3,45 +3,81 @@
  */
 
 .site-footer {
-    background-color: @color-gray-light;
+    background-color: @color-white;
     //border-top: 4px solid @color-secondary;
     padding: 40px 0;
     //color: @color-black;
-    //height: 300px;
+    height: 300px;
 
-    &__site-link {
-        font-size: 16px;
-        color: @color-white;
-        margin-top: 30px;
-        display: block;
-        text-align: right;
-
-        &:hover {color: @color-white;}
+    &__inner {
+        margin-left: 80px;
+        margin-right: 80px;
     }
 
-    &__title {
-        text-transform: uppercase;
-        display: block;
-        color: @color-gray-light;
-        font-weight: 500;
-        margin-bottom: 5px;
+    &__logo {
+        width: 190px;
+        height: 55px;
+        float: left;
+        margin-top: 10px;
+    }
+    &__text {
+        float: left;
+        margin-left: 120px;
+    }
+    .social-media {
+        float: right;
+        margin-top: -5px;
+        margin-right: 0;
+
+        &__hashtag {
+            margin-right: -53px;
+        }
+
+        &__instagram {
+            position: relative;
+            top: 40px;
+            margin-left: 0px;
+        }
+        &__facebook {
+            position: relative;
+            top: 40px;
+        }
     }
 
-    &__list {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 30px;
 
-        @media (min-width:@screen-md) {margin-bottom: 0;}
-    }
-
-    &__link {
-        display: block;
-        line-height: 30px;
-        color: @color-white;
-
-        &:hover {color: @color-white;}
-    }
+    //&__site-link {
+    //    font-size: 16px;
+    //    color: @color-white;
+    //    margin-top: 30px;
+    //    display: block;
+    //    text-align: right;
+    //
+    //    &:hover {color: @color-white;}
+    //}
+    //
+    //&__title {
+    //    text-transform: uppercase;
+    //    display: block;
+    //    color: @color-gray-light;
+    //    font-weight: 500;
+    //    margin-bottom: 5px;
+    //}
+    //
+    //&__list {
+    //    list-style: none;
+    //    padding: 0;
+    //    margin: 0 0 30px;
+    //
+    //    @media (min-width:@screen-md) {margin-bottom: 0;}
+    //}
+    //
+    //&__link {
+    //    display: block;
+    //    line-height: 30px;
+    //    color: @color-white;
+    //
+    //    &:hover {color: @color-white;}
+    //}
 }
 
 .site-footer-contact {
