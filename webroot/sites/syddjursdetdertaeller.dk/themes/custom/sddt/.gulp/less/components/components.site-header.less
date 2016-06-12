@@ -16,7 +16,7 @@
    padding: 10px 0;
    .transition(padding-left .3s);
 
-  @media (max-width:@screen-sm-max) {position: fixed;}
+  //@media (max-width:@screen-sm-max) {position: fixed;}
 
   &.js-fixed {
     position: fixed;
@@ -56,6 +56,11 @@
 
   &:hover {text-decoration: none;}
 
+  @media (min-width:@screen-sm) {
+    top: 30px;
+    margin-left: 40px;
+  }
+
   @media (min-width:@screen-md) {
     top: 30px;
     margin-left: 80px;
@@ -66,6 +71,11 @@
     width: 58px;
     height: 18px;
     .transition(all .3s);
+
+    @media (min-width:@screen-sm) {
+      width: 195px;
+      height: 75px;
+    }
 
     @media (min-width:@screen-md) {
       width: 195px;
@@ -107,6 +117,15 @@
   margin-right: 271px;
   margin-top: 25px;
 
+  @media (min-width:@screen-sm) {
+    margin-right: 215px;
+  }
+
+  @media (min-width:@screen-md) {
+    margin-right: 271px;
+    margin-top: 25px;
+  }
+
   &__hashtag {
     display: inline-block;
     font-size: 20px;
@@ -123,6 +142,14 @@
     position: relative;
     top: 5px;
     margin-left: 45px;
+
+    @media (min-width:@screen-sm) {
+      margin-left: 10px;
+    }
+
+    @media (min-width:@screen-md) {
+      margin-left: 45px;
+    }
   }
 
   &__facebook {
