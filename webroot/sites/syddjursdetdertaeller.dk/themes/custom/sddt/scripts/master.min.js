@@ -6,8 +6,8 @@
 
  sddt.navigation = sddt.navigation || function() {
   this.init = function() {
-    toggleMobileNavigation();
-    stickyHeader();
+    toggleNavigation();
+    //stickyHeader();
   };
 
   this.stickyHeader = function(){
@@ -29,12 +29,12 @@
     }
   };
 
-  this.toggleMobileNavigation = function(){
-    if (jQuery('#js-mobile-navigation').length > 0) {
-      jQuery('#js-mobile-navigation-open, #js-mobile-navigation-close').on('click', function(){
-        if (!jQuery('#js-mobile-navigation').hasClass('js-active')) {
+  this.toggleNavigation = function(){
+    if (jQuery('#js-navigation').length > 0) {
+      jQuery('#js-navigation-open, #js-navigation-close').on('click', function(){
+        if (!jQuery('#js-navigation').hasClass('js-active')) {
           // Add active class to the menu
-          jQuery('#js-mobile-navigation').addClass('js-active');
+          jQuery('#js-navigation').addClass('js-active');
 
           // Add menu-open class to the site-header
           jQuery('#js-site-header').addClass('js-menu-open');
@@ -44,7 +44,7 @@
         }
         else {
           // Remove active class to the menu
-          jQuery('#js-mobile-navigation').removeClass('js-active');
+          jQuery('#js-navigation').removeClass('js-active');
 
           // Remove menu-open class to the site-header
           jQuery('#js-site-header').removeClass('js-menu-open');
@@ -56,6 +56,33 @@
     }
   };
 
+
+         // this.toggleMobileNavigation = function(){
+         //     if (jQuery('#js-mobile-navigation').length > 0) {
+         //         jQuery('#js-mobile-navigation-open, #js-mobile-navigation-close').on('click', function(){
+         //             if (!jQuery('#js-mobile-navigation').hasClass('js-active')) {
+         //                 // Add active class to the menu
+         //                 jQuery('#js-mobile-navigation').addClass('js-active');
+         //
+         //                 // Add menu-open class to the site-header
+         //                 jQuery('#js-site-header').addClass('js-menu-open');
+         //
+         //                 // Add a backdrop to the site
+         //                 sddt.overlay.backdrop();
+         //             }
+         //             else {
+         //                 // Remove active class to the menu
+         //                 jQuery('#js-mobile-navigation').removeClass('js-active');
+         //
+         //                 // Remove menu-open class to the site-header
+         //                 jQuery('#js-site-header').removeClass('js-menu-open');
+         //
+         //                 // Remove the backdrop
+         //                 sddt.overlay.destroy();
+         //             }
+         //         });
+         //     }
+         // };
   /**
    * Script to move navigation elements around depending on the window inner width
    */

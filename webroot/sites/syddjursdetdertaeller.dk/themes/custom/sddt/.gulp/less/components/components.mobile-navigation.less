@@ -2,19 +2,19 @@
  * Component: Mobile navigation
  */
 
-.mobile-navigation {
+.navigation {
   position: fixed;
   top: 0;
   right: 0;
-  width: 255px;
+  width: 565px;
   height: 100%;
   padding: 17px 30px 30px;
-  background-color: @color-white;
+  background: rgba(238, 238, 238, 0.95);
   z-index: 1100;
   .translate3d(100%, 0, 0);
   .transition(transform .2s);
 
-  @media (min-width:@screen-md) {display: none;}
+  //@media (min-width:@screen-md) {display: none;}
 
   // Not very BEM like, but to make sure no flicker,
   // we apply display block to the elements
@@ -22,19 +22,19 @@
   .site-navigation {display: block;}
 
 
- .mobile-navigation-button {display: none;}
+ .navigation-button {display: none;}
   &.js-active {
     .translate3d(0, 0, 0);
 
     // Button animation
-    .mobile-navigation-button {
+    .navigation-button {
       display: block;
       &__icon {
-        background: transparent;
+        background: mediumvioletred;
 
         &:before,
         &:after {
-          background: transparent;
+          background: red;
           .transform-origin(50% 50%);
 
           top: 0;
@@ -45,22 +45,61 @@
       }
     }
   }
+
+  .navigation-close {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    position: relative;
+    float: right;
+    right: 70px;
+    top: 35px;
+    background: none;
+    border: none;
+
+    &__icon {
+      width: 35px;
+      height: 35px;
+      fill: @color-red;
+    }
+  }
 }
 
-.mobile-navigation-button {
+//.navigation-button {
+//  width: 40px;
+//  height: 25px;
+//  border: none;
+// /* background-color: @color-white;*/
+//  background-color: #2ca02c;
+//  position: relative;
+//  float: right;
+//  //display: inline-block;
+//  margin-right: 80px;
+//  margin-top: -48px;
+//
+//  &__icon {
+//    width: 40px;
+//    height: 25px;
+//    fill: @color-red;
+//  }
+//}
+
+.navigation-button {
+  //background-color: green;
   background: none;
   border: 0;
-  width: 30px;
-  height: 30px;
-  line-height: 1;
+  width: 40px;
+  height: 25px;
+  //line-height: 1;
   text-align: center;
-  margin: 0;
+  margin-right: 128px;
+  margin-top: -48px;
   padding: 5px 0 0;
   position:absolute;
-  top: 10px;
-  left: -30px;
+  //top: 10px;
+  //left: -30px;
 
-  @media (min-width:@screen-md) {display: block;}
+  //@media (min-width:@screen-md) {display: block;}
 
   // Site header location
   &--site-header {
@@ -71,26 +110,26 @@
   &:focus,
   &:active {outline: none;}
 
-  &:hover &__icon {.scale(1.2);}
+  &:hover &__icon {.scale(1.1);}
 
   &__icon {
     display: inline-block;
-    width: 20px;
-    height: 2px;
-    background: @color-text;
-    border-radius: 3px;
+    width: 40px;
+    height: 4px;
+    background: @color-red;
+    //border-radius: 3px;
     .transition(all .3s);
     position: relative;
-    top: -5px;
+    top: -10px;
     margin-right: 5px;
 
     &:before,
     &:after {
       display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: @color-text;
-      border-radius: 4px;
+      width: 40px;
+      height: 4px;
+      background: @color-red;
+      //border-radius: 3px;
       .transition(all .3s);
       position: absolute;
       left: 0;
@@ -98,7 +137,7 @@
       .transform-origin(4px center);
     }
 
-    &:before {top: 5px;}
-    &:after {top: -5px;}
+    &:before {top: 10px;}
+    &:after {top: -10px;}
   }
 }

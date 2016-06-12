@@ -1,9 +1,13 @@
-<div id="js-mobile-navigation" class="mobile-navigation">
-  <button id="js-mobile-navigation-open" class="mobile-navigation-button">
-    <span class="mobile-navigation-button__icon"></span>
+<div id="js-navigation" class="navigation">
+  <button id="js-navigation-close" class="navigation-close">
+    <svg class="navigation-close__icon">
+      <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#close"></use>
+    </svg>
   </button>
-  <a class="logo logo--mobile" href="/">
-    <img class="logo__image" src="/{{ directory }}/images/logo.png" alt="Logo">
-    <span class="logo__branch"></span>
-  </a>
+
+  {% include directory ~ '/templates/navigation/site-navigation.html.twig' %}
+  {#<a class="logo logo--mobile" href="/">#}
+    {#<img class="logo__image" src="/{{ directory }}/images/logo.png" alt="Logo">#}
+    {#<span class="logo__branch"></span>#}
+  {#</a>#}
 </div>

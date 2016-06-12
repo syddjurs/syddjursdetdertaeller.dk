@@ -1,4 +1,4 @@
-{{ page.global_header }}
+{#{{ page.global_header }}#}
 <div id="js-site-header" class="site-header">
   <div class="container">
     <a class="logo" href="/">
@@ -21,14 +21,21 @@
         </a>
       </div>
 
-      <button class="navigation-button">
-        <svg class="navigation-button__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>
-        </svg>
-      </button>
+      {#<button class="navigation-button">#}
+        {#<svg class="navigation-button__icon">#}
+          {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>#}
+        {#</svg>#}
+      {#</button>#}
 
-      <button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
-        <span class="mobile-navigation-button__icon"></span>
+      {#<button id="js-navigation-open" class="navigation-button navigation-button--site-header">#}
+        {#<svg class="navigation-button__icon">#}
+          {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>#}
+        {#</svg>#}
+        {#<span class="mobile-navigation-button__icon"></span>#}
+      {#</button>#}
+
+      <button id="js-navigation-open" class="navigation-button navigation-button--site-header">
+        <span class="navigation-button__icon"></span>
       </button>
     </div>
 
