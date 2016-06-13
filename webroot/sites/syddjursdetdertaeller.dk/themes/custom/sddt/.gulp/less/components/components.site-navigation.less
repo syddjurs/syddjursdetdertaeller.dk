@@ -14,9 +14,14 @@
 
   &__list {
     list-style: none;
-    margin-top: 170px;
-    margin-left: 59px;
+    margin-top: 70px;
+    //margin-left: 0x;
     padding: 0;
+
+    @media (min-width:@screen-md) {
+      margin-top: 170px;
+      margin-left: 59px;
+    }
 
     //@media (min-width:@screen-md) {margin-right: 10px;}
   }
@@ -24,7 +29,11 @@
   &__item {
     display: block;
     position: relative;
-    margin-bottom: 10px;
+
+    @media (min-width:@screen-md) {
+      margin-bottom: 10px;
+    }
+
     //border-bottom: 1px solid @color-secondary;
 
     //@media (min-width:@screen-md) {
@@ -77,11 +86,12 @@
     display: block;
     text-decoration: none;
     color: @color-red;
-    padding: 20px 0 17px;
+    padding: 0px 0 17px;
+    font-size: 20px;
 
     @media (min-width:@screen-md) {
       padding: 0 0 5px;
-
+      font-size: 16px;
     }
 
     &:hover {

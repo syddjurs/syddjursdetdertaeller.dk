@@ -7,40 +7,127 @@
     //border-top: 4px solid @color-secondary;
     padding: 40px 0;
     //color: @color-black;
-    height: 300px;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (min-width:@screen-sm) {
+        height: 300px;
+    }
 
     &__inner {
-        margin-left: 80px;
-        margin-right: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        @media (min-width:@screen-sm) {
+            width: 100%;
+            margin-left: 80px;
+            margin-right: 80px;
+            align-items: stretch;
+            justify-content: flex-start;
+            flex-direction: row;
+        }
     }
+
+
 
     &__logo {
+        display: block;
         width: 190px;
         height: 55px;
-        float: left;
+        //float: left;
         margin-top: 10px;
+
+        @media (min-width:@screen-sm) {
+            width: 33.3333%;
+            //margin-top: 70px;
+            & img {
+                width: 190px;
+                height: 55px;
+            }
+        }
     }
     &__text {
-        float: left;
-        margin-left: 120px;
+        //float: left;
+        text-align: center;
+        margin-top: 30px;
+        font-size: 15px;
+        
+        @media (min-width:@screen-sm) {
+            width: 33.3333%;
+            //margin-left: 120px;
+            margin-top: 8px;
+            text-align: left;
+        }
     }
-    .social-media {
-        float: right;
-        margin-top: -5px;
-        margin-right: 0;
+    &__social-media {
+        //float: right;
+        //margin-top: -5px;
+        //margin-right: 0;
+        @media (min-width:@screen-sm) {
+            width: 33.3333%;
+        //    //float: right;
+        //    //margin-right: 0;
+        //    position: relative;
+        //    top: 50px;
+        }
+
+        &__inner {
+            @media (min-width:@screen-sm) {
+                float: right;
+            }
+        }
 
         &__hashtag {
-            margin-right: -53px;
-        }
+            //margin-right: -53px;
+            display: block;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
 
+            @media (min-width:@screen-sm) {
+                display: inline-block;
+                //float: right;
+                margin-right: -45px;
+            }
+        }
+        &__link {
+            text-decoration: none;
+            @media (min-width:@screen-sm) {
+            //    float: right;
+            //
+            //    //margin-left: 0;
+            //    position: relative;
+            //    right: -240px;
+            //    top: 60px;
+                display: inline-block;
+                //float: right;
+
+            }
+        }
         &__instagram {
-            position: relative;
-            top: 40px;
-            margin-left: 0px;
+            //margin-left: 0px;
+            width: 25px;
+            height: 25px;
+            fill: @color-black;
+            margin-left: 38px;
+            @media (min-width:@screen-sm) {
+                position: relative;
+                top: 40px;
+            }
         }
         &__facebook {
-            position: relative;
-            top: 40px;
+            width: 25px;
+            height: 25px;
+            fill: @color-black;
+            margin-left: 5px;
+            @media (min-width:@screen-sm) {
+                position: relative;
+                top: 40px;
+            }
         }
     }
 
