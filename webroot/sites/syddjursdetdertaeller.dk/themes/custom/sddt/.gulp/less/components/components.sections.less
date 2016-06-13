@@ -1,32 +1,49 @@
 // Single section
 .single-section {
   margin-bottom: 20px;
+  min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 440px;
+
+  @media (min-width:@screen-md) {
+    min-height: 440px;
+  }
 
   &__inner {
-    margin: 100px 0px;
-    max-width: 45%;
     text-align: center;
+    max-width: 80%;
+    margin: 30px;
 
     & > h2 {
       margin-top: 0px;
+    }
+
+    @media (min-width:@screen-md) {
+      margin: 100px 0px;
+      max-width: 45%;
     }
   }
 }
 
 // Double section
 .field-section-element-2 {
-  display: flex;
+  display: block;
   width: 100%;
-  //flex-direction: column;
+  //flex-direction: column-reverse;
 
   & > div {
-    width: 50%;
+    //width: 100%;
     display: flex;
   }
+
+  @media (min-width:@screen-md) {
+    display: flex;
+    & > div {
+      width: 50%;
+    }
+  }
+
 }
 
 .double-section {
@@ -35,23 +52,45 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 440px;
+    min-height: 300px;
     height: 100%;
+
+    @media (min-width:@screen-md) {
+    min-height: 440px;
+    }
   }
   &__text-inner {
-    max-width: 62%;
-    margin: 30px 0px;
+    max-width: 80%;
+    margin-bottom: 10px;
+    margin-top: 30px;
+
+    @media (min-width:@screen-md) {
+      max-width: 62%;
+      margin: 30px 0px;
+    }
+  }
+
+  &__img{
+    height: 300px;
+
+    @media (min-width:@screen-md) {
+      height: 100%;
+    }
   }
 }
 
 // Triple section
 .field-section-element-3 {
-  display: flex;
-  width: 100%;
+  display: block;
 
-  & > div {
-    width: 33.333333%;
+  @media (min-width:@screen-md) {
     display: flex;
+    width: 100%;
+
+    & > div {
+      width: 33.333333%;
+      display: flex;
+    }
   }
 }
 
@@ -67,7 +106,7 @@
   }
 
   &__text {
-    margin: 50px 40px;
+    margin: 30px 40px;
   }
 }
 

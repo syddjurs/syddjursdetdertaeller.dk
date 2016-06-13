@@ -1,4 +1,4 @@
-{{ page.global_header }}
+{#{{ page.global_header }}#}
 <div id="js-site-header" class="site-header">
   <div class="container">
     <a class="logo" href="/">
@@ -21,14 +21,21 @@
         </a>
       </div>
 
-      <button class="navigation-button">
-        <svg class="navigation-button__icon">
-          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>
-        </svg>
-      </button>
+      {#<button class="navigation-button">#}
+      {#<svg class="navigation-button__icon">#}
+      {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>#}
+      {#</svg>#}
+      {#</button>#}
 
-      <button id="js-mobile-navigation-open" class="mobile-navigation-button mobile-navigation-button--site-header">
-        <span class="mobile-navigation-button__icon"></span>
+      {#<button id="js-navigation-open" class="navigation-button navigation-button--site-header">#}
+      {#<svg class="navigation-button__icon">#}
+      {#<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#burger-menu"></use>#}
+      {#</svg>#}
+      {#<span class="mobile-navigation-button__icon"></span>#}
+      {#</button>#}
+
+      <button id="js-navigation-open" class="navigation-button navigation-button--site-header">
+        <span class="navigation-button__icon"></span>
       </button>
     </div>
 
@@ -43,8 +50,38 @@
 {{ page.help }}
 {{ page.content }}
 <footer class="site-footer">
-  <div class="container">
+  <div class="site-footer__inner">
+    <div class="site-footer__logo">
+      <img src="/{{ directory }}/images/Syddjurs-logo.svg" alt="Logo">
+    </div>
+    <div class="site-footer__text">
+      <p>Syddjurs Kommune </br>
+        Lundbergsvej 2 </br>
+        8400 Ebeltoft
+      </p>
+      <p>
+        Telefon · 87 53 50 00 <br />
+        Email · syddjurs@syddjurs.dk </br>
+      </p>
+      <p>
+        www.syddjurs.dk
+      </p>
+    </div>
+
+    <div class="social-media">
+      <p class="social-media__hashtag">#detdertæller</p>
+      <a Class="social-media__link" href="/">
+        <svg class="social-media__instagram">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#instagram-logo"></use>
+        </svg>
+      </a>
+      <a Class="social-media__link" href="/">
+        <svg class="social-media__facebook">
+          <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/icons/icons.svg#facebook-logo"></use>
+        </svg>
+      </a>
+    </div>
     {{ page.footer }}
-    {{ page.footer_below }}
+    {#{{ page.footer_below }}#}
   </div>
 </footer>

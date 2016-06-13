@@ -158,6 +158,8 @@ function sddt_preprocess_paragraph(&$variables) {
       //$variables['attributes']['class'][] = 'no-gutter-section';
       break;
     case 'double_section_element_image':
+      $variables['attributes']['class'][] = 'double-section__img';
+    case 'double_section_element_image':
     case 'double_section_element_text':
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
