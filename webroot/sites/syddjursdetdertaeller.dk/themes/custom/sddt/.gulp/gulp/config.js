@@ -38,6 +38,7 @@ module.exports = (function () {
                     projectPath + "scripts/components/components.navigation.js",
                     projectPath + "scripts/components/components.overlay.js",
                     projectPath + "scripts/components/components.scrollLock.js",
+                    projectPath + "scripts/components/components.fonts.js",
                     // projectPath + "scripts/components/novicell.js",
                     // projectPath + "scripts/components/novicell.debounce.js",
                     // projectPath + "scripts/components/novicell.visible.js",

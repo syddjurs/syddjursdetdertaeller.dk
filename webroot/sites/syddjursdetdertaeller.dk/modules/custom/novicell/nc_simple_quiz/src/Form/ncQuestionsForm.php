@@ -99,7 +99,7 @@ class ncQuestionsForm extends FormBase {
       '#type' => 'button',
       '#value' => t('Next'),
       '#attributes' => array(
-        'class' => ['btn', 'btn-md', 'btn-outline-inverse']
+        'class' => ['button', 'button--secondary']
       ),
     );
 
