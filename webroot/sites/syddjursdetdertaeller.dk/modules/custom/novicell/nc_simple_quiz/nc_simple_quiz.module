@@ -32,3 +32,13 @@ function nc_simple_quiz_preprocess_paragraph(&$variables) {
     $variables['content'] = $form;
   }
 }
+
+function nc_simple_quiz_theme($existing, $type, $theme, $path) {
+  // Remove form from node edit page when paragraph is in preview mode
+  return array(
+    'paragraph__simple_quiz__preview' => array(
+      'variables' => array('test_var' => NULL),
+      'template' => 'paragraph--simple-quiz--preview',
+    ),
+  );
+}

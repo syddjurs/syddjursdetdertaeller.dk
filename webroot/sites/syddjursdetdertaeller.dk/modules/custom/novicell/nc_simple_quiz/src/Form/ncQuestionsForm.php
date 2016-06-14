@@ -85,7 +85,7 @@ class ncQuestionsForm extends FormBase {
     $n = 1;
 
     foreach ($question['options'] as $option) {
-      $form['questions']['answers']['option' . $n] = array(
+      $form['questions']['answers']['option-' . $question['index'] . '-' . $n] = array(
         '#type' => 'checkbox',
         '#title' => $option['text'],
         '#return_value' => $option['value'],
@@ -106,13 +106,57 @@ class ncQuestionsForm extends FormBase {
     return $form;
   }
 
-  public function getQuizResult($form, $form_state){
-//    $valid = $this->validateEmail($form, $form_state);
+  public function getQuizResult($form, FormStateInterface $form_state){
     $response = new AjaxResponse();
 
-    $message = (object) ['title'=>'Det virker','content'=>'YES!!!'];
+    $answers = [];
+    foreach($form_state->getValues() as $key => $val){
+      if(preg_match('/^option-/',$key)){
+        if(!empty($val)){
+          $option = explode('-',$key);
+          $answer = array_pop($option);
+          $question = array_pop($option);
+
+          $answers[$question] = $val;
+        }
+      }
+    }
+
+    $message = $this->calculateQuizResult($answers);
     $response->addCommand(new SetQuizResult($message));
     return $response;
+  }
+
+  private function calculateQuizResult($answers){
+    $questions = $this->getQuestions();
+
+    $message = (object) [
+      'title' => 'Det virker',
+      'content' => '',
+    ];
+
+    $reponse = [];
+
+    foreach($questions as $question){
+      if(!empty($answers[$question['index']])){
+        $answer = $answers[$question['index']];
+        foreach($question['options'] as $option){
+          if($option['value'] == $answer){
+            $reponse[$question['index']] = (object) [
+              'question' => (object) [
+                'title' => $question['title'],
+                'text' => $question['text'],
+              ],
+              'answer' => (object) $option,
+            ];
+          }
+        }
+      }
+    }
+
+    $message->content .= var_export($reponse,true);
+
+    return $message;
   }
 
   public function getQuestions() {
