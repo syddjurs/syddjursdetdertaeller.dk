@@ -1,0 +1,22 @@
+uuid: 1796e689-b6e1-4c16-84b2-11dbf9e0c0b7
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.simple_quiz.field_insert_space
+    - paragraphs.paragraphs_type.simple_quiz
+id: paragraph.simple_quiz.default
+targetEntityType: paragraph
+bundle: simple_quiz
+mode: default
+content:
+  field_insert_space:
+    weight: 0
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+hidden:
+  created: true
+  status: true
+  uid: true
