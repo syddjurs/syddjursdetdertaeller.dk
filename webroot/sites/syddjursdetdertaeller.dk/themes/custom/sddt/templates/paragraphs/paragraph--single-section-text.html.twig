@@ -41,13 +41,13 @@
     <div class="row">
       <div class="col--xs-12 no-gutter">
         <div class="{{ attributes.class | first }}__inner">
-          {#<div class="row bum">#}
-            {#<div class="col--xs-12 col--md-12">#}
+          {#<div class="row">#}
+            <div class="col--xs-12 col--md-12">
               {{ content.field_image }}
               {% if content.field_headline %}<h2>{{ content.field_headline }}</h2>{% endif %}
               {{ content.field_body }}
               {{ content.field_cta_button }}
-            {#</div>#}
+            </div>
           {#</div>#}
         </div>
       </div>
