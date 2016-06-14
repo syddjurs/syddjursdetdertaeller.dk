@@ -1,9 +1,9 @@
-uuid: 0dad9823-5e2f-423c-a4fd-34dfd6b37d77
+uuid: 2da2e793-0f65-4821-a9c0-8cb21d373f8a
 langcode: da
 status: true
 dependencies:
   config:
-    - field.storage.node.field_section
+    - field.storage.node.field_section_element
     - node.type.page
     - paragraphs.paragraphs_type.double_section
     - paragraphs.paragraphs_type.simple_quiz
@@ -11,11 +11,11 @@ dependencies:
     - paragraphs.paragraphs_type.triple_section
   module:
     - entity_reference_revisions
-id: node.page.field_section
-field_name: field_section
+id: node.page.field_section_element
+field_name: field_section_element
 entity_type: node
 bundle: page
-label: Bånd
+label: Båndelement
 description: ''
 required: false
 translatable: false
@@ -36,19 +36,19 @@ settings:
       double_section:
         enabled: true
         weight: -14
+      double_section_element_image:
+        weight: -13
+        enabled: false
+      double_section_element_text:
+        weight: -12
+        enabled: false
       triple_section:
         enabled: true
-        weight: -13
-      simple_quiz:
-        enabled: true
-        weight: -12
-      double_section_element_text:
         weight: -11
-        enabled: false
-      double_section_element_image:
+      triple_section_element_img_text:
         weight: -10
         enabled: false
-      triple_section_element_img_text:
+      simple_quiz:
+        enabled: true
         weight: -9
-        enabled: false
 field_type: entity_reference_revisions

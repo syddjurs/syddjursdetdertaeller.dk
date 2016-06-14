@@ -91,7 +91,7 @@
       var siteHeader = jQuery('#js-site-header'),
           siteSearch = jQuery('#js-site-search'),
           siteNavigation = jQuery('#js-site-navigation'),
-          mobileNavigation = jQuery('#js-mobile-navigation'),
+          mobileNavigation = jQuery('#js-navigation'),
           breadcrumb = jQuery('#js-breadcrumb');
 
       setTimeout(function() {
@@ -100,10 +100,10 @@
          * Move elements to mobile view
          */
           // Search
-          siteSearch.appendTo(mobileNavigation);
+          // siteSearch.appendTo(mobileNavigation);
 
           // Navigation
-          siteNavigation.insertAfter(siteSearch);
+          siteNavigation.appendTo(mobileNavigation);
         }
         else {
           /*

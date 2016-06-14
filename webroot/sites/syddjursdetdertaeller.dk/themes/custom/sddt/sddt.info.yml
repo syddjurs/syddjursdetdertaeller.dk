@@ -14,6 +14,7 @@ libraries:
 regions:
   global_header: 'Global Header'
   header: 'Header'
+  navigation: 'Page navigation'
   highlighted: 'Highlighted'
   content: 'Main content'
   sidebar_first: 'First sidebar'

@@ -4,7 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
-    - field.field.node.page.field_section
+    - field.field.node.page.field_section_element
     - node.type.page
   module:
     - paragraphs
@@ -30,7 +30,7 @@ content:
     weight: 10
     settings: {  }
     third_party_settings: {  }
-  field_section:
+  field_section_element:
     type: entity_reference_paragraphs
     weight: 32
     settings:

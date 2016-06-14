@@ -33,7 +33,7 @@ sddt.overlay = sddt.overlay || function () {
   this.backdrop = function() {
     if (jQuery('#js-overlay-backdrop').length !== 1) {
       jQuery('body').append('<div id="js-overlay-backdrop" class="overlay-backdrop"></div>');
-      jQuery('#js-overlay-backdrop').height(jQuery('body').height());
+      // jQuery('#js-overlay-backdrop').height(jQuery('body').height());
 
       // Lock scroll
       jQuery.scrollLock(true);
