@@ -9,7 +9,7 @@ dependencies:
     - field.field.paragraph.triple_section_element_img_text.field_text
     - paragraphs.paragraphs_type.triple_section_element_img_text
   module:
-    - image
+    - responsive_image
     - text
 id: paragraph.triple_section_element_img_text.default
 targetEntityType: paragraph
@@ -27,10 +27,10 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: ''
+      responsive_image_style: triple_section
       image_link: ''
     third_party_settings: {  }
-    type: image
+    type: responsive_image
   field_text:
     weight: 2
     label: hidden

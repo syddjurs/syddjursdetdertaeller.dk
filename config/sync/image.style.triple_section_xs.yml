@@ -1,0 +1,22 @@
+uuid: e876d223-143f-4c35-bb2a-df1b91933e3a
+langcode: da
+status: true
+dependencies:
+  module:
+    - image_effects
+name: triple_section_xs
+label: 'Triple section: xs'
+effects:
+  232354a2-6ada-418b-96c1-29490daf8e5f:
+    uuid: 232354a2-6ada-418b-96c1-29490daf8e5f
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 768
+      height: 384
+  9a9e827c-95d0-44cb-935e-605c014511fe:
+    uuid: 9a9e827c-95d0-44cb-935e-605c014511fe
+    id: image_effects_convolution_sharpen
+    weight: 2
+    data:
+      level: 10

@@ -1,0 +1,22 @@
+uuid: 83653085-1a91-4251-a866-271264c8790d
+langcode: da
+status: true
+dependencies:
+  module:
+    - image_effects
+name: triple_section_sm
+label: 'Triple section: sm'
+effects:
+  d832f72c-be6c-420d-a1dd-63f9c4e290a2:
+    uuid: d832f72c-be6c-420d-a1dd-63f9c4e290a2
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 256
+      height: 170
+  db857cc8-60fe-4a32-803d-6bf380cb306a:
+    uuid: db857cc8-60fe-4a32-803d-6bf380cb306a
+    id: image_effects_convolution_sharpen
+    weight: 2
+    data:
+      level: 10

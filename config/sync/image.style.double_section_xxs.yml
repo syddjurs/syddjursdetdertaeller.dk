@@ -1,0 +1,23 @@
+uuid: 3445c2c8-c9a8-4c85-aeb1-c16f238c745c
+langcode: da
+status: true
+dependencies:
+  module:
+    - image_effects
+name: double_section_xxs
+label: 'Double section: xxs'
+effects:
+  18d0a98e-b98f-4f20-a53c-3919cf6d511e:
+    uuid: 18d0a98e-b98f-4f20-a53c-3919cf6d511e
+    id: image_scale
+    weight: 1
+    data:
+      width: 752
+      height: null
+      upscale: true
+  126d05eb-f591-4e09-91e0-19280c09f6e2:
+    uuid: 126d05eb-f591-4e09-91e0-19280c09f6e2
+    id: image_effects_convolution_sharpen
+    weight: 2
+    data:
+      level: 10

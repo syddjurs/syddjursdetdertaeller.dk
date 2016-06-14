@@ -159,6 +159,13 @@ function sddt_preprocess_paragraph(&$variables) {
       break;
     case 'double_section_element_image':
       $variables['attributes']['class'][] = 'double-section__img';
+      if(!empty($paragraph->hasField('field_image'))){
+        if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
+          $path = ImageStyle::load('double_section_xxs')->buildUrl($paragraph->field_image->entity->getFileUri());
+          $variables['image_path'] = $path;
+        }
+      }
+      break;
     case 'double_section_element_image':
     case 'double_section_element_text':
       $variables['attributes']['class'][] = 'col--xs-12';
@@ -180,13 +187,6 @@ function sddt_preprocess_paragraph(&$variables) {
       //$variables['attributes']['class'][] = 'no-gutter-section';
       break;
 
-  }
-
-  if(!empty($paragraph->hasField('field_image'))){
-    if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
-      $path = ImageStyle::load('large')->buildUrl($paragraph->field_image->entity->getFileUri());
-      $variables['image_path'] = $path;
-    }
   }
 
   if(!empty($paragraph->hasField('field_cta_button'))){

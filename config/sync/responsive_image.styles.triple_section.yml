@@ -1,0 +1,42 @@
+uuid: 4aa5f479-4bca-4f16-b29d-6c84fcfc50bb
+langcode: da
+status: true
+dependencies:
+  config:
+    - image.style.triple_section_lg
+    - image.style.triple_section_md
+    - image.style.triple_section_sm
+    - image.style.triple_section_xs
+    - image.style.triple_section_xxs
+  theme:
+    - sddt
+id: triple_section
+label: 'Triple section'
+image_style_mappings:
+  -
+    breakpoint_id: sddt.lg
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: triple_section_lg
+  -
+    breakpoint_id: sddt.md
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: triple_section_md
+  -
+    breakpoint_id: sddt.sm
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: triple_section_sm
+  -
+    breakpoint_id: sddt.xxs
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: triple_section_xxs
+  -
+    breakpoint_id: sddt.xs
+    multiplier: 1x
+    image_mapping_type: image_style
+    image_mapping: triple_section_xs
+breakpoint_group: sddt
+fallback_image_style: '_empty image_'

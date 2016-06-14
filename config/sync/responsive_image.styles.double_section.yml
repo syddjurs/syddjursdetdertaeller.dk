@@ -1,0 +1,13 @@
+uuid: 44a35003-d7f2-4847-a92d-5d40c26fd92a
+langcode: da
+status: true
+dependencies:
+  config:
+    - image.style.double_section_xxs
+  theme:
+    - sddt
+id: double_section
+label: 'Double section'
+image_style_mappings: {  }
+breakpoint_group: sddt
+fallback_image_style: double_section_xxs

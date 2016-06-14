@@ -1,0 +1,24 @@
+uuid: 0ff9f6e2-0b62-4904-92ee-b971023accae
+langcode: da
+status: true
+dependencies:
+  module:
+    - image_effects
+_core:
+  default_config_hash: Y9NmnZHQq20ASSyTNA6JnwtWrJJiSajOehGDtmUFdM0
+name: triple_section_md
+label: 'Triple section: md'
+effects:
+  7b955c7f-8db6-4060-b431-3d98a53f3a11:
+    uuid: 7b955c7f-8db6-4060-b431-3d98a53f3a11
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 331
+      height: 204
+  f494784d-384c-4a37-a8f3-f3f3775b0525:
+    uuid: f494784d-384c-4a37-a8f3-f3f3775b0525
+    id: image_effects_convolution_sharpen
+    weight: 2
+    data:
+      level: 10
