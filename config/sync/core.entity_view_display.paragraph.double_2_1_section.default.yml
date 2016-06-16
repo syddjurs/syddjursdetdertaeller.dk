@@ -1,0 +1,27 @@
+uuid: e66ca03e-01d9-4647-8f60-e1d6740080cc
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double_2_1_section.field_insert_space
+    - field.field.paragraph.double_2_1_section.field_section_element
+    - paragraphs.paragraphs_type.double_2_1_section
+  module:
+    - entity_reference_revisions
+id: paragraph.double_2_1_section.default
+targetEntityType: paragraph
+bundle: double_2_1_section
+mode: default
+content:
+  field_section_element:
+    weight: 0
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    type: entity_reference_revisions_entity_view
+hidden:
+  created: true
+  field_insert_space: true
+  uid: true

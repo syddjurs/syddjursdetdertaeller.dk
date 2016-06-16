@@ -5,6 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.double_section_element_image.field_image
+    - field.field.paragraph.double_section_element_image.field_video
     - image.style.thumbnail
     - paragraphs.paragraphs_type.double_section_element_image
   module:
@@ -24,4 +25,5 @@ content:
     type: image
 hidden:
   created: true
+  field_video: true
   uid: true

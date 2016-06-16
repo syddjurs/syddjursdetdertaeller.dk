@@ -9,7 +9,7 @@ id: paragraph.double_section.field_insert_space
 field_name: field_insert_space
 entity_type: paragraph
 bundle: double_section
-label: 'Indsæt luft under bånd'
+label: 'Indsæt luft over bånd'
 description: ''
 required: false
 translatable: true

@@ -12,7 +12,7 @@ field_name: field_image
 entity_type: paragraph
 bundle: triple_section_element_img_text
 label: Billede
-description: ''
+description: 'Hvis du oploader en video, vises denne i stedet for billedet.'
 required: true
 translatable: true
 default_value: {  }

@@ -36,6 +36,13 @@
  * @ingroup themeable
  */
 #}
-<div{{ attributes }}{% if image_path %} style="background-image: url({{ image_path }});"{% endif %}>
-  {%  if not image_path %}{{ content.field_image }}{% endif %}
-</div>
+{% if content.field_video %}
+  <div{{ attributes }}>
+    {{ content.field_video }}
+  </div>
+{% else %}
+  <div{{ attributes }}{% if image_path %} style="background-image: url({{ image_path }});"{% endif %}>
+    {%  if not image_path %}{{ content.field_image }}{% endif %}
+  </div>
+{% endif %}
+

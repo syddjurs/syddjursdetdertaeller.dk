@@ -7,10 +7,12 @@ dependencies:
     - field.field.paragraph.triple_section_element_img_text.field_image
     - field.field.paragraph.triple_section_element_img_text.field_layout
     - field.field.paragraph.triple_section_element_img_text.field_text
+    - field.field.paragraph.triple_section_element_img_text.field_video
     - paragraphs.paragraphs_type.triple_section_element_img_text
   module:
     - responsive_image
     - text
+    - video_embed_field
 id: paragraph.triple_section_element_img_text.default
 targetEntityType: paragraph
 bundle: triple_section_element_img_text
@@ -37,6 +39,16 @@ content:
     settings: {  }
     third_party_settings: {  }
     type: text_default
+  field_video:
+    weight: 3
+    label: hidden
+    settings:
+      responsive: true
+      width: 854
+      height: 480
+      autoplay: false
+    third_party_settings: {  }
+    type: video_embed_field_video
 hidden:
   created: true
   field_layout: true

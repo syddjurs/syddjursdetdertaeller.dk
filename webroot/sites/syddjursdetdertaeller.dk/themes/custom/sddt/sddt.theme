@@ -167,7 +167,7 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
       $variables['attributes']['class'][] = 'no-gutter';
-      if(!empty($paragraph->hasField('field_image'))){
+      if($paragraph->hasField('field_image')){
         if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
           $path = ImageStyle::load('double_section_xxs')->buildUrl($paragraph->field_image->entity->getFileUri());
           $variables['image_path'] = $path;
@@ -197,21 +197,28 @@ function sddt_preprocess_paragraph(&$variables) {
 
   }
 
-  if(!empty($paragraph->hasField('field_cta_button'))){
+  if($paragraph->hasField('field_video')){
+    if(empty($paragraph->get('field_video')->getValue())){
+      unset($variables['content']['field_video']);
+    }
+  }
+
+  if($paragraph->hasField('field_cta_button')){
     foreach($paragraph->get('field_cta_button') as $key => $link){
       if($link->isExternal()){
         $variables['content']['field_cta_button'][$key]['#attributes'] = [
-            'target' => [
-                '_blank',
-            ],
-            'class' => [
-                'button',
-                'button--secondary',
-            ],
+          'target' => [
+            '_blank',
+          ],
+          'class' => [
+            'button',
+            'button--secondary',
+          ],
         ];
       }
     }
   }
+
   if(isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)){
     $variables['attributes']['class'][] = 'no-spacing';
   }

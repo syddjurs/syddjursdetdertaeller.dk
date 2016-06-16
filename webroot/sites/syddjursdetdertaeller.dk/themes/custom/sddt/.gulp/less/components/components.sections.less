@@ -57,7 +57,7 @@
 
   & > div {
     //width: 100%;
-    display: flex;
+    //display: flex;
   }
 
   @media (min-width: @screen-sm) {
@@ -65,6 +65,26 @@
     min-height: 200px;
     & > div {
       width: 50%;
+      & > div {
+        height: 100%;
+      }
+    }
+  }
+
+  .video-embed-field-responsive-video {
+    display: flex;
+    background: @color-black;
+
+    @media (min-width: @screen-sm) {
+      //height: 166.02px;
+      width: 100%;
+      height: 100%;
+    }
+    @media (min-width: @screen-md) {
+      //height: 199.27px;
+    }
+    @media (min-width: @screen-lg) {
+      //height: 240px;
     }
   }
 }
@@ -90,31 +110,15 @@
   }
 }
 
-.field-section-element-2 {
-  display: block;
-  width: 100%;
-  //flex-direction: column-reverse;
-
-  & > div {
-    //width: 100%;
-    display: flex;
-  }
-
-  @media (min-width: @screen-sm) {
-    display: flex;
-    & > div {
-      width: 50%;
-    }
-  }
-}
-
 .double-section {
   margin-top: 20px;
   &__text {
+    @media (min-width: @screen-sm) {
+      min-height: 300px;
+    }
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 300px;
     height: 100%;
 
     @media (min-width: @screen-sm) {
@@ -147,9 +151,6 @@
 
 // Triple section
 .field-section-element-3 {
-  display: flex;
-  flex-direction: column;
-
   @media (min-width: @screen-sm) {
     display: flex;
     width: 100%;
@@ -160,6 +161,21 @@
       display: flex;
     }
   }
+
+  .video-embed-field-responsive-video {
+    overflow: hidden;
+
+    @media (min-width: @screen-sm) {
+      height: 166.02px;
+      width: 100%+1px;
+    }
+    @media (min-width: @screen-md) {
+      height: 199.27px;
+    }
+    @media (min-width: @screen-lg) {
+      height: 240px;
+    }
+  }
 }
 
 .triple-section {
@@ -167,10 +183,6 @@
   &__img {
     padding-right: 0px;
     padding-left: 0px;
-  }
-
-  figure > img {
-    height: 240px;
   }
 
   &__text {

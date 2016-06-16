@@ -4,22 +4,46 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.double_section_element_image.field_image
+    - field.field.paragraph.double_section_element_image.field_video
     - image.style.thumbnail
     - paragraphs.paragraphs_type.double_section_element_image
   module:
+    - field_group
     - image
+    - video_embed_field
+third_party_settings:
+  field_group:
+    group_image_video:
+      children:
+        - field_video
+        - field_image
+      parent_name: ''
+      weight: 0
+      label: 'Billede eller video (video rules)'
+      format_type: fieldset
+      format_settings:
+        description: ''
+        classes: ''
+        id: ''
+        required_fields: true
 id: paragraph.double_section_element_image.default
 targetEntityType: paragraph
 bundle: double_section_element_image
 mode: default
 content:
   field_image:
-    weight: 0
+    weight: 3
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+  field_video:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
 hidden:
   created: true
+  status: true
   uid: true
