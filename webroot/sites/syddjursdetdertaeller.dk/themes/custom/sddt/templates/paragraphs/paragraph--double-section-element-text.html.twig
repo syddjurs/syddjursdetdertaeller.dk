@@ -37,10 +37,8 @@
  */
 #}
 <div{{ attributes }}>
-  <div class="double-section__text">
-    <div class="double-section__text-inner">
-        {{ content.field_image }}
-        {{ content.field_text }}
-    </div>
+  <div class="{{ attributes.class | first }}-inner">
+      {{ content.field_image }}
+      {{ content.field_text }}
   </div>
 </div>

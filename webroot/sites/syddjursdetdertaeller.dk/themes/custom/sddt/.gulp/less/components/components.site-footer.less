@@ -3,17 +3,20 @@
  */
 
 .site-footer {
-    background-color: @color-white;
     //border-top: 4px solid @color-secondary;
-    padding: 40px 0;
+    //padding: 40px 0;
     //color: @color-black;
-    height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
 
-    @media (min-width:@screen-sm) {
-        height: 300px;
+    & > .container {
+        background-color: @color-white;
+
+        @media (min-width:@screen-sm) {
+            height: 300px;
+        }
     }
 
     &__inner {
@@ -24,8 +27,7 @@
 
         @media (min-width:@screen-sm) {
             width: 100%;
-            margin-left: 80px;
-            margin-right: 80px;
+            padding: 40px 80px-@gutter;
             align-items: stretch;
             justify-content: flex-start;
             flex-direction: row;

@@ -157,8 +157,16 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'double-section';
       //$variables['attributes']['class'][] = 'no-gutter-section';
       break;
+    case 'double_2_1_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'double-2-1-section';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+      break;
     case 'double_section_element_image':
       $variables['attributes']['class'][] = 'double-section__img';
+      $variables['attributes']['class'][] = 'col--xs-12';
+      //$variables['attributes']['class'][] = 'col--md-6';
+      $variables['attributes']['class'][] = 'no-gutter';
       if(!empty($paragraph->hasField('field_image'))){
         if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
           $path = ImageStyle::load('double_section_xxs')->buildUrl($paragraph->field_image->entity->getFileUri());
@@ -166,8 +174,8 @@ function sddt_preprocess_paragraph(&$variables) {
         }
       }
       break;
-    case 'double_section_element_image':
     case 'double_section_element_text':
+      $variables['attributes']['class'][] = 'double-section__text';
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
       $variables['attributes']['class'][] = 'no-gutter';

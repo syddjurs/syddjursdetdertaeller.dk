@@ -1,13 +1,13 @@
 // Single section
 .single-section {
-  margin-bottom: 20px;
-  min-height: 300px;
+  margin-top: 20px;
+  //min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: transparent!important;
+  background: transparent !important;
 
-  @media (min-width:@screen-sm) {
+  @media (min-width: @screen-sm) {
     min-height: 440px;
 
     .container {
@@ -35,16 +35,16 @@
 
   &__inner {
     text-align: center;
-    max-width: 80%;
-    margin: 30px;
+    padding: 30px;
+    .clearfix();
 
     & > h2 {
       margin-top: 0px;
     }
 
-    @media (min-width:@screen-sm) {
-      margin: 100px auto;
-      max-width: 45%;
+    @media (min-width: @screen-sm) {
+      margin: 70px auto;
+      max-width: 70%;
     }
   }
 }
@@ -60,7 +60,47 @@
     display: flex;
   }
 
-  @media (min-width:@screen-sm) {
+  @media (min-width: @screen-sm) {
+    display: flex;
+    min-height: 200px;
+    & > div {
+      width: 50%;
+    }
+  }
+}
+
+.double-2-1-section {
+  margin-top: 20px;
+
+  .field-section-element-2 {
+    @media (min-width: @screen-sm) {
+      & > .double-section__img {
+        width: 33.3333%;
+      }
+      & > .double-section__text {
+        width: 66.6667%;
+
+        & .double-section__text-inner {
+          max-width: 80%;
+
+          font-size: 15px;
+        }
+      }
+    }
+  }
+}
+
+.field-section-element-2 {
+  display: block;
+  width: 100%;
+  //flex-direction: column-reverse;
+
+  & > div {
+    //width: 100%;
+    display: flex;
+  }
+
+  @media (min-width: @screen-sm) {
     display: flex;
     & > div {
       width: 50%;
@@ -69,7 +109,7 @@
 }
 
 .double-section {
-  margin-bottom: 20px;
+  margin-top: 20px;
   &__text {
     display: flex;
     align-items: center;
@@ -77,8 +117,8 @@
     min-height: 300px;
     height: 100%;
 
-    @media (min-width:@screen-sm) {
-    min-height: 440px;
+    @media (min-width: @screen-sm) {
+      min-height: 440px;
     }
   }
   &__text-inner {
@@ -86,20 +126,20 @@
     margin-bottom: 10px;
     margin-top: 30px;
 
-    @media (min-width:@screen-sm) {
+    @media (min-width: @screen-sm) {
       max-width: 62%;
       margin: 30px 0px;
     }
   }
 
-  &__img{
+  &__img {
     min-height: 300px;
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     width: 100%;
 
-    @media (min-width:@screen-sm) {
+    @media (min-width: @screen-sm) {
       min-height: 100%;
     }
   }
@@ -110,7 +150,7 @@
   display: flex;
   flex-direction: column;
 
-  @media (min-width:@screen-sm) {
+  @media (min-width: @screen-sm) {
     display: flex;
     width: 100%;
     flex-direction: row;
@@ -123,7 +163,7 @@
 }
 
 .triple-section {
-  margin-bottom: 20px;
+  margin-top: 20px;
   &__img {
     padding-right: 0px;
     padding-left: 0px;

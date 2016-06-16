@@ -13,14 +13,14 @@
 #}
 <div class="container">
   <div class="row">
-    <div class="col--xs-12 local-tasks">
+    <div class="col--xs-12 local-tasks no-gutter">
       {% if primary %}
         <h2 class="visually-hidden">{{ 'Primary tabs'|t }}</h2>
-        <ul>{{ primary }}</ul>
+        <ul class="local-tasks__list">{{ primary }}</ul>
       {% endif %}
       {% if secondary %}
         <h2 class="visually-hidden">{{ 'Secondary tabs'|t }}</h2>
-        <ul>{{ secondary }}</ul>
+        <ul class="local-tasks__list">{{ secondary }}</ul>
       {% endif %}
     </div>
   </div>

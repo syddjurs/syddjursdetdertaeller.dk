@@ -44,7 +44,7 @@ jQuery(window).resize(function(){
      */
     Drupal.behaviors.sddt = {
       attach: function (context) {
-        var context = $(context);
+        // var context = $(context);
 
         // $('body').on('click','.notification__close',function(){
         //   $(this).closest('.notification').fadeOut(2000).slideUp(2000,function(){

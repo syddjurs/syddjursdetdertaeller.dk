@@ -40,7 +40,7 @@
 {% if multiple %}
   <div{{ attributes.addClass(['field-section-element-2']) }}>
     {% for item in items %}
-      <div{{ item.attributes }}>{{ item.content }}</div>
+      {#{% if item.attributes %}<div{{ item.attributes }}>{% endif %}#}{{ item.content }}{#{% if item.attributes %}</div>{% endif %}#}
     {% endfor %}
   </div>
 {% else %}
