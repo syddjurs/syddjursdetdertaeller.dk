@@ -194,6 +194,33 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'simple-quiz';
       //$variables['attributes']['class'][] = 'no-gutter-section';
       break;
+    case 'google_maps':
+      // Set attributes
+      $variables['attributes']['class'][] = 'google-maps';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+
+      $pin_values = $paragraph->get('field_pin')->getValue();
+      $field_collection_ids = array_column($pin_values, 'value');
+      $pin_content = \Drupal\field_collection\Entity\FieldCollectionItem::loadMultiple($field_collection_ids);
+
+      $pins = [];
+
+      foreach ($pin_content as $pin_item) {
+        $pins[] = (object) [
+          'name' => $pin_item->get('field_pin_name')->value,
+          'latitude' => $pin_item->get('field_latitude')->value,
+          'longitude' => $pin_item->get('field_longitude')->value,
+        ];
+      }
+//      $variables['#attached']['js'][] = array('type' => 'external', 'data' => 'https://maps.googleapis.com/maps/api/js'); // https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap
+      $variables['map_id'] = $paragraph->id();
+      $variables['#attached']['drupalSettings']['google_maps']['data'] = [];
+      $variables['#attached']['drupalSettings']['google_maps']['data'][$variables['map_id']] = [
+        'pins' => $pins,
+        'map_id' => $variables['map_id'],
+      ];
+
+      break;
 
   }
 

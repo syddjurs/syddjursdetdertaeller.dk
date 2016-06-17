@@ -8,3 +8,7 @@ master:
     scripts/master.min.js: {}
   dependencies:
     - core/jquery
+
+gmap:
+  js:
+    //maps.googleapis.com/maps/api/js: { type: external, minified: true }

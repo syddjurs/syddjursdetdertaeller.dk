@@ -1,0 +1,20 @@
+uuid: 65019c0e-9d80-4f31-8330-a3bed43d2818
+langcode: da
+status: true
+dependencies:
+  module:
+    - field_collection
+id: field_collection_item.field_longitude
+field_name: field_longitude
+entity_type: field_collection_item
+type: decimal
+settings:
+  precision: 10
+  scale: 6
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

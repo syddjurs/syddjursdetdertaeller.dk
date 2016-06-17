@@ -7,6 +7,7 @@ dependencies:
     - node.type.page
     - paragraphs.paragraphs_type.double_2_1_section
     - paragraphs.paragraphs_type.double_section
+    - paragraphs.paragraphs_type.google_maps
     - paragraphs.paragraphs_type.simple_quiz
     - paragraphs.paragraphs_type.single_section_text
     - paragraphs.paragraphs_type.triple_section
@@ -30,30 +31,34 @@ settings:
       double_section: double_section
       double_2_1_section: double_2_1_section
       triple_section: triple_section
+      google_maps: google_maps
       simple_quiz: simple_quiz
     target_bundles_drag_drop:
       single_section_text:
         enabled: true
-        weight: -17
+        weight: -19
       double_section:
         enabled: true
-        weight: -16
+        weight: -18
       double_2_1_section:
         enabled: true
-        weight: -15
+        weight: -17
       double_section_element_image:
-        weight: -14
+        weight: -16
         enabled: false
       double_section_element_text:
-        weight: -13
+        weight: -15
         enabled: false
       triple_section:
         enabled: true
-        weight: -12
+        weight: -14
       triple_section_element_img_text:
-        weight: -11
+        weight: -13
         enabled: false
+      google_maps:
+        enabled: true
+        weight: -12
       simple_quiz:
         enabled: true
-        weight: -10
+        weight: -11
 field_type: entity_reference_revisions

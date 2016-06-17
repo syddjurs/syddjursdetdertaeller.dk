@@ -1,0 +1,23 @@
+uuid: 2d66e116-73c2-4816-9a27-c4beb5a2648e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.field_collection_item.field_latitude
+    - field_collection.field_collection.field_pin
+id: field_collection_item.field_pin.field_latitude
+field_name: field_latitude
+entity_type: field_collection_item
+bundle: field_pin
+label: Breddegrad
+description: 'Angives som decimal-tal, f.eks. <em>56.252042</em> (max seks decimaler). Husk at bruge punktum i stedet for komma.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

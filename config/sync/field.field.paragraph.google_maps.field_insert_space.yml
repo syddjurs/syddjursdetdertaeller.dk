@@ -1,0 +1,23 @@
+uuid: d19f626a-5329-4e18-a4e9-e39705de23e9
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_insert_space
+    - paragraphs.paragraphs_type.google_maps
+id: paragraph.google_maps.field_insert_space
+field_name: field_insert_space
+entity_type: paragraph
+bundle: google_maps
+label: 'Indsæt luft over bånd'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Ja
+  off_label: Nej
+field_type: boolean
