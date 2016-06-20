@@ -178,11 +178,12 @@ class ncQuestionsForm extends FormBase {
     $count = null;
     foreach($response as $key => $val){
       if(!is_null($count) && $val < $count){
-        exit;
+        continue;
       }
       $result = $this->getQuizResultOption($key);
       if(!empty($result)){
         $message->content[] = $result;
+        $count = $val;
       }
     }
 
