@@ -4,10 +4,14 @@
    */
   Drupal.AjaxCommands.prototype.setQuizResult = function (ajax, response, status) {
     // Place content in current-msg div.
-    $('#ncquestionsform').once('show-result').fadeOut(200,function(){
-      $(this).after(
-        $('<div>').hide().addClass('.result').html('<h3>'+response.title+'</h3>' + response.content).fadeIn(200)
-      );
+    $('#ncquestionsform .quiz-container').once('show-result').fadeOut(200,function(){
+      var result = $('<div>').hide().addClass('.result').html('<h3>'+response.title+'</h3>');
+      $(this).after(result);
+      $.each(response.content,function(){
+        result.append('<p><b>' + this.title + '</b></p>')
+          .append('<p>' + this.text + '</p>');
+      });
+      result.fadeIn(200);
     });
   }
 })(jQuery, Drupal);

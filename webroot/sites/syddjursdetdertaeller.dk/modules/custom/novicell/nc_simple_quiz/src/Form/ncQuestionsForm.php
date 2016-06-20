@@ -31,11 +31,32 @@ class ncQuestionsForm extends FormBase {
       '#title' => 'Signup'
     );
 
+    $form['title'] = array(
+      '#prefix' => '<h2>',
+//      '#markup' => $this->t('What kind of Syddjurs type are you?'),
+      '#markup' => 'Hvilken Syddjurstype er du?',
+      '#suffix' => '</h2>',
+    );
+
+    $form['description'] = array(
+      '#prefix' => '<p><i>',
+//      '#markup' => $this->t('Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.'),
+      '#markup' => 'Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.',
+      '#suffix' => '</i></p>',
+    );
+
+    $form['quiz'] = array(
+      '#type' => 'container',
+      '#attributes' => array(
+        'class' => 'quiz-container',
+      ),
+    );
+
     foreach ($this->getQuestions() as $question) {
-      $form['question' . $question['index']] = $this->buildQuestion($question);
+      $form['quiz']['question' . $question['index']] = $this->buildQuestion($question);
     }
 
-    $form['hidden_submit'] = array(
+    $form['quiz']['hidden_submit'] = array(
       '#type' => 'button',
       '#attributes' => array(
         'class' => ['submit'],
@@ -46,12 +67,12 @@ class ncQuestionsForm extends FormBase {
         'event' => 'click',
         'progress' => array(
           'type' => 'throbber',
-          'message' => t('Calculating quiz result...'),
+          'message' => $this->t('Calculating quiz result...'),
         ),
       ],
     );
 
-    $form['progress'] = array(
+    $form['quiz']['progress'] = array(
       '#theme' => 'progress_bar',
       '#percent' => '0',
       '#label' => '',
@@ -131,32 +152,62 @@ class ncQuestionsForm extends FormBase {
     $questions = $this->getQuestions();
 
     $message = (object) [
-      'title' => 'Det virker',
-      'content' => '',
+      'title' => 'Resultat',
+      'content' => [],
     ];
 
-    $reponse = [];
+    $response = [];
 
     foreach($questions as $question){
       if(!empty($answers[$question['index']])){
         $answer = $answers[$question['index']];
         foreach($question['options'] as $option){
           if($option['value'] == $answer){
-            $reponse[$question['index']] = (object) [
-              'question' => (object) [
-                'title' => $question['title'],
-                'text' => $question['text'],
-              ],
-              'answer' => (object) $option,
-            ];
+            foreach($option['area'] AS $area){
+              if(empty($response[$area])){
+                $response[$area] = 0;
+              }
+              $response[$area]++;
+            }
           }
         }
       }
     }
+    arsort($response);
 
-    $message->content .= var_export($reponse,true);
+    $count = null;
+    foreach($response as $key => $val){
+      if(!is_null($count) && $val < $count){
+        exit;
+      }
+      $result = $this->getQuizResultOption($key);
+      if(!empty($result)){
+        $message->content[] = $result;
+      }
+    }
 
     return $message;
+  }
+
+  private function getQuizResultOption($key=''){
+    $options = [];
+    $options['land'] = [
+      'title' => 'Landområder',
+      'text' => 'Syddjurs byder på mange, skønne landsbyer som Nimtofte i Nord, Knebel i Syd, Lime i Vest og Balle i Øst, hvor I vil føle jer godt hjemme. Her rækker pengene ekstra langt til hus og have, frihed og luft til tæerne. Afstanden til Aarhus er ikke afgørende for dig, og du er ikke fremmed over for tanken om bil(er). Den varierede natur, årstidernes skiften og mulighed for at dyrke egne råvarer gør hele forskellen.',
+    ];
+    $options['ebeltoft'] = [
+      'title' => 'Ebeltoft',
+      'text' => 'Ebeltoftområdet byder på den købstadsidyl, maritime lækkerhed og kulturelle overflod, som matcher din familie godt. Med Nationalpark Mols Bjerge i baghaven og Ebeltoft Vig lige uden for døren får du let adgang til din skattede natur. I Syddjurs’ største by kan du dyrke din lidenskab for smagfulde specialbutikker – og Aarhus er stadig kun 45 minutter væk.',
+    ];
+    $options['kalø'] = [
+      'title' => 'Kalø-Mols',
+      'text' => 'Som pendlerfamilie passer Kalø-Mols-området rigtig godt til din familie. Du er kun en halv time fra Aarhus, samtidig med at du har et enestående kyst- og kulturlandskab lige foran dig. Du kan både dyrke nærværet i parcelhuskvarterets trygge rammer og give den gas med de utallige outdoor-muligheder.',
+    ];
+    $options['letbane'] = [
+      'title' => 'Letbanebyer',
+      'text' => 'De gamle stationsbyer er perfekte til jeres familie. Her er alle byens servicemuligheder kombineret med den effektive logistik til Aarhus, som kun bliver forbedret med Letbanen. Samtidig er der rig mulighed for at dyrke engagementet i det lokale og fællesskabet – så kom, og få det til at ske!',
+    ];
+    return !empty($options[$key]) ? $options[$key] : null;
   }
 
   public function getQuestions() {
@@ -164,28 +215,37 @@ class ncQuestionsForm extends FormBase {
 
     $questions[] = [
       'title' => 'Spørgsmål 1',
-      'text' => 'Hvem er vi?',
+      'text' => 'Pengene rækker langt i Syddjurs, og du finder skønne boliger her i alle prisklasser. Hvad tænker du, jeres kommende bolig cirka må koste?',
       'options' => [
-        ['value' => 2, 'text' => 'Svar 1'],
-        ['value' => 1, 'text' => 'Svar 2'],
+        ['value' => 1, 'text' => 'Max 1 mio. kr', 'area' => ['land']],
+        ['value' => 2, 'text' => '1-2 mio. kr.', 'area' => ['letbane']],
+        ['value' => 3, 'text' => '2-3 mio. kr.', 'area' => ['ebeltoft']],
+        ['value' => 4, 'text' => 'Over 3 mio. kr.', 'area' => ['kalø']],
       ],
     ];
 
     $questions[] = [
       'title' => 'Spørgsmål 2',
-      'text' => 'Hvor kommer vi fra?',
+      'text' => 'Måske drømmer du om den helt store villa med havudsigt eller et nedlagt landbrug med lærkesang og jord til. Du finder hele paletten i Syddjurs. Hvilken slags bolig står mon øverst på jeres ønskeseddel?',
       'options' => [
-        ['value' => 2, 'text' => 'Svar 3'],
-        ['value' => 1, 'text' => 'Svar 4'],
+        ['value' => 1, 'text' => 'Landejendom', 'area' => ['land']],
+        ['value' => 2, 'text' => 'Kollektiv', 'area' => ['land']],
+        ['value' => 3, 'text' => 'Parcelhus', 'area' => ['land','letbane','ebeltoft','kalø']],
+        ['value' => 4, 'text' => 'Lejlighed', 'area' => ['ebeltoft']],
+        ['value' => 5, 'text' => 'Nybyggeri', 'area' => ['letbane']],
+        ['value' => 6, 'text' => 'Villa', 'area' => ['kalø']],
       ],
     ];
 
     $questions[] = [
       'title' => 'Spørgsmål 3',
-      'text' => 'Hvor kan vi stille de tomme flasker?',
+      'text' => 'Syddjurs har en rig, varieret natur – mere end 40 af de 60 typer oprindelig, vild natur i Danmark er repræsenteret hos os. Hvad vil du gerne have som udsigt fra køkkenvinduet?',
       'options' => [
-        ['value' => 2, 'text' => 'Svar 5'],
-        ['value' => 1, 'text' => 'Svar 6'],
+        ['value' => 1, 'text' => 'Vandet og det dramatiske kystlandskab – mindre kan ikke gøre det', 'area' => ['kalø']],
+        ['value' => 2, 'text' => 'Letbanen, skov og grønne områder – grønt er godt for øjet, men mobilitet er vigtigst', 'area' => ['letbane']],
+        ['value' => 3, 'text' => 'Legende børn på vejen – dét er livet', 'area' => ['land','letbane','ebeltoft','kalø']],
+        ['value' => 4, 'text' => 'Enge, marker og bakkedrag – og gerne et krondyr i ny og næ', 'area' => ['land']],
+        ['value' => 5, 'text' => 'Kysten og et levende havnemiljø – vi elsker det maritime!', 'area' => ['ebeltoft']],
       ],
     ];
 
