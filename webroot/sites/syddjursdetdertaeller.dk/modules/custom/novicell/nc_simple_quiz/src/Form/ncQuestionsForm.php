@@ -250,6 +250,41 @@ class ncQuestionsForm extends FormBase {
       ],
     ];
 
+    $questions[] = [
+      'title' => 'Spørgsmål 4',
+      'text' => 'Der er fin forbindelse mellem Aarhus og Syddjurs med bil, bus og snart med Letbanen. Men tidsforbruget afhænger selvfølgelig af, hvor i Syddjurs I slår jer ned. Hvor lang tid må det maksimalt tage dig at komme til Aarhus N?',
+      'options' => [
+        ['value' => 1, 'text' => '20-30 minutter', 'area' => ['kalø']],
+        ['value' => 2, 'text' => '25-35 minutter', 'area' => ['letbane']],
+        ['value' => 3, 'text' => '45 minutter', 'area' => ['ebeltoft']],
+        ['value' => 4, 'text' => 'Det er ikke vigtigt for mig', 'area' => ['land']],
+      ],
+    ];
+
+    $questions[] = [
+      'title' => 'Spørgsmål 5',
+      'text' => '',
+      'options' => [
+        ['value' => 1, 'text' => 'To biler', 'area' => ['ebeltoft','land']],
+        ['value' => 2, 'text' => 'En bil', 'area' => ['kalø']],
+        ['value' => 3, 'text' => 'Udelukkende offentlig transport, cykel og gå-ben', 'area' => ['letbane']],
+      ],
+    ];
+
+    $questions[] = [
+      'title' => 'Spørgsmål 6',
+      'text' => '',
+      'options' => [
+        ['value' => 1, 'text' => '<b>Bonderøven:</b> Masser af plads, lidt høns og mulighed for at flikke en shelter sammen. Du dyrker yoga og måske lidt spelt. Mon et selvforsynende kollektiv er næste skridt?', 'area' => ['land']],
+        ['value' => 2, 'text' => '<b>Gør-det-selv-typen:</b> Planen er at købe et håndværkertilbud, du kan ombygge. Du drømmer om at banke et værksted op, så du kan rode med veteranbilen.', 'area' => ['land']],
+        ['value' => 3, 'text' => '<b>Kulturtripper:</b> Kunst, historiske markeder og børnekultur – du tænder på det hele. Uanset om vi taler spoken word, kammermusik eller den nyeste Woody Allen, er du på pletten.', 'area' => ['ebeltoft']],
+        ['value' => 4, 'text' => '<b>Fællesskabs-fan:</b> Du elsker at kunne låne en kop sukker, snakke over hækken og arrangere vejfest. Du ender lynhurtigt i diverse frivilliggrupper, fordi du simpelthen ikke kan lade være med at engagere dig lokalt.', 'area' => ['letbane']],
+        ['value' => 5, 'text' => '<b>Parcelhuselsker:</b> Dit hjerte frydes ved lukkede villaveje med oplyste stisystemer direkte til den lokale skole. Din favorithygge er arbejdsdag i grundejerforeningen.', 'area' => ['kalø']],
+        ['value' => 6, 'text' => '<b>Liebhaver:</b> En eksklusiv bolig, der matcher din karriere, med panoramaudsigt over vandet og plads til Audierne. Du dyrker det gode liv med gourmetmad, ferniseringer og lækker natur.', 'area' => ['ebeltoft']],
+        ['value' => 7, 'text' => '<b>Outdoor-freaken:</b> Mountainbiken, surfbrættet og løbeskoene er dine redskaber – naturen er din arena. Du elsker, at stor set alle friluftsmuligheder er lige uden for døren.', 'area' => ['kalø']],
+      ],
+    ];
+
     foreach ($questions as $index => $question) {
       $questions[$index]['index'] = ($index + 1);
     }
