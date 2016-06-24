@@ -5,3 +5,4 @@ webroot/drush/*
 **/.gulp/vendor/
 .idea/
 drupal-8.*
+logs/
