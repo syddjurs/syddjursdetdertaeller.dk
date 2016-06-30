@@ -263,7 +263,7 @@ class ncQuestionsForm extends FormBase {
 
     $questions[] = [
       'title' => 'Spørgsmål 5',
-      'text' => '',
+      'text' => 'Hverdagslogistikken er ofte central, når man skal flytte. Hvordan kommer vi på arbejde? Til fritidsinteresser og indkøb? Hvilket transportbehov forstiller I jer?',
       'options' => [
         ['value' => 1, 'text' => 'To biler', 'area' => ['ebeltoft','land']],
         ['value' => 2, 'text' => 'En bil', 'area' => ['kalø']],
@@ -273,7 +273,7 @@ class ncQuestionsForm extends FormBase {
 
     $questions[] = [
       'title' => 'Spørgsmål 6',
-      'text' => '',
+      'text' => 'Du tror det måske ikke, men uanset hvor mainstream eller skæv en type, du er – så er der nogen præcis som dig i Syddjurs, som ville elske at have dig som nabo. Hvilken type kan du bedst identificere dig med?',
       'options' => [
         ['value' => 1, 'text' => '<b>Bonderøven:</b> Masser af plads, lidt høns og mulighed for at flikke en shelter sammen. Du dyrker yoga og måske lidt spelt. Mon et selvforsynende kollektiv er næste skridt?', 'area' => ['land']],
         ['value' => 2, 'text' => '<b>Gør-det-selv-typen:</b> Planen er at købe et håndværkertilbud, du kan ombygge. Du drømmer om at banke et værksted op, så du kan rode med veteranbilen.', 'area' => ['land']],
