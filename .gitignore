@@ -6,3 +6,4 @@ webroot/drush/*
 .idea/
 drupal-8.*
 logs/
+tmp/
