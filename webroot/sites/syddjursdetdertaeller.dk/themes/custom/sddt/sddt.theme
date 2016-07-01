@@ -173,6 +173,9 @@ function sddt_preprocess_paragraph(&$variables) {
           $variables['image_path'] = $path;
         }
       }
+      if($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')->getValue())){
+        $variables['attributes']['class'][] = 'double-section__video';
+      }
       break;
     case 'double_section_element_text':
       $variables['attributes']['class'][] = 'double-section__text';
@@ -188,6 +191,11 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       $variables['attributes']['class'][] = 'triple-section__img';
       //$variables['attributes']['class'][] = 'col--md-4';
+
+      if($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')->getValue())){
+        $variables['attributes']['class'][] = 'triple-section__video';
+      }
+
       break;
     case 'simple_quiz':
       // Set attributes
