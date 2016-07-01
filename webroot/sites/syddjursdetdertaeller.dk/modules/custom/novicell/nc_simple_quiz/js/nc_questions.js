@@ -41,24 +41,24 @@ jQuery(document).ready(
       var question = jQuery(event.target).closest('.question').data('question');
       event.preventDefault();
       if (nc_answers[question] > 0) {
-        var offset = $(this).closest('section.simple-quiz').offset(); // Contains .top and .left
-
-        offset.left -= 20;
-        offset.top -= 20;
-
-        var adminMenuHeight = $('.toolbar-bar').height() + $('.toolbar-tray-horizontal.is-active').height();
-
-        $('html, body').animate({
-          scrollTop: offset.top - adminMenuHeight,
-          scrollLeft: offset.left - adminMenuHeight
-        },200);
-
         nc_question = question + 1;
         if (nc_question_finished < question) nc_question_finished = question;
         if (question < nc_questions) {
           jQuery('.question[data-question=' + question + ']').hide();
           jQuery('.question[data-question=' + nc_question + ']').show();
         } else {
+          var offset = $(this).closest('section.simple-quiz').offset(); // Contains .top and .left
+
+          offset.left -= 20;
+          offset.top -= 20;
+
+          var adminMenuHeight = $('.toolbar-bar').height() + $('.toolbar-tray-horizontal.is-active').height();
+
+          $('html, body').animate({
+            scrollTop: offset.top - adminMenuHeight,
+            scrollLeft: offset.left - adminMenuHeight
+          },200);
+
           // var highest_answer = 1;
           // var correct_answer = 1;
           // var answers = [];
