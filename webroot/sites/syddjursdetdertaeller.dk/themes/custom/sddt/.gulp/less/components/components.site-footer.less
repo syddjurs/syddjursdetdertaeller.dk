@@ -80,6 +80,7 @@
         &__inner {
             @media (min-width:@screen-sm) {
                 float: right;
+                text-align: right;
             }
         }
 
@@ -89,11 +90,10 @@
             font-size: 20px;
             font-weight: bold;
             text-align: center;
+            margin-bottom: 10px;
 
             @media (min-width:@screen-sm) {
-                display: inline-block;
-                //float: right;
-                margin-right: -45px;
+                text-align: right;
             }
         }
         &__link {
@@ -106,6 +106,7 @@
             //    right: -240px;
             //    top: 60px;
                 display: inline-block;
+                height: 25px;
                 //float: right;
 
             }
@@ -115,10 +116,8 @@
             width: 25px;
             height: 25px;
             fill: @color-black;
-            margin-left: 38px;
             @media (min-width:@screen-sm) {
                 position: relative;
-                top: 40px;
             }
         }
         &__facebook {
@@ -128,7 +127,6 @@
             margin-left: 5px;
             @media (min-width:@screen-sm) {
                 position: relative;
-                top: 40px;
             }
         }
     }

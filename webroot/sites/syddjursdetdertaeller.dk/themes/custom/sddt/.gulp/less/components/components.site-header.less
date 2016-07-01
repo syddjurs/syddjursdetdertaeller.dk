@@ -161,36 +161,33 @@
   &__hashtag {
     display: inline-block;
     font-size: 20px;
+
+    @media (min-width: @screen-sm) {
+      margin-right: 10px;
+    }
+
+    @media (min-width: @screen-md) {
+      margin-right: 45px;
+    }
   }
 
   &__link {
     text-decoration: none;
-  }
-
-  &__instagram {
-    width: 25px;
-    height: 25px;
-    fill: @color-black;
     position: relative;
     top: 5px;
-    margin-left: 45px;
+
+    width: 25px;
+    height: 25px;
 
     @media (min-width: @screen-sm) {
-      margin-left: 10px;
-    }
-
-    @media (min-width: @screen-md) {
-      margin-left: 45px;
+      margin-right: 10px;
     }
   }
 
-  &__facebook {
+  &__instagram, &__facebook {
     width: 25px;
     height: 25px;
     fill: @color-black;
-    position: relative;
-    top: 5px;
-    margin-left: 10px;
   }
 }
 
