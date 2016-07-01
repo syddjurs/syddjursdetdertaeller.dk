@@ -23,6 +23,7 @@ var nc_answers = [];
 
 jQuery(document).ready(
   function () {
+    var $ = $ || jQuery;
     jQuery('.question .form-checkbox').prop('checked', false);
     jQuery('.question[data-question=1]').show();
     jQuery('.question').each(function (index, item) {
@@ -40,6 +41,18 @@ jQuery(document).ready(
       var question = jQuery(event.target).closest('.question').data('question');
       event.preventDefault();
       if (nc_answers[question] > 0) {
+        var offset = $(this).closest('section.simple-quiz').offset(); // Contains .top and .left
+
+        offset.left -= 20;
+        offset.top -= 20;
+
+        var adminMenuHeight = $('.toolbar-bar').height() + $('.toolbar-tray-horizontal.is-active').height();
+
+        $('html, body').animate({
+          scrollTop: offset.top - adminMenuHeight,
+          scrollLeft: offset.left - adminMenuHeight
+        },200);
+
         nc_question = question + 1;
         if (nc_question_finished < question) nc_question_finished = question;
         if (question < nc_questions) {
