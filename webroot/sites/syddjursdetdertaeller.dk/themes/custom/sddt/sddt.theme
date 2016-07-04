@@ -109,7 +109,10 @@ function sddt_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_stat
  * @param $variables
  */
 function sddt_preprocess_input(&$variables) {
-  if (in_array($variables['theme_hook_original'],['input__textfield','input__password'])) {
+  if (in_array($variables['theme_hook_original'], [
+    'input__textfield',
+    'input__password'
+  ])) {
     $variables['attributes']['class'][] = 'input';
   }
 
@@ -167,13 +170,16 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
       $variables['attributes']['class'][] = 'no-gutter';
-      if($paragraph->hasField('field_image')){
+      if ($paragraph->hasField('field_image')) {
         if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
-          $path = ImageStyle::load('double_section_xxs')->buildUrl($paragraph->field_image->entity->getFileUri());
+          $path = ImageStyle::load('double_section_xxs')
+            ->buildUrl($paragraph->field_image->entity->getFileUri());
           $variables['image_path'] = $path;
         }
       }
-      if($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')->getValue())){
+      if ($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')
+          ->getValue())
+      ) {
         $variables['attributes']['class'][] = 'double-section__video';
       }
       break;
@@ -192,7 +198,9 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'triple-section__img';
       //$variables['attributes']['class'][] = 'col--md-4';
 
-      if($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')->getValue())){
+      if ($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')
+          ->getValue())
+      ) {
         $variables['attributes']['class'][] = 'triple-section__video';
       }
 
@@ -232,15 +240,15 @@ function sddt_preprocess_paragraph(&$variables) {
 
   }
 
-  if($paragraph->hasField('field_video')){
-    if(empty($paragraph->get('field_video')->getValue())){
+  if ($paragraph->hasField('field_video')) {
+    if (empty($paragraph->get('field_video')->getValue())) {
       unset($variables['content']['field_video']);
     }
   }
 
-  if($paragraph->hasField('field_cta_button')){
-    foreach($paragraph->get('field_cta_button') as $key => $link){
-      if($link->isExternal()){
+  if ($paragraph->hasField('field_cta_button')) {
+    foreach ($paragraph->get('field_cta_button') as $key => $link) {
+      if ($link->isExternal()) {
         $variables['content']['field_cta_button'][$key]['#attributes'] = [
           'target' => [
             '_blank',
@@ -254,12 +262,12 @@ function sddt_preprocess_paragraph(&$variables) {
     }
   }
 
-  if(isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)){
+  if (isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)) {
     $variables['attributes']['class'][] = 'no-spacing';
   }
 
-  if(!empty($paragraph->field_layout->value)){
-    $variables['attributes']['class'][] = 'layout-'.$paragraph->field_layout->value;
+  if (!empty($paragraph->field_layout->value)) {
+    $variables['attributes']['class'][] = 'layout-' . $paragraph->field_layout->value;
   }
 
 //  if ($fid = $paragraph->field_image->target_id) {
@@ -296,4 +304,103 @@ function sddt_preprocess_block(&$variables) {
       }
     }
   }
+}
+
+function sddt_page_attachments_alter(array &$attachments) {
+  $themePath = \Drupal::theme()->getActiveTheme()->getPath();
+
+  $appleTouchIconSizes = [
+    '57x57',
+    '60x60',
+    '72x72',
+    '76x76',
+    '114x114',
+    '120x120',
+    '144x144',
+    '152x152',
+    '180x180',
+  ];
+  foreach ($appleTouchIconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'apple-touch-icon',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/apple-icon-' . $size . '.png',
+      ],
+      'appleTouchIcon' . $size,
+    ];
+  }
+
+  $androidIconSizes = [
+    '192x192',
+  ];
+  foreach ($androidIconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'icon',
+        'type' => 'image/png',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/android-icon-' . $size . '.png',
+      ],
+      'androidIcon' . $size,
+    ];
+  }
+
+  $iconSizes = [
+    '32x32',
+    '96x96',
+    '16x16',
+  ];
+  foreach ($iconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'icon',
+        'type' => 'image/png',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/favicon-' . $size . '.png',
+      ],
+      'favicon' . $size,
+    ];
+  }
+
+  $attachments['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'manifest',
+      'href' => $themePath . '/favicon/manifest.json',
+    ],
+    'manifest',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'msapplication-TileColor',
+        'content' => '#ffffff',
+      ],
+    ],
+    'msapplication-TileColor'
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'msapplication-TileImage',
+        'content' => $themePath . '/favicon/ms-icon-144x144.png',
+      ],
+    ],
+    'msapplication-TileImage',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'theme-color',
+        'content' => '#ffffff',
+      ],
+    ],
+    'theme-color',
+  ];
 }
