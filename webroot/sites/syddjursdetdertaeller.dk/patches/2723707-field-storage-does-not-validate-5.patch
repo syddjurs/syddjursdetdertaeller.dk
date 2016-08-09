@@ -1,0 +1,30 @@
+diff --git a/core/lib/Drupal/Core/Field/FieldConfigStorageBase.php b/core/lib/Drupal/Core/Field/FieldConfigStorageBase.php
+index f54607c..11b5668 100644
+--- a/core/lib/Drupal/Core/Field/FieldConfigStorageBase.php
++++ b/core/lib/Drupal/Core/Field/FieldConfigStorageBase.php
+@@ -23,7 +23,9 @@
+   protected function mapFromStorageRecords(array $records) {
+     foreach ($records as &$record) {
+       $class = $this->fieldTypeManager->getPluginClass($record['field_type']);
+-      $record['settings'] = $class::fieldSettingsFromConfigData($record['settings']);
++      if (!empty($class)) {
++        $record['settings'] = $class::fieldSettingsFromConfigData($record['settings']);
++      }
+     }
+     return parent::mapFromStorageRecords($records);
+   }
+diff --git a/core/modules/field/src/FieldStorageConfigStorage.php b/core/modules/field/src/FieldStorageConfigStorage.php
+index 072b6fa..41619c1 100644
+--- a/core/modules/field/src/FieldStorageConfigStorage.php
++++ b/core/modules/field/src/FieldStorageConfigStorage.php
+@@ -152,7 +152,9 @@ public function loadByProperties(array $conditions = array()) {
+   protected function mapFromStorageRecords(array $records) {
+     foreach ($records as &$record) {
+       $class = $this->fieldTypeManager->getPluginClass($record['type']);
+-      $record['settings'] = $class::storageSettingsFromConfigData($record['settings']);
++      if (!empty($class)) {
++        $record['settings'] = $class::storageSettingsFromConfigData($record['settings']);
++      }
+     }
+     return parent::mapFromStorageRecords($records);
+   }
