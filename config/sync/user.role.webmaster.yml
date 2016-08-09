@@ -1,0 +1,22 @@
+uuid: e70caec2-86bd-44c7-88aa-82281f9436c4
+langcode: da
+status: true
+dependencies: {  }
+id: webmaster
+label: Webmaster
+weight: -8
+is_admin: null
+permissions:
+  - 'use text format full_html'
+  - 'administer meta tags'
+  - 'access content overview'
+  - 'create page content'
+  - 'delete any page content'
+  - 'delete own page content'
+  - 'edit any page content'
+  - 'edit own page content'
+  - 'administer cookieinfo'
+  - 'create url aliases'
+  - 'administer menu'
+  - 'view the administration theme'
+  - 'access toolbar'
