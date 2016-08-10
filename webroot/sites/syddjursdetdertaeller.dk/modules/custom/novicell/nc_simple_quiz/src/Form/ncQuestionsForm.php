@@ -38,19 +38,20 @@ class ncQuestionsForm extends FormBase {
       '#suffix' => '</h2>',
     );
 
-    $form['description'] = array(
-      '#prefix' => '<p><i>',
-//      '#markup' => $this->t('Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.'),
-      '#markup' => 'Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.',
-      '#suffix' => '</i></p>',
-    );
-
     $form['quiz'] = array(
       '#type' => 'container',
       '#attributes' => array(
         'class' => 'quiz-container',
       ),
     );
+
+    $form['quiz']['description'] = array(
+      '#prefix' => '<p><i>',
+//      '#markup' => $this->t('Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.'),
+      '#markup' => 'Prøv vores helt uvidenskabelige test, hvis du er nysgerrig efter en indikation af, hvor i Syddjurs din familiedrøm allerbedst udfolder sig. Hvis ingen svar passer perfekt, så vælg det, der passer bedst. Testen tager cirka syv minutter.',
+      '#suffix' => '</i></p>',
+    );
+
 
     foreach ($this->getQuestions() as $question) {
       $form['quiz']['question' . $question['index']] = $this->buildQuestion($question);
