@@ -4,10 +4,12 @@ status: true
 dependencies:
   config:
     - field.field.node.page.body
+    - field.field.node.page.field_meta_tags
     - field.field.node.page.field_section_element
     - node.type.page
   module:
     - entity_reference_revisions
+    - metatag
     - text
     - user
 _core:
@@ -23,6 +25,12 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+  field_meta_tags:
+    weight: 3
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: metatag_empty_formatter
   field_section_element:
     type: entity_reference_revisions_entity_view
     weight: 1
