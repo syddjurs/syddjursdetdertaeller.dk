@@ -306,6 +306,21 @@ function sddt_preprocess_block(&$variables) {
   }
 }
 
+function sddt_preprocess_page_title(&$variables) {
+  // Load the node entity from current route
+  if ($node = \Drupal::routeMatch()->getParameter('node')){
+
+    if ($node->hasField('field_show_page_title')) {
+      foreach($node->get('field_show_page_title')->getValue() as $entry){
+        if(empty($entry['value'])){
+          // Unset the page title
+          unset($variables['title']);
+        }
+      }
+    }
+  }
+}
+
 function sddt_page_attachments_alter(array &$attachments) {
   $themePath = \Drupal::theme()->getActiveTheme()->getPath();
 

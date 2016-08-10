@@ -2,8 +2,6 @@ uuid: 0a23e23d-3537-47da-a592-34469b65650c
 langcode: da
 status: true
 dependencies:
-  module:
-    - system
   theme:
     - sddt
 _core:
@@ -19,9 +17,4 @@ settings:
   label: Sidetitel
   provider: core
   label_display: '0'
-visibility:
-  request_path:
-    id: request_path
-    pages: '<front>'
-    negate: true
-    context_mapping: {  }
+visibility: {  }
