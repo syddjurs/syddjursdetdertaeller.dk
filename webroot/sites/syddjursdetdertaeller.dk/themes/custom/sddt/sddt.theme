@@ -154,11 +154,7 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'single_section_text':
       // Set attributes
       $variables['attributes']['class'][] = 'single-section';
-      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
-        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
-        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
-      }
-    break;
+      break;
     case 'double_section':
       // Set attributes
       $variables['attributes']['class'][] = 'double-section';
@@ -192,10 +188,6 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
       $variables['attributes']['class'][] = 'no-gutter';
-      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
-        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
-        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
-      }
       break;
     case 'triple_section':
       // Set attributes
@@ -210,11 +202,6 @@ function sddt_preprocess_paragraph(&$variables) {
           ->getValue())
       ) {
         $variables['attributes']['class'][] = 'triple-section__video';
-      }
-
-      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
-        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
-        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
       }
 
       break;
@@ -242,7 +229,8 @@ function sddt_preprocess_paragraph(&$variables) {
           'longitude' => $pin_item->get('field_longitude')->value,
         ];
         if (!empty($pin_item->field_image->entity) && !empty($pin_item->field_image->entity->getFileUri())) {
-          $pin->image_path = ImageStyle::load('triple_section_md')->buildUrl($pin_item->field_image->entity->getFileUri());
+          $pin->image_path = ImageStyle::load('triple_section_md')
+            ->buildUrl($pin_item->field_image->entity->getFileUri());
         }
         $pins[] = $pin;
 
@@ -257,6 +245,15 @@ function sddt_preprocess_paragraph(&$variables) {
 
       break;
 
+  }
+
+  if ($paragraph->hasField('field_image_link')) {
+    if (!empty($paragraph->get('field_image_link')->first())) {
+      $variables['image_link_url'] = $paragraph->get('field_image_link')
+        ->first()
+        ->getUrl();
+      $variables['image_link_target'] = $variables['image_link_url']->isExternal() ? '_blank' : '';
+    }
   }
 
   if ($paragraph->hasField('field_video')) {
@@ -327,11 +324,11 @@ function sddt_preprocess_block(&$variables) {
 
 function sddt_preprocess_page_title(&$variables) {
   // Load the node entity from current route
-  if ($node = \Drupal::routeMatch()->getParameter('node')){
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
 
     if ($node->hasField('field_show_page_title')) {
-      foreach($node->get('field_show_page_title')->getValue() as $entry){
-        if(empty($entry['value'])){
+      foreach ($node->get('field_show_page_title')->getValue() as $entry) {
+        if (empty($entry['value'])) {
           // Unset the page title
           unset($variables['title']);
         }

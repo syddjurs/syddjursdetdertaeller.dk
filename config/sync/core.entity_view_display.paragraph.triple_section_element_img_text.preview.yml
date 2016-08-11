@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_mode.paragraph.preview
     - field.field.paragraph.triple_section_element_img_text.field_headline
     - field.field.paragraph.triple_section_element_img_text.field_image
+    - field.field.paragraph.triple_section_element_img_text.field_image_link
     - field.field.paragraph.triple_section_element_img_text.field_layout
     - field.field.paragraph.triple_section_element_img_text.field_text
     - field.field.paragraph.triple_section_element_img_text.field_video
@@ -51,6 +52,7 @@ content:
     third_party_settings: {  }
 hidden:
   created: true
+  field_image_link: true
   field_layout: true
   field_video: true
   uid: true

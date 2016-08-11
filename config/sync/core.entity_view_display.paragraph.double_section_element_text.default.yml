@@ -4,11 +4,13 @@ status: true
 dependencies:
   config:
     - field.field.paragraph.double_section_element_text.field_image
+    - field.field.paragraph.double_section_element_text.field_image_link
     - field.field.paragraph.double_section_element_text.field_layout
     - field.field.paragraph.double_section_element_text.field_text
     - paragraphs.paragraphs_type.double_section_element_text
   module:
     - image
+    - link
     - text
 id: paragraph.double_section_element_text.default
 targetEntityType: paragraph
@@ -23,6 +25,17 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+  field_image_link:
+    weight: 2
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
   field_text:
     weight: 1
     label: hidden

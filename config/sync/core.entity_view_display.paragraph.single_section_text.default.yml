@@ -7,6 +7,7 @@ dependencies:
     - field.field.paragraph.single_section_text.field_cta_button
     - field.field.paragraph.single_section_text.field_headline
     - field.field.paragraph.single_section_text.field_image
+    - field.field.paragraph.single_section_text.field_image_link
     - field.field.paragraph.single_section_text.field_insert_space
     - field.field.paragraph.single_section_text.field_layout
     - paragraphs.paragraphs_type.single_section_text
@@ -53,6 +54,7 @@ content:
     type: image
 hidden:
   created: true
+  field_image_link: true
   field_insert_space: true
   field_layout: true
   uid: true

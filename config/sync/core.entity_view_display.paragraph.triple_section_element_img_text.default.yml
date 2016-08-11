@@ -5,10 +5,12 @@ dependencies:
   config:
     - field.field.paragraph.triple_section_element_img_text.field_headline
     - field.field.paragraph.triple_section_element_img_text.field_image
+    - field.field.paragraph.triple_section_element_img_text.field_image_link
     - field.field.paragraph.triple_section_element_img_text.field_layout
     - field.field.paragraph.triple_section_element_img_text.field_text
     - field.field.paragraph.triple_section_element_img_text.field_video
     - paragraphs.paragraphs_type.triple_section_element_img_text
+    - responsive_image.styles.triple_section
   module:
     - responsive_image
     - text
@@ -51,5 +53,6 @@ content:
     type: video_embed_field_video
 hidden:
   created: true
+  field_image_link: true
   field_layout: true
   uid: true
