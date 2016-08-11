@@ -40,7 +40,15 @@
   {% if content.field_video %}
     {{ content.field_video }}
   {% else %}
-    <figure class="triple-section__img-inner">{{ content.field_image }}</figure>
+    <figure class="triple-section__img-inner">
+      {% if content.field_image %}
+        {% if image_link_url %}
+          <a href="{{ image_link_url }}"{% if image_link_target %} target="{{ image_link_target }}"{% endif %}>
+        {% endif %}
+        {{ content.field_image }}
+        {% if image_link_url %}</a>{% endif %}
+      {% endif %}
+    </figure>
   {% endif %}
   <div class="triple-section__text">
     {% if content.field_headline %}

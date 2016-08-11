@@ -38,7 +38,13 @@
 #}
 <div{{ attributes }}>
   <div class="{{ attributes.class | first }}-inner">
+    {% if content.field_image %}
+      {% if image_link_url %}
+        <a href="{{ image_link_url }}"{% if image_link_target %} target="{{ image_link_target }}"{% endif %}>
+      {% endif %}
       {{ content.field_image }}
-      {{ content.field_text }}
+      {% if image_link_url %}</a>{% endif %}
+    {% endif %}
+    {{ content.field_text }}
   </div>
 </div>

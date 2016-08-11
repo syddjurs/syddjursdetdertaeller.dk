@@ -154,7 +154,11 @@ function sddt_preprocess_paragraph(&$variables) {
     case 'single_section_text':
       // Set attributes
       $variables['attributes']['class'][] = 'single-section';
-      break;
+      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
+        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
+        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
+      }
+    break;
     case 'double_section':
       // Set attributes
       $variables['attributes']['class'][] = 'double-section';
@@ -188,6 +192,10 @@ function sddt_preprocess_paragraph(&$variables) {
       $variables['attributes']['class'][] = 'col--xs-12';
       //$variables['attributes']['class'][] = 'col--md-6';
       $variables['attributes']['class'][] = 'no-gutter';
+      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
+        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
+        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
+      }
       break;
     case 'triple_section':
       // Set attributes
@@ -202,6 +210,11 @@ function sddt_preprocess_paragraph(&$variables) {
           ->getValue())
       ) {
         $variables['attributes']['class'][] = 'triple-section__video';
+      }
+
+      if ($paragraph->hasField('field_image_link') && !empty($paragraph->get('field_image_link')->first())){
+        $variables['image_link_url'] = $paragraph->get('field_image_link')->first()->getUrl();
+        $variables['image_link_target'] = $paragraph->get('field_image_link')->first()->getUrl()->isExternal() ? '_blank' : '';
       }
 
       break;
