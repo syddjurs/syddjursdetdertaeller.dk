@@ -3,6 +3,8 @@ langcode: da
 status: true
 dependencies:
   config:
+    - field.field.field_collection_item.field_pin.field_description
+    - field.field.field_collection_item.field_pin.field_image
     - field.field.field_collection_item.field_pin.field_latitude
     - field.field.field_collection_item.field_pin.field_longitude
     - field.field.field_collection_item.field_pin.field_pin_name
@@ -20,5 +22,7 @@ content:
     third_party_settings: {  }
     type: string
 hidden:
+  field_description: true
+  field_image: true
   field_latitude: true
   field_longitude: true

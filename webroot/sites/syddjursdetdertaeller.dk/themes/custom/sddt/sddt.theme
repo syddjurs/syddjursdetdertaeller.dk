@@ -222,11 +222,17 @@ function sddt_preprocess_paragraph(&$variables) {
       $pins = [];
 
       foreach ($pin_content as $pin_item) {
-        $pins[] = (object) [
+        $pin = (object) [
           'name' => $pin_item->get('field_pin_name')->value,
+          'description' => $pin_item->get('field_description')->value,
           'latitude' => $pin_item->get('field_latitude')->value,
           'longitude' => $pin_item->get('field_longitude')->value,
         ];
+        if (!empty($pin_item->field_image->entity) && !empty($pin_item->field_image->entity->getFileUri())) {
+          $pin->image_path = ImageStyle::load('triple_section_md')->buildUrl($pin_item->field_image->entity->getFileUri());
+        }
+        $pins[] = $pin;
+
       }
 //      $variables['#attached']['js'][] = array('type' => 'external', 'data' => 'https://maps.googleapis.com/maps/api/js'); // https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap
       $variables['map_id'] = $paragraph->id();
