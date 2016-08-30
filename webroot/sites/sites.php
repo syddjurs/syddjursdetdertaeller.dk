@@ -59,6 +59,8 @@ $sites['syddjursdetdertaeller.dk.local.drupal08.novicell.dk'] = 'syddjursdetdert
 $sites['syddjurs.dk.local.drupal08.novicell.dk'] = 'syddjursdetdertaeller.dk';
 
 # Novicell staging
+$sites['syddjursdetdertaeller.dk.staging.drupal08.novicell.dk'] = 'syddjursdetdertaeller.dk';
+$sites['www.syddjursdetdertaeller.dk.staging.drupal08.novicell.dk'] = 'syddjursdetdertaeller.dk';
 $sites['syddjursdetdertaeller.ditnyewebsite.dk'] = 'syddjursdetdertaeller.dk';
 $sites['www.syddjursdetdertaeller.ditnyewebsite.dk'] = 'syddjursdetdertaeller.dk';
 
