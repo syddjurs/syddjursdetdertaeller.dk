@@ -1,0 +1,38 @@
+uuid: 34f09c67-0311-4384-83e8-93ba182cd366
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - image
+id: paragraph.double_section_element_text.field_image
+field_name: field_image
+entity_type: paragraph
+bundle: double_section_element_text
+label: Billede
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: content-image-upload
+  file_extensions: 'png jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

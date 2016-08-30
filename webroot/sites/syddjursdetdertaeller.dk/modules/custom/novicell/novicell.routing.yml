@@ -1,0 +1,7 @@
+nc.config:
+  path: '/admin/config/novicell'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Novicell'
+  requirements:
+    _permission: 'administer settings'

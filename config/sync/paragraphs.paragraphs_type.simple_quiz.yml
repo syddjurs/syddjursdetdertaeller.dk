@@ -1,0 +1,8 @@
+uuid: efd9763a-b11b-4b8c-859d-4fbd804361e1
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: ZsPvomlROF5dDjwoi8zAIezj6AxsTqZ6gshtGpCq3nI
+id: simple_quiz
+label: 'Simple Quiz'

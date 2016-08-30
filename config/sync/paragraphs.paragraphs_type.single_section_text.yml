@@ -1,0 +1,6 @@
+uuid: dd6cc65e-1f7f-413c-9bd9-ece57601f956
+langcode: da
+status: true
+dependencies: {  }
+id: single_section_text
+label: 'Enkelt bånd: Tekst'

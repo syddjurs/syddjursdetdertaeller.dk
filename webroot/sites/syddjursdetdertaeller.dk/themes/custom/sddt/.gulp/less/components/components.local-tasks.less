@@ -1,0 +1,47 @@
+.local-tasks {
+  ul {
+    margin: 20px @gutter-xs/2 0!important;
+
+    @media (min-width: @screen-sm) {
+      margin-left: 0!important;
+    }
+
+    li {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+
+      a {
+        display: block;
+        .button();
+        padding: 7px 20px;
+
+        &, &:hover {
+          color: @color-white;
+        }
+
+        &.is-active {
+          background-color: @color-gray;
+          color: @color-black;
+        }
+
+        @media (min-width: @screen-sm) {
+          padding: 7px 40px;
+        }
+
+        @media (min-width: @screen-md) {
+          padding: 7px 60px;
+        }
+
+        @media (min-width: @screen-lg) {
+          padding: 7px 80px;
+        }
+      }
+    }
+  }
+  &__list {
+    margin: 0 !important;
+    padding: 0;
+  }
+}

@@ -1,0 +1,21 @@
+{% set classes = ['content-block'] %}
+
+<section{{ attributes.addClass(classes) }}>
+  <div class="container">
+    <div class="row">
+      {{ title_prefix }}
+      {{ title_suffix }}
+        <div class="col--xs-12 col--md-6">
+          <h2>{{ content.field_headline }}</h2>
+          {{ content.body }}
+        </div>
+        <div class="col--xs-12 col--md-6">
+          <div class="content-block-cta">
+            {{ content.field_buttons }}
+            {#<a class="button button--large content-block-cta__button" href="#">{{ button.label }}</a>#}
+            {#<a class="button button--secondary button--large content-block-cta__button" href="#">Start online chat</a>#}
+          </div>
+        </div>
+    </div>
+  </div>
+</section>

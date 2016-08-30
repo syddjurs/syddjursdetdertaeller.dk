@@ -1,0 +1,6 @@
+nc.config:
+  title: 'Novicell'
+  route_name: nc.config
+  parent: system.admin_config
+  description: 'Custom things'
+  weight: -15

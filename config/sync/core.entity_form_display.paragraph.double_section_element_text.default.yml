@@ -1,0 +1,50 @@
+uuid: f380a2a1-02d6-4470-a733-9f98f21e9d43
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double_section_element_text.field_image
+    - field.field.paragraph.double_section_element_text.field_image_link
+    - field.field.paragraph.double_section_element_text.field_layout
+    - field.field.paragraph.double_section_element_text.field_text
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - image
+    - link
+    - text
+id: paragraph.double_section_element_text.default
+targetEntityType: paragraph
+bundle: double_section_element_text
+mode: default
+content:
+  field_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_image_link:
+    weight: 2
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_layout:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+hidden:
+  created: true
+  status: true
+  uid: true

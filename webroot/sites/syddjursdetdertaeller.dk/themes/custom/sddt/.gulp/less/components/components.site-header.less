@@ -1,0 +1,195 @@
+/**
+ * Component: Site header
+ * Logo, menu, sticky feature
+ */
+
+.site-header {
+  font-family: @header-font-family;
+  position: relative;
+  z-index: 1000;
+  top: 0 !important;
+  left: 0;
+  width: 100%;
+  height: 85px;
+  padding: 0;
+  margin-bottom: 0;
+
+  //background-color: rgba(255, 255, 255, .9);
+  //border-bottom: 4px solid @color-secondary;
+  .transition(padding-left .3s);
+
+  @media (min-width: @screen-sm) {
+    height: 150px;
+  }
+  //@media (max-width:@screen-sm-max) {position: fixed;}
+
+  &.js-fixed {
+    position: fixed;
+    top: 0;
+
+    .site-navigation {
+      margin-top: 0;
+    }
+    .site-navigation__counter {
+      top: -8px;
+      width: 20px;
+      height: 20px;
+      line-height: 20px;
+      font-size: 8px;
+    }
+    .logo__image {
+      width: 58px;
+      height: 18px;
+    }
+    .logo__branch {
+      font-size: 15px;
+    }
+  }
+
+  & > .container {
+    height: 100%;
+    background-color: @color-white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    box-shadow: 0px 3px 4px -2px rgba(0,0,0,0.15);
+  }
+
+  @media (min-width: @screen-md) {
+    //padding: 10px 0 0;
+    top: 42px; // 42px off from the global header
+  }
+
+  //@media (max-width:420px) {
+  //  &.js-menu-open {padding-left: 50%;}
+  //}
+}
+
+.logo {
+  display: block;
+  text-decoration: none;
+  position: relative;
+  top: 10px;
+  left: 10px;
+  float: left;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  @media (min-width: @screen-sm) {
+    top: 30px;
+    margin-left: 20px;
+  }
+
+  @media (min-width: @screen-md) {
+    top: 30px;
+    margin-left: 80px;
+  }
+
+  &__image {
+    display: inline-block;
+    width: 120px;
+    height: 45px;
+    .transition(all .3s);
+
+    @media (min-width: @screen-sm) {
+      width: 195px;
+      height: 75px;
+    }
+
+    @media (min-width: @screen-md) {
+      width: 195px;
+      height: 75px;
+    }
+  }
+
+  &__branch {
+    display: inline-block;
+    color: @color-text;
+    line-height: 1;
+    font-size: 15px;
+    .transition(all .3s);
+
+    @media (min-width: @screen-md) {
+      font-size: 30px;
+    }
+  }
+
+  // Mobile variant, for the mobile navigation
+  &--mobile {
+    margin-bottom: 10px;
+    float: none;
+    top: 0;
+
+    .logo__image {
+      width: 76px;
+    }
+    .logo__branch {
+      font-size: 22px;
+    }
+  }
+}
+
+.header-right {
+  position: relative;
+  float: right;
+  margin-top: 20px;
+  margin-right: 10px;
+
+  @media (min-width: @screen-md) {
+    margin-right: -60px;
+    margin-top: 0;
+    margin-right: 0;
+  }
+}
+
+.social-media {
+  //width: 400px;
+  //position: relative;
+  //float: right;
+  display: none;
+
+  @media (min-width: @screen-sm) {
+    display: block;
+    margin-right: 215px;
+  }
+
+  @media (min-width: @screen-md) {
+    margin-right: 271px;
+    margin-top: 25px;
+  }
+
+  &__hashtag {
+    display: inline-block;
+    font-size: 20px;
+
+    @media (min-width: @screen-sm) {
+      margin-right: 10px;
+    }
+
+    @media (min-width: @screen-md) {
+      margin-right: 45px;
+    }
+  }
+
+  &__link {
+    text-decoration: none;
+    position: relative;
+    top: 5px;
+
+    width: 25px;
+    height: 25px;
+
+    @media (min-width: @screen-sm) {
+      margin-right: 10px;
+    }
+  }
+
+  &__instagram, &__facebook {
+    width: 25px;
+    height: 25px;
+    fill: @color-black;
+  }
+}
+
+

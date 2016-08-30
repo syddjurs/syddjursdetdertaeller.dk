@@ -1,0 +1,14 @@
+uuid: a188c70d-0461-4040-ab47-7c47ec9699c2
+name: Syddjurs
+mail: drupal@novicell.dk
+slogan: 'det der tæller'
+page:
+  403: /node/3
+  404: /node/2
+  front: /node/4
+admin_compact_mode: false
+weight_select_max: 100
+langcode: da
+default_langcode: da
+_core:
+  default_config_hash: yXadRE77Va-G6dxhd2kPYapAvbnSvTF6hO4oXiOEynI

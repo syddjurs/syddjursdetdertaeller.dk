@@ -1,0 +1,23 @@
+uuid: b3fe89bb-76da-418a-889a-f3e684b3aa9f
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image_link
+    - paragraphs.paragraphs_type.double_section_element_text
+  module:
+    - link
+id: paragraph.double_section_element_text.field_image_link
+field_name: field_image_link
+entity_type: paragraph
+bundle: double_section_element_text
+label: Billed-link
+description: 'Indsæt link, som billedet skal linke til.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  link_type: 17
+  title: 0
+field_type: link

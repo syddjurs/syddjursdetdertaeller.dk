@@ -1,0 +1,23 @@
+uuid: 2b8bddc3-3a5f-4bff-9aca-584200d3a3dc
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.field_collection_item.field_longitude
+    - field_collection.field_collection.field_pin
+id: field_collection_item.field_pin.field_longitude
+field_name: field_longitude
+entity_type: field_collection_item
+bundle: field_pin
+label: Længdegrad
+description: 'Angives som decimal-tal, f.eks. <em>10.616863</em> (max seks decimaler). Husk at bruge punktum i stedet for komma.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: decimal

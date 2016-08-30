@@ -1,0 +1,23 @@
+uuid: 3bcc5239-39f7-47b9-92ef-d13a690ab5f6
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_meta_tags
+    - node.type.page
+  module:
+    - metatag
+id: node.page.field_meta_tags
+field_name: field_meta_tags
+entity_type: node
+bundle: page
+label: 'Meta data'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 'a:1:{s:5:"title";s:34:"[current-page:title] | [site:name]";}'
+default_value_callback: ''
+settings: {  }
+field_type: metatag

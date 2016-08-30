@@ -1,0 +1,60 @@
+uuid: a25c7684-6540-44a0-b763-e5dcdd741d5a
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.single_section_text.field_body
+    - field.field.paragraph.single_section_text.field_cta_button
+    - field.field.paragraph.single_section_text.field_headline
+    - field.field.paragraph.single_section_text.field_image
+    - field.field.paragraph.single_section_text.field_image_link
+    - field.field.paragraph.single_section_text.field_insert_space
+    - field.field.paragraph.single_section_text.field_layout
+    - paragraphs.paragraphs_type.single_section_text
+  module:
+    - image
+    - link
+    - text
+id: paragraph.single_section_text.default
+targetEntityType: paragraph
+bundle: single_section_text
+mode: default
+content:
+  field_body:
+    weight: 2
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: text_default
+  field_cta_button:
+    weight: 3
+    label: hidden
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+  field_headline:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  created: true
+  field_image_link: true
+  field_insert_space: true
+  field_layout: true
+  uid: true

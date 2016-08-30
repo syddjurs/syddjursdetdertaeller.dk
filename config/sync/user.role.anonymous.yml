@@ -1,0 +1,16 @@
+uuid: 26a0cd59-0036-4131-b593-b89fb4eb5192
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: j5zLMOdJBqC0bMvSdth5UebkprJB8g_2FXHqhfpJzow
+id: anonymous
+label: 'Anonym bruger'
+weight: -10
+is_admin: false
+permissions:
+  0: 'access content'
+  1: 'use text format restricted_html'
+  2: 'access comments'
+  4: 'search content'
+  5: 'view cookie info'

@@ -1,0 +1,14 @@
+uuid: d708776f-3210-47d9-9931-ca392cd1f953
+langcode: da
+status: true
+dependencies:
+  config:
+    - user.role.webmaster
+  module:
+    - user
+id: user_add_role_action.webmaster
+label: 'Tilføj rollen Webmaster til de valgte brugere'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: webmaster

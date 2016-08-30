@@ -1,0 +1,117 @@
+/**
+ * Base
+ */
+
+// Box sizing
+* {
+  .box-sizing(border-box);
+
+  &:before,
+  &:after {
+    .box-sizing(border-box);
+  }
+}
+
+// Body
+body {
+  background-color: @site-background-color;
+  font-family: @base-font-family;
+  font-weight: @base-font-weight;
+  font-size: @base-font-size;
+  color: @color-text;
+  line-height: 1.5;
+  overflow-x: hidden;
+  position: relative;
+  max-width: 1170px;
+  margin: 0 auto;
+
+  @media screen and (min-width: 1024px) {
+    //width: 1024px;
+    //background-color: #2ca02c;
+    //margin-right: -40px;
+  }
+
+  @media (min-width: @screen-lg) {
+    font-size: 18px;
+    //width: 1170px;
+  }
+
+  //@media @screen-md {
+  //    width: 1170px;
+  //    background-color: #2ca02c;
+  //}
+  //@media @screen-lg {
+  //    width: 1170px;
+  //    background-color: #2ca02c;
+  //}
+}
+
+// Links
+a {
+  color: @color-link;
+  text-decoration: underline;
+
+  &:hover,
+  &:focus {
+    color: darken(@color-link, 10%);
+  }
+}
+
+// Image handling
+figure {
+  margin: 0;
+}
+
+img {
+  max-width: 100%;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+// Boxes
+.layout-orange {
+  background-color: @color-orange;
+  color: @color-white;
+}
+
+.layout-red {
+  background-color: @color-red;
+  color: @color-white;
+}
+
+.layout-white {
+  background-color: @color-white;
+  color: @color-black;
+}
+
+.layout-orange, .layout-red {
+  a {
+    color: @color-white;
+    text-decoration: underline;
+
+    &:hover {
+      //text-decoration: none;
+      color: fade(@color-white, 80%);
+    }
+  }
+}
+
+// No gutters
+.no-gutter {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+//Spacing between sections
+.content-block {
+  padding-top: 0 !important;
+}
+
+.no-spacing {
+  margin-top: 0 !important;
+}
+
+.visually-hidden {
+  display: none;
+}

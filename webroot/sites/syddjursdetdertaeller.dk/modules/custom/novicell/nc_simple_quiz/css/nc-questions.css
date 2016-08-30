@@ -1,0 +1,28 @@
+#ncquestionsform .question {
+    display: none;
+    padding: 20px;
+    color: #000000;
+}
+#ncquestionsform .answer {
+     display: none;
+     padding: 20px;
+}
+#ncquestionsform input[type=checkbox], input[type=radio] {
+    margin: 4px 0 0;
+    margin-top: 1px\9;
+    line-height: normal;
+    display: inline-block;
+    width: 36px;
+    border: none;
+    box-shadow: none;
+    vertical-align: middle;
+    margin-left: 50px;
+}
+#ncquestionsform .form-submit {
+    margin: auto;
+}
+#ncquestionsform .progress__bar {
+    -webkit-animation: none;
+    -moz-animation: none;
+    min-width: 0px;
+}

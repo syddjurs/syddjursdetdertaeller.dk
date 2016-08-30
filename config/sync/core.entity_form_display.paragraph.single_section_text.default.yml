@@ -1,0 +1,74 @@
+uuid: 2ffc188f-9d4a-490e-8f9c-8c0c00204a8e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.single_section_text.field_body
+    - field.field.paragraph.single_section_text.field_cta_button
+    - field.field.paragraph.single_section_text.field_headline
+    - field.field.paragraph.single_section_text.field_image
+    - field.field.paragraph.single_section_text.field_image_link
+    - field.field.paragraph.single_section_text.field_insert_space
+    - field.field.paragraph.single_section_text.field_layout
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.single_section_text
+  module:
+    - image
+    - link
+    - text
+id: paragraph.single_section_text.default
+targetEntityType: paragraph
+bundle: single_section_text
+mode: default
+content:
+  field_body:
+    weight: 5
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+  field_cta_button:
+    weight: 6
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_headline:
+    weight: 4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_image:
+    weight: 2
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_image_link:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+  field_insert_space:
+    weight: 0
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_layout:
+    weight: 1
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+hidden:
+  created: true
+  status: true
+  uid: true

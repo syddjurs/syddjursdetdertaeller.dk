@@ -1,0 +1,11 @@
+uuid: 647cc2ff-4304-4522-b84b-134b0f7cbb70
+langcode: da
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: 4w1vDIuPlVqNIiynysHZHU-9sBCpx5uiEIPlo4SW1tw
+id: personal
+label: 'Personlig kontaktformular'
+recipients: {  }
+reply: ''
+weight: 0

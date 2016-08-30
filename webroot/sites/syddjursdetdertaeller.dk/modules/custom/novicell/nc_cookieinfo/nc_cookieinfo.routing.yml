@@ -1,0 +1,7 @@
+ncCookieInfo.settings:
+  path: '/admin/config/novicell/cookieinfo'
+  defaults:
+    _form: '\Drupal\nc_cookieinfo\Form\NcCookieInfoSettingsForm'
+    _title: 'Novicell Cookie info'
+  requirements:
+    _permission: 'administer cookieinfo'

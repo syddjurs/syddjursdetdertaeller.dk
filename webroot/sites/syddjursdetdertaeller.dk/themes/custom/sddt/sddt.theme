@@ -1,0 +1,437 @@
+<?php
+use Drupal\file\Entity\File;
+use Drupal\image\Entity\ImageStyle;
+
+function sddt_image_style_from_field(&$variables, $field) {
+  if (!empty($variables['content'][$field][0]['#item']) && $item = $variables['content'][$field][0]['#item']) {
+    $style = ImageStyle::load($variables['content'][$field][0]['#image_style']);
+    $uri = $item->get('entity')
+      ->getTarget()
+      ->getValue()
+      ->getFileUri();
+    if (!empty($uri)) {
+      $url = $style->buildUrl($uri);
+    }
+    else {
+      $url = '';
+    }
+    $variables['styled_image'][$field] = array(
+      'url' => $url,
+    );
+  }
+}
+
+function sddt_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+  if ($variables['elements']['#plugin_id'] == 'system_main_block') {
+    $current_path = \Drupal::request()->getPathInfo();
+    $path_args = explode('/', $current_path);
+    $suggestions[] = $variables['theme_hook_original'] . '__' . $variables['elements']['#id'] . '__' . $path_args[1];
+  }
+
+  if (!isset($variables['elements']['#configuration']['region'])) {
+    $block_id = $variables['elements']['#id'];
+    $block = \Drupal\block\Entity\Block::load($block_id);
+    $variables['region'] = $block->getRegion();
+    $suggestions[] = 'block__' . $variables['region'];
+    if (isset($block_id)) {
+      $suggestions[] = 'block__' . $variables['region'] . '__' . $block_id;
+    }
+  }
+
+  if (isset($variables['elements']['content']['#block_content'])) {
+    $block_content = $variables['elements']['content']['#block_content'];
+    if ($bundle = $block_content->bundle()) {
+      $suggestions[] = 'block__' . $bundle;
+    }
+  }
+}
+
+function sddt_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if (isset($variables['element'])) {
+    $element = $variables['element'];
+    switch ($hook) {
+      case 'input':
+        $suggestions[] = 'input__' . $element['#name'];
+      case 'form_element':
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $element['#type'] . (!empty($element['#name']) ? '__' . $element['#name'] : '');
+        break;
+      case 'form':
+        $suggestions[] = $variables['theme_hook_original'] . '__' . $element['#form_id'];
+        break;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_form_alter
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function sddt_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'search_block_form':
+      $form['keys']['#attributes']['class'] = array('site-search__input');
+      $form['keys']['#type'] = 'textfield';
+      $form['keys']['#title_display'] = 'hidden';
+      unset($form['keys']['#theme_wrappers']);
+      unset($form['actions']['#theme_wrappers']);
+      $form['actions']['submit']['#search'] = TRUE;
+      break;
+    case 'search_form':
+      $form['#attributes']['class'] = 'search-results-form';
+      unset($form['basic']['#attributes']['class']);
+      unset($form['help_link']);
+
+      $form['basic']['keys'] = array(
+        '#type' => 'textfield',
+        '#title' => $form['basic']['keys']['#title'],
+        '#title_display' => 'hidden',
+        '#default_value' => $form['basic']['keys']['#default_value'],
+        '#attributes' => array(
+          'class' => array('input', 'search-results-form__input'),
+          'placeholder' => $form['basic']['keys']['#title']
+        ),
+        '#wrapper_attributes' => array('class' => array('search-results-form__input-container'))
+      );
+
+      $form['basic']['submit']['#weight'] = -1;
+      $form['basic']['submit']['#attributes']['class'] = array(
+        'button',
+        'search-results-form__button'
+      );
+      break;
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_HOOK (input)
+ * @param $variables
+ */
+function sddt_preprocess_input(&$variables) {
+  if (in_array($variables['theme_hook_original'], [
+    'input__textfield',
+    'input__password'
+  ])) {
+    $variables['attributes']['class'][] = 'input';
+  }
+
+  if ($variables['theme_hook_original'] == 'input__submit') {
+    $variables['attributes']['class'][] = 'button';
+  }
+
+  if ($variables['theme_hook_original'] == 'input__submit' && isset($variables['element']['#search'])) {
+    $variables['attributes']['class'] = array('site-search__button');
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_HOOK (input)
+ * @param $variables
+ */
+function sddt_preprocess_form(&$variables) {
+  switch ($variables['attributes']['id']) {
+    case 'search-block-form':
+      $variables['attributes']['class'][] = 'site-search';
+      $variables['attributes']['id'] = 'js-site-search';
+      break;
+  }
+}
+
+/**
+ * Implementing hook_preprocess_HOOK (paragraph)
+ * @param $variables
+ */
+function sddt_preprocess_paragraph(&$variables) {
+  /** @var \Drupal\paragraphs\Entity\Paragraph $paragraph */
+  $paragraph = $variables['paragraph'];
+
+  switch ($paragraph->bundle()) {
+    case 'top_banner_hero':
+      $variables['attributes']['class'][] = 'hero';
+      sddt_image_style_from_field($variables, 'field_image');
+      break;
+    case 'single_section_text':
+      // Set attributes
+      $variables['attributes']['class'][] = 'single-section';
+      break;
+    case 'double_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'double-section';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+      break;
+    case 'double_2_1_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'double-2-1-section';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+      break;
+    case 'double_section_element_image':
+      $variables['attributes']['class'][] = 'double-section__img';
+      $variables['attributes']['class'][] = 'col--xs-12';
+      //$variables['attributes']['class'][] = 'col--md-6';
+      $variables['attributes']['class'][] = 'no-gutter';
+      if ($paragraph->hasField('field_image')) {
+        if (!empty($paragraph->field_image->entity) && !empty($paragraph->field_image->entity->getFileUri())) {
+          $path = ImageStyle::load('double_section_xxs')
+            ->buildUrl($paragraph->field_image->entity->getFileUri());
+          $variables['image_path'] = $path;
+        }
+      }
+      if ($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')
+          ->getValue())
+      ) {
+        $variables['attributes']['class'][] = 'double-section__video';
+      }
+      break;
+    case 'double_section_element_text':
+      $variables['attributes']['class'][] = 'double-section__text';
+      $variables['attributes']['class'][] = 'col--xs-12';
+      //$variables['attributes']['class'][] = 'col--md-6';
+      $variables['attributes']['class'][] = 'no-gutter';
+      break;
+    case 'triple_section':
+      // Set attributes
+      $variables['attributes']['class'][] = 'triple-section';
+      break;
+    case 'triple_section_element_img_text':
+      $variables['attributes']['class'][] = 'col--xs-12';
+      $variables['attributes']['class'][] = 'triple-section__img';
+      //$variables['attributes']['class'][] = 'col--md-4';
+
+      if ($paragraph->hasField('field_video') && !empty($paragraph->get('field_video')
+          ->getValue())
+      ) {
+        $variables['attributes']['class'][] = 'triple-section__video';
+      }
+
+      break;
+    case 'simple_quiz':
+      // Set attributes
+      $variables['attributes']['class'][] = 'simple-quiz';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+      break;
+    case 'google_maps':
+      // Set attributes
+      $variables['attributes']['class'][] = 'google-maps';
+      //$variables['attributes']['class'][] = 'no-gutter-section';
+
+      $pin_values = $paragraph->get('field_pin')->getValue();
+      $field_collection_ids = array_column($pin_values, 'value');
+      $pin_content = \Drupal\field_collection\Entity\FieldCollectionItem::loadMultiple($field_collection_ids);
+
+      $pins = [];
+
+      foreach ($pin_content as $pin_item) {
+        $pin = (object) [
+          'name' => $pin_item->get('field_pin_name')->value,
+          'description' => $pin_item->get('field_description')->value,
+          'latitude' => $pin_item->get('field_latitude')->value,
+          'longitude' => $pin_item->get('field_longitude')->value,
+        ];
+        if (!empty($pin_item->field_image->entity) && !empty($pin_item->field_image->entity->getFileUri())) {
+          $pin->image_path = ImageStyle::load('triple_section_md')
+            ->buildUrl($pin_item->field_image->entity->getFileUri());
+        }
+        $pins[] = $pin;
+
+      }
+//      $variables['#attached']['js'][] = array('type' => 'external', 'data' => 'https://maps.googleapis.com/maps/api/js'); // https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap
+      $variables['map_id'] = $paragraph->id();
+      $variables['#attached']['drupalSettings']['google_maps']['data'] = [];
+      $variables['#attached']['drupalSettings']['google_maps']['data'][$variables['map_id']] = [
+        'pins' => $pins,
+        'map_id' => $variables['map_id'],
+      ];
+
+      break;
+
+  }
+
+  if ($paragraph->hasField('field_image_link')) {
+    if (!empty($paragraph->get('field_image_link')->first())) {
+      $variables['image_link_url'] = $paragraph->get('field_image_link')
+        ->first()
+        ->getUrl();
+      $variables['image_link_target'] = $variables['image_link_url']->isExternal() ? '_blank' : '';
+    }
+  }
+
+  if ($paragraph->hasField('field_video')) {
+    if (empty($paragraph->get('field_video')->getValue())) {
+      unset($variables['content']['field_video']);
+    }
+  }
+
+  if ($paragraph->hasField('field_cta_button')) {
+    foreach ($paragraph->get('field_cta_button') as $key => $link) {
+      if ($link->isExternal()) {
+        $variables['content']['field_cta_button'][$key]['#attributes'] = [
+          'target' => [
+            '_blank',
+          ],
+          'class' => [
+            'button',
+            'button--secondary',
+          ],
+        ];
+      }
+    }
+  }
+
+  if (isset($paragraph->field_insert_space->value) && empty($paragraph->field_insert_space->value)) {
+    $variables['attributes']['class'][] = 'no-spacing';
+  }
+
+  if (!empty($paragraph->field_layout->value)) {
+    $variables['attributes']['class'][] = 'layout-' . $paragraph->field_layout->value;
+  }
+
+//  if ($fid = $paragraph->field_image->target_id) {
+//    $file = File::load($fid);
+//    $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
+//    $variables['attributes']['class'][] = 'splash';
+//    $variables['attributes']['style'][] = 'background-image: url(' . $path . ');';
+//  }
+//  $variables['button'] = [
+//    '#title' => t('See all questions and answers'),
+//    '#type' => 'link',
+//    '#url' => Url::fromUserInput('/kundeservice/tv/faq'),
+//    '#attributes' => array(
+//      'class' => array('button', 'button--secondary')
+//    )
+//  ];
+}
+
+function sddt_preprocess_block(&$variables) {
+  if (isset($variables['content']['#block_content'])) {
+    $block = $variables['content']['#block_content'];
+
+    if ($block->bundle() == 'hero_tv') {
+      if ($fid = $block->field_banner->target_id) {
+        $file = File::load($fid);
+        $path = ImageStyle::load('full_width')->buildUrl($file->getFileUri());
+        $variables['attributes']['class'][] = 'hero';
+        $variables['hero_image'] = $path;
+        $variables['content']['field_button'][0]['#attributes']['class'] = array(
+          'button',
+          'button--large',
+          'content-block-cta__button',
+        );
+      }
+    }
+  }
+}
+
+function sddt_preprocess_page_title(&$variables) {
+  // Load the node entity from current route
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+
+    if ($node->hasField('field_show_page_title')) {
+      foreach ($node->get('field_show_page_title')->getValue() as $entry) {
+        if (empty($entry['value'])) {
+          // Unset the page title
+          unset($variables['title']);
+        }
+      }
+    }
+  }
+}
+
+function sddt_page_attachments_alter(array &$attachments) {
+  $themePath = \Drupal::theme()->getActiveTheme()->getPath();
+
+  $appleTouchIconSizes = [
+    '57x57',
+    '60x60',
+    '72x72',
+    '76x76',
+    '114x114',
+    '120x120',
+    '144x144',
+    '152x152',
+    '180x180',
+  ];
+  foreach ($appleTouchIconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'apple-touch-icon',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/apple-icon-' . $size . '.png',
+      ],
+      'appleTouchIcon' . $size,
+    ];
+  }
+
+  $androidIconSizes = [
+    '192x192',
+  ];
+  foreach ($androidIconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'icon',
+        'type' => 'image/png',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/android-icon-' . $size . '.png',
+      ],
+      'androidIcon' . $size,
+    ];
+  }
+
+  $iconSizes = [
+    '32x32',
+    '96x96',
+    '16x16',
+  ];
+  foreach ($iconSizes as $size) {
+    $attachments['#attached']['html_head_link'][] = [
+      [
+        'rel' => 'icon',
+        'type' => 'image/png',
+        'sizes' => $size,
+        'href' => $themePath . '/favicon/favicon-' . $size . '.png',
+      ],
+      'favicon' . $size,
+    ];
+  }
+
+  $attachments['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'manifest',
+      'href' => $themePath . '/favicon/manifest.json',
+    ],
+    'manifest',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'msapplication-TileColor',
+        'content' => '#ffffff',
+      ],
+    ],
+    'msapplication-TileColor'
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'msapplication-TileImage',
+        'content' => $themePath . '/favicon/ms-icon-144x144.png',
+      ],
+    ],
+    'msapplication-TileImage',
+  ];
+
+  $attachments['#attached']['html_head'][] = [
+    [
+      '#tag' => 'meta',
+      '#attributes' => [
+        'name' => 'theme-color',
+        'content' => '#ffffff',
+      ],
+    ],
+    'theme-color',
+  ];
+}

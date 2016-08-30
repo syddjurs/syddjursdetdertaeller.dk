@@ -1,0 +1,82 @@
+uuid: 152cbe40-d251-4aed-b9f6-d021b9230859
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.triple_section_element_img_text.field_headline
+    - field.field.paragraph.triple_section_element_img_text.field_image
+    - field.field.paragraph.triple_section_element_img_text.field_image_link
+    - field.field.paragraph.triple_section_element_img_text.field_layout
+    - field.field.paragraph.triple_section_element_img_text.field_text
+    - field.field.paragraph.triple_section_element_img_text.field_video
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - field_group
+    - image
+    - link
+    - text
+    - video_embed_field
+third_party_settings:
+  field_group:
+    group_image_or_video:
+      children:
+        - field_video
+        - field_image
+        - field_image_link
+      parent_name: ''
+      weight: 1
+      label: 'Billede eller video (video rules)'
+      format_type: fieldset
+      format_settings:
+        label: 'Billede eller video (video rules)'
+        id: ''
+        classes: ''
+        required_fields: false
+id: paragraph.triple_section_element_img_text.default
+targetEntityType: paragraph
+bundle: triple_section_element_img_text
+mode: default
+content:
+  field_headline:
+    weight: 2
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+  field_image:
+    weight: 4
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_image_link:
+    type: link_default
+    weight: 5
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+  field_layout:
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_text:
+    weight: 3
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+  field_video:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    type: video_embed_field_textfield
+hidden:
+  created: true
+  status: true
+  uid: true

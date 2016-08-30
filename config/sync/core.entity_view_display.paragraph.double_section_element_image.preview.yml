@@ -1,0 +1,29 @@
+uuid: 4484fbb8-ab58-4569-a028-6b52fb560c0f
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.double_section_element_image.field_image
+    - field.field.paragraph.double_section_element_image.field_video
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.double_section_element_image
+  module:
+    - image
+id: paragraph.double_section_element_image.preview
+targetEntityType: paragraph
+bundle: double_section_element_image
+mode: preview
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+hidden:
+  created: true
+  field_video: true
+  uid: true

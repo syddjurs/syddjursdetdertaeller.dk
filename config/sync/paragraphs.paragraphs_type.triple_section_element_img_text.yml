@@ -1,0 +1,6 @@
+uuid: 9248f24d-1168-4ade-8cf0-7f41f6de602c
+langcode: da
+status: true
+dependencies: {  }
+id: triple_section_element_img_text
+label: '1/3: Billede og tekst'

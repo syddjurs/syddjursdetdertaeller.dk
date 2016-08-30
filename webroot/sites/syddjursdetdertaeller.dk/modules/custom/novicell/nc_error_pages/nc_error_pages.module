@@ -1,0 +1,86 @@
+<?php
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\node\NodeInterface;
+
+
+/**
+ * Create new theme suggestions for the error pages
+ * You can use:
+ * - node--error-page.html.twig,
+ * - node--error-page-403.html.twig,
+ * - node--error-page-404.html.twig
+ *
+ * Implements hook_theme_suggestions_alter().
+ */
+function nc_error_pages_theme_suggestions_node_alter(array &$suggestions, array $variables) {
+
+  // Adding custom theme suggestions for 403 and 404 pages
+  $config = \Drupal::configFactory()->get('system.site');
+  $current_path = \Drupal::service('path.current')->getPath();
+
+  if ($config->get('page.403') == $current_path || $config->get('page.404') == $current_path) {
+    $suggestions[] = 'node__error_page';
+  }
+  if ($config->get('page.403') == $current_path) {
+    $suggestions[] = 'node__error_page_403';
+  }
+  if ($config->get('page.404') == $current_path) {
+    $suggestions[] = 'node__error_page_404';
+  }
+}
+
+/**
+ * Make the textfield on the admin/config/system/site page containing
+ * the paths to the error pages read only to prevent changes if the
+ * user does't have the "Set error pages" permission
+ *
+ * Implements hook_form_alter().
+ * Prevent edit of error pages
+ */
+function nc_error_pages_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  switch ($form_id) {
+    case 'system_site_information_settings':
+      $current_user = \Drupal::currentUser();
+      if (!$current_user->hasPermission('set error pages')) {
+        $form['error_page']['site_403']['#attributes']['readonly'] = '';
+        $form['error_page']['site_404']['#attributes']['readonly'] = '';
+      }
+      break;
+  }
+}
+
+/**
+ * Prevent deletion and/or modification of error pages
+ * "delete error pages" and "edit error pages" permissions
+ * This only works if the user does't have the "bypass node access" permission
+ *
+ * @param \Drupal\node\NodeInterface $node
+ * @param $op
+ * @param \Drupal\Core\Session\AccountInterface $account
+ * @return \Drupal\Core\Access\AccessResult
+ */
+
+function nc_error_pages_node_access(NodeInterface $node, $op, AccountInterface $account) {
+  $type = $node->bundle();
+
+  // Get the configuration and create an array containing the paths
+  $config = \Drupal::configFactory()->get('system.site');
+  $error_pages = [$config->get('page.403'), $config->get('page.404')];
+
+  // Check if th euser has the correct permission
+  // These rules does not apply to user ID #1 or users with the "bypass node access" permission
+  switch ($op) {
+    case 'delete':
+      if ($type == 'page' && in_array('/node/' . $node->id(), $error_pages) && !$account->hasPermission('delete error pages')) {
+        return AccessResult::forbidden();
+      }
+      break;
+
+    case 'update':
+      if ($type == 'page' && in_array('/node/' . $node->id(), $error_pages) && !$account->hasPermission('edit error pages')) {
+        return AccessResult::forbidden();
+      }
+      break;
+  }
+}

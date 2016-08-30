@@ -1,0 +1,19 @@
+uuid: dbf24bc0-855c-4391-a273-380ec74a5cac
+langcode: da
+status: true
+dependencies:
+  module:
+    - field_collection
+    - text
+id: field_collection_item.field_description
+field_name: field_description
+entity_type: field_collection_item
+type: text_long
+settings: {  }
+module: text
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

@@ -1,0 +1,23 @@
+uuid: 2b561814-e4b2-4d52-986a-744bf46f5aa6
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_insert_space
+    - paragraphs.paragraphs_type.single_section_text
+id: paragraph.single_section_text.field_insert_space
+field_name: field_insert_space
+entity_type: paragraph
+bundle: single_section_text
+label: 'Indsæt luft over bånd'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Ja
+  off_label: Nej
+field_type: boolean

@@ -1,0 +1,22 @@
+uuid: 3356e8ee-aaa2-43c0-86ca-a7283f3e54e0
+langcode: da
+status: true
+dependencies:
+  theme:
+    - sddt
+_core:
+  default_config_hash: X9I1OB0W3WlWtrK-CNcg6hNWwa8wficanpH8pYnDZDE
+id: sddt_local_tasks
+theme: sddt
+region: content
+weight: -6
+provider: null
+plugin: local_tasks_block
+settings:
+  id: local_tasks_block
+  label: Faner
+  provider: core
+  label_display: '0'
+  primary: true
+  secondary: true
+visibility: {  }

@@ -1,0 +1,26 @@
+uuid: 995c2b99-e8f1-4d8c-b2b9-852141c3c888
+langcode: da
+status: false
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.google_maps.field_insert_space
+    - field.field.paragraph.google_maps.field_pin
+    - paragraphs.paragraphs_type.google_maps
+  module:
+    - field_collection
+id: paragraph.google_maps.preview
+targetEntityType: paragraph
+bundle: google_maps
+mode: preview
+content:
+  field_pin:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: field_collection_items
+hidden:
+  created: true
+  field_insert_space: true
+  uid: true

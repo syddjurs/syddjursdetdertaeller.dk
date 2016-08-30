@@ -1,0 +1,6 @@
+uuid: d94c8f2f-738b-44a3-9900-0eb04f09daa3
+langcode: da
+status: true
+dependencies: {  }
+id: google_maps
+label: 'Google kort'

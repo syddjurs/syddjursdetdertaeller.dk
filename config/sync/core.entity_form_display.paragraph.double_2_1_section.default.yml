@@ -1,0 +1,35 @@
+uuid: 37e7a9be-93c9-4653-87c9-1104478f7f78
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.double_2_1_section.field_insert_space
+    - field.field.paragraph.double_2_1_section.field_section_element
+    - paragraphs.paragraphs_type.double_2_1_section
+  module:
+    - paragraphs
+id: paragraph.double_2_1_section.default
+targetEntityType: paragraph
+bundle: double_2_1_section
+mode: default
+content:
+  field_insert_space:
+    weight: 0
+    settings:
+      display_label: true
+    third_party_settings: {  }
+    type: boolean_checkbox
+  field_section_element:
+    weight: 1
+    settings:
+      title: Paragraph
+      title_plural: Paragraphs
+      edit_mode: preview
+      add_mode: dropdown
+      form_display_mode: default
+    third_party_settings: {  }
+    type: entity_reference_paragraphs
+hidden:
+  created: true
+  status: true
+  uid: true

@@ -1,0 +1,49 @@
+<section{{ attributes }}>
+<figure class="hero__image" style="background-image: url({{hero_image}})"></figure>
+
+<div class="container">
+  {% if not configuration.label_display %}
+    {% set title_attributes = title_attributes.addClass('visually-hidden') %}
+  {% endif %}
+  {{ title_prefix }}
+  <h2{{ title_attributes }}>{{ configuration.label }}</h2>
+  {{ title_suffix }}
+  <div class="hero__inner">
+    <img class="hero__blockoff" src="/{{ directory }}/images/hero-blockoff.svg">
+    <div class="t-figure t-figure--hero t-figure--right">
+      <svg class="t-figure__image">
+        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/{{ directory }}/images/t-figure.svg#figure"></use>
+      </svg>
+      <div class="t-figure__content">
+        <h1 class="t-figure__title">{{ content.field_banner_headline }}</h1>
+        <span class="t-figure__lead">{{ content.field_banner_body }}</span>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+<section class="content-block">
+  <div class="container">
+    <div class="row">
+      <div class="col--xs-12">
+        <h2>{{ content.field_headline }}</h2>
+        <p>{{ content.body }}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col--xs-12 col--md-6">
+        {% if content.field_channels %}
+          {{ content.field_channels }}
+        {% endif %}
+      </div>
+      <div class="col--xs-12 col--md-6">
+        <div class="content-block-cta">
+          {% if content.field_button %}
+            {{ content.field_button }}
+            <span class="content-block-cta__label">- og find det tilbud, der passer til dig</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

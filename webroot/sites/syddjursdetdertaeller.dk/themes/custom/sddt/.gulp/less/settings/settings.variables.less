@@ -1,0 +1,121 @@
+/**
+ * Settings: Variables
+ */
+
+
+/* Colors
+********************/
+@color-white:                   #ffffff;
+@color-red:                     #ae0f0a;
+@color-orange:                  #de7724;
+@color-black:                   #000000;
+
+
+@color-gray-dark:               #4d4c4c;
+@color-gray:                    #ababab;
+@color-gray-light:              #bababa;
+
+@color-primary:                 @color-red;
+@color-secondary:               #a8c23b;
+
+@color-link:                    @color-primary;
+@color-text:                    #000000;
+@color-mute:                    @color-gray;
+
+// Input colors
+@color-input-text:              @color-text;
+@color-input-bg:                @color-white;
+@color-input-border:            @color-gray-light;
+@color-input-bg-disabled:       @color-gray-dark;
+@color-placeholder:             @color-gray-light;
+
+// Notification colors
+@color-notification-bg:         @color-gray-light;
+@color-notification-border:     darken(@color-gray, 10%);
+@color-notification-text:       @color-text;
+
+// Validation states
+@color-success-bg:              #DFF0D8;
+@color-success-border:          darken(#D6E9C6, 10%);
+@color-success-text:            #3C763D;
+
+@color-warning-bg:              #FCF8E3;
+@color-warning-border:          darken(#FAEBCC, 10%);
+@color-warning-text:            #8A6D3B;
+
+@color-error-bg:                #fce3e3;
+@color-error-border:            darken(#facccc, 10%);
+@color-error-text:              #763c3c;
+
+/* Layout
+********************/
+@site-background-color:         #eeeeee;
+
+
+/* Typography
+********************/
+@base-font-family:              "Arial", "Lato", "Helvetica", "sans-serif";
+@base-font-size:                16px;
+@base-font-weight:              400;
+
+@header-font-family:            "museo-sans-rounded",sans-serif;
+
+
+/* Grid
+********************/
+@gutter:                        30px;
+@gutter-xs:                     @gutter;
+@gutter-ms:                     @gutter;
+@gutter-sm:                     @gutter;
+@gutter-md:                     @gutter;
+@gutter-lg:                     @gutter;
+
+@grid-columns:                  12;
+
+// Small screen / tablet
+@container-tablet:             (720px + @gutter);
+@container-sm:                 @container-tablet;
+
+// Medium screen / desktop
+@container-desktop:            (940px + @gutter);
+@container-md:                 @container-desktop;
+
+// Large screen / wide desktop
+@container-large-desktop:      (1140px + @gutter);
+@container-lg:                 @container-large-desktop;
+
+
+/* Media query breakpoints
+********************/
+// Extra small screen / phone
+@screen-xs:                     480px;
+@screen-xs-min:                 @screen-xs;
+@screen-phone:                  @screen-xs-min;
+
+// Small medium screen / phablet, large phones
+@screen-ms:                     480px;
+@screen-ms-min:                 @screen-ms;
+//** Deprecated `@screen-ms-desktop` as of v3.0.1
+@screen-ms-desktop:             @screen-ms-min;
+
+// Small screen / tablet
+@screen-sm:                     768px;
+@screen-sm-min:                 @screen-sm;
+@screen-tablet:                 @screen-sm-min;
+
+// Medium screen / desktop
+@screen-md:                     992px;
+@screen-md-min:                 @screen-md;
+@screen-desktop:                @screen-md-min;
+
+// Large screen / wide desktop
+@screen-lg:                     1200px;
+@screen-lg-min:                 @screen-lg;
+@screen-lg-desktop:             @screen-lg-min;
+
+
+// So media queries don't overlap when required, provide a maximum for each breakpoint
+@screen-xs-max:                 (@screen-ms-min - 1);
+@screen-ms-max:                 (@screen-sm-min - 1);
+@screen-sm-max:                 (@screen-md-min - 1);
+@screen-md-max:                 (@screen-lg-min - 1);

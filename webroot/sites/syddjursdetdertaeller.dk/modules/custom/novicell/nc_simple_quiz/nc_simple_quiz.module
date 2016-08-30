@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Contains nc_simple_quiz.module..
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function nc_simple_quiz_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the nc_simple_quiz module.
+    case 'help.page.nc_simple_quiz':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Simple Quiz') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+function nc_simple_quiz_preprocess_paragraph(&$variables) {
+  /** @var  \Drupal\paragraphs\Entity\Paragraph */
+  $paragraph = $variables['paragraph'];
+
+  if($paragraph->bundle() == 'simple_quiz') {
+    $form = \Drupal::formBuilder()->getForm('Drupal\nc_simple_quiz\Form\ncQuestionsForm');
+    $variables['content'] = $form;
+  }
+}
+
+function nc_simple_quiz_theme($existing, $type, $theme, $path) {
+  // Remove form from node edit page when paragraph is in preview mode
+  return array(
+    'paragraph__simple_quiz__preview' => array(
+      'variables' => array('test_var' => NULL),
+      'template' => 'paragraph--simple-quiz--preview',
+    ),
+  );
+}

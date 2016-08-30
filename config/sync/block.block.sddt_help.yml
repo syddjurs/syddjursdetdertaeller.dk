@@ -1,0 +1,22 @@
+uuid: 567f0b6e-f958-46fa-99ac-e0c174879f12
+langcode: da
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - sddt
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: sddt_help
+theme: sddt
+region: content
+weight: -4
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Hjælp
+  provider: help
+  label_display: '0'
+visibility: {  }

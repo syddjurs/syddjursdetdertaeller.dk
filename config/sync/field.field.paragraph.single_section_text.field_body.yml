@@ -1,0 +1,22 @@
+uuid: 6493e0af-887e-4787-82fc-120917de24e0
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.single_section_text
+  module:
+    - text
+id: paragraph.single_section_text.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: single_section_text
+label: Body
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

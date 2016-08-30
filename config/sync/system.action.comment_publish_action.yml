@@ -1,0 +1,13 @@
+uuid: da4051e1-c228-4d05-9c9f-129101a7c556
+langcode: da
+status: true
+dependencies:
+  module:
+    - comment
+_core:
+  default_config_hash: f6w_Pd30AyyDIoMkD4QpPMM2-I8FTEHICchFVOpjiCI
+id: comment_publish_action
+label: 'Udgiv kommentar'
+type: comment
+plugin: comment_publish_action
+configuration: {  }

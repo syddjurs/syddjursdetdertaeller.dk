@@ -1,0 +1,25 @@
+uuid: 50d0c280-b931-433e-b513-59e80e64c6ad
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_video
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - video_embed_field
+id: paragraph.triple_section_element_img_text.field_video
+field_name: field_video
+entity_type: paragraph
+bundle: triple_section_element_img_text
+label: Video
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  allowed_providers:
+    vimeo: '0'
+    youtube: '0'
+    youtube_playlist: '0'
+field_type: video_embed_field

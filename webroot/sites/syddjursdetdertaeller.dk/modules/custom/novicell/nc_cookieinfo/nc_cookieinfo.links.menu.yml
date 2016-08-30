@@ -1,0 +1,8 @@
+nc_cookieinfo.admin:
+  title: Novicell Cookie info
+  description: 'Change the text of the cookie info popup'
+  route_name: ncCookieInfo.settings
+  weight: -20
+  parent: nc.config
+
+

@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * Implement hook_theme
+ * @param $existing
+ * @param $type
+ * @param $theme
+ * @param $path
+ * @return array
+ */
+function nc_cookieinfo_theme($existing, $type, $theme, $path) {
+  return array(
+    'nc_cookieinfo' => array(
+      'variables' => array(
+        'title' => NULL,
+        'body' => NULL,
+        'button' => t('OK!')
+      )
+    )
+  );
+}
+
+
+/**
+ * @param array $page_bottom
+ */
+function nc_cookieinfo_page_bottom(array &$page_bottom) {
+
+  // Get current theme
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Get system theme settings
+  $config = \Drupal::config('system.theme');
+
+  // Get cookie configuration
+  $cookie_config = \Drupal::config('nc_cookieinfo.settings');
+
+  // If current theme is not admin and cookie budy text is not empty show cookieinfo
+  if ($theme != $config->get('admin') && !empty($cookie_config->get('cookie_body')) && \Drupal::currentUser()->hasPermission('view cookie info')) {
+    $page_bottom['nc_cookieinfo'] = [
+      '#theme' => 'nc_cookieinfo',
+      '#title' => $cookie_config->get('cookie_title'),
+      '#body' => $cookie_config->get('cookie_body')['value'],
+      '#attached' => [
+        'library' => 'nc_cookieinfo/nc_cookieinfo',
+      ]
+    ];
+
+    if (!empty($cookie_config->get('cookie_button'))) {
+      $page_bottom['nc_cookieinfo']['#button'] = $cookie_config->get('cookie_button');
+    }
+  }
+}

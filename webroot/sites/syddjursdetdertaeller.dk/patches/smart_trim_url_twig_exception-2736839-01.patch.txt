@@ -1,0 +1,14 @@
+diff --git a/src/Plugin/Field/FieldFormatter/SmartTrimFormatter.php b/src/Plugin/Field/FieldFormatter/SmartTrimFormatter.php
+index 29723a4..2cadcb5 100644
+--- a/src/Plugin/Field/FieldFormatter/SmartTrimFormatter.php
++++ b/src/Plugin/Field/FieldFormatter/SmartTrimFormatter.php
+@@ -205,7 +205,8 @@ class SmartTrimFormatter extends FormatterBase {
+ 
+       // Add the link, if there is one!
+       $link = '';
+-      $uri = $entity->toUrl();
++      $uri = $entity->hasLinkTemplate('canonical') ? $entity->toUrl() : null;
++
+       // But wait! Don't add a more link if the field ends in <!--break-->.
+       if ($uri && $this->getSetting('more_link') && strpos(strrev($output), strrev('<!--break-->')) !== 0) {
+         $more = $this->getSetting('more_text');

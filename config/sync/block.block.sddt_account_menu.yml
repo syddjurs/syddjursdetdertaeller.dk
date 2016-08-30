@@ -1,0 +1,26 @@
+uuid: a912325d-902b-4dc7-a349-1f41be008ed6
+langcode: da
+status: false
+dependencies:
+  config:
+    - system.menu.account
+  module:
+    - system
+  theme:
+    - sddt
+_core:
+  default_config_hash: DweBpscQZdG0-fHkSpUzdYucrNH45G_KF7Z82V-oyQM
+id: sddt_account_menu
+theme: sddt
+region: '-1'
+weight: -6
+provider: null
+plugin: 'system_menu_block:account'
+settings:
+  id: 'system_menu_block:account'
+  label: Brugerkontomenu
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 1
+visibility: {  }

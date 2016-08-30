@@ -1,0 +1,10 @@
+nc_questions:
+  version: 1.x
+  css:
+    theme:
+      css/nc-questions.css: {}
+  js:
+      js/nc_questions.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal.ajax

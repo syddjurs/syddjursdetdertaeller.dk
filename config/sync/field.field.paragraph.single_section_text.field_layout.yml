@@ -1,0 +1,23 @@
+uuid: a06be5ac-5fab-4025-bfe7-8afad7972c1d
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_layout
+    - paragraphs.paragraphs_type.single_section_text
+  module:
+    - options
+id: paragraph.single_section_text.field_layout
+field_name: field_layout
+entity_type: paragraph
+bundle: single_section_text
+label: Layout
+description: ''
+required: true
+translatable: true
+default_value:
+  -
+    value: white
+default_value_callback: ''
+settings: {  }
+field_type: list_string

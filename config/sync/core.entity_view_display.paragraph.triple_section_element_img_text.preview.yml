@@ -1,0 +1,58 @@
+uuid: fdf6a0db-7879-4b32-872a-908639dc3be6
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.triple_section_element_img_text.field_headline
+    - field.field.paragraph.triple_section_element_img_text.field_image
+    - field.field.paragraph.triple_section_element_img_text.field_image_link
+    - field.field.paragraph.triple_section_element_img_text.field_layout
+    - field.field.paragraph.triple_section_element_img_text.field_text
+    - field.field.paragraph.triple_section_element_img_text.field_video
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - image
+    - smart_trim
+id: paragraph.triple_section_element_img_text.preview
+targetEntityType: paragraph
+bundle: triple_section_element_img_text
+mode: preview
+content:
+  field_headline:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_text:
+    type: smart_trim
+    weight: 2
+    label: hidden
+    settings:
+      trim_length: '60'
+      trim_type: chars
+      trim_suffix: ...
+      more_link: '0'
+      more_text: More
+      trim_options:
+        text: text
+      more_class: more-link
+      summary_handler: full
+    third_party_settings: {  }
+hidden:
+  created: true
+  field_image_link: true
+  field_layout: true
+  field_video: true
+  uid: true

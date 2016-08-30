@@ -1,0 +1,38 @@
+uuid: f18ac3d7-68c5-4c83-80fb-7f42891efa5e
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_image
+    - paragraphs.paragraphs_type.triple_section_element_img_text
+  module:
+    - image
+id: paragraph.triple_section_element_img_text.field_image
+field_name: field_image
+entity_type: paragraph
+bundle: triple_section_element_img_text
+label: Billede
+description: 'Hvis du oploader en video, vises denne i stedet for billedet.'
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: content-image-upload
+  file_extensions: 'png jpg jpeg'
+  max_filesize: ''
+  max_resolution: ''
+  min_resolution: ''
+  alt_field: true
+  alt_field_required: false
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image

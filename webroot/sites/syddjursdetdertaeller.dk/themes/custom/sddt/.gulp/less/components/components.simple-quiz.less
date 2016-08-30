@@ -1,0 +1,134 @@
+.question {
+  a {
+    text-decoration: underline;
+    font-weight: bold;
+    color: #ffffff;
+  }
+
+  .clearfix();
+  padding: 0px !important;
+
+  &--last {
+    padding: 30px 0 !important;
+  }
+
+  .form-item {
+    margin-top: 0;
+
+    label {
+      //.h3();
+      //font-family: @font-family-headline;
+      font-weight: bold;
+      margin-top: 0;
+    }
+  }
+
+  .js-form-type-checkbox {
+    position: relative;
+  }
+
+  input[type="checkbox"], input[type="radio"] {
+    width: 22px !important;
+    height: 22px !important;
+    margin-left: 0 !important;
+    visibility: hidden;
+    display: none!important;
+
+    + label::before {
+      content: "";
+      display: block;
+      border: 0px solid #cccccc;
+      background: #d1d1d1;
+      width: 22px;
+      height: 22px;
+      visibility: visible;
+      //border-radius: 2px;
+      //box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+      position: absolute;
+      left: 0px;
+      top: 0px;
+      cursor: pointer
+
+    }
+
+    + label {
+      position: relative;
+      //top: 0;
+      padding-left: 40px;
+      cursor: pointer;
+      display: block;
+    }
+  }
+
+  input[type="checkbox"]:checked, input[type="radio"]:checked {
+    + label::before {
+      content: "";
+      display: block;
+      border-color: #aaaaaa;
+      background-color: @color-orange; // rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  fieldset {
+    margin: 30px 0;
+    border: 0;
+    padding: 20px 0 0;
+
+    legend {
+      display: none;
+    }
+
+    .form-item {
+      margin: 0;
+
+      + .form-item {
+        margin-top: 15px;
+      }
+    }
+  }
+
+  input[type="submit"] {
+    //float: right;
+  }
+}
+
+.progress {
+  &__track {
+    border-radius: 0;
+    box-shadow: none;
+    background-image: none;
+    background-color: fade(@color-orange, 20%);
+    border: none;
+    margin: 30px 0 0;
+  }
+
+  &__bar {
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+    background-color: @color-orange;
+    border: none;
+    padding: 0;
+    margin: 0;
+    max-height: 100%;
+    min-width: 0;
+  }
+
+  &__percentage {
+    margin-top: -40px;
+  }
+
+  .clearfix();
+  //padding-bottom: 10px;
+}
+
+.simple-quiz {
+  margin-top: 20px;
+
+  &__inner {
+    min-height: 300px;
+    background: #fff;
+    margin: 0;
+    padding: 30px;
+  }
+}

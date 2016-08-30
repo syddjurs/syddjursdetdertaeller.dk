@@ -1,0 +1,22 @@
+uuid: 40075cf5-0ba7-4ce4-b615-7733a938dcc4
+langcode: da
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - sddt
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: sddt_messages
+theme: sddt
+region: highlighted
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: Statusmeddelelser
+  provider: system
+  label_display: '0'
+visibility: {  }

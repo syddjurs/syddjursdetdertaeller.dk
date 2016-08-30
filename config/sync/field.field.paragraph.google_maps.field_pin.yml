@@ -1,0 +1,23 @@
+uuid: dbf65268-6491-4e45-acba-cb46d65e0435
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_pin
+    - paragraphs.paragraphs_type.google_maps
+  module:
+    - field_collection
+id: paragraph.google_maps.field_pin
+field_name: field_pin
+entity_type: paragraph
+bundle: google_maps
+label: Pin
+description: ''
+required: false
+translatable: false
+default_value:
+  - {  }
+  - {  }
+default_value_callback: ''
+settings: {  }
+field_type: field_collection
