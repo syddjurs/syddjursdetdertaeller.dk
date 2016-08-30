@@ -67,3 +67,9 @@ $sites['www.syddjursdetdertaeller.ditnyewebsite.dk'] = 'syddjursdetdertaeller.dk
 # live
 $sites['syddjursdetdertaeller.dk'] = 'syddjursdetdertaeller.dk';
 $sites['www.syddjursdetdertaeller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['detdertaeller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['www.detdertaeller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['detdertæller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['www.detdertæller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['syddjurs-detdertaeller.dk'] = 'syddjursdetdertaeller.dk';
+$sites['www.syddjurs-detdertaeller.dk'] = 'syddjursdetdertaeller.dk';
