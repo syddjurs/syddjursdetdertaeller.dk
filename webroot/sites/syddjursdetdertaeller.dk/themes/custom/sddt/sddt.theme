@@ -264,17 +264,16 @@ function sddt_preprocess_paragraph(&$variables) {
 
   if ($paragraph->hasField('field_cta_button')) {
     foreach ($paragraph->get('field_cta_button') as $key => $link) {
+      $cta_button_attributes = [
+        'class' => [
+          'button',
+          'button--secondary',
+        ],
+      ];
       if ($link->isExternal()) {
-        $variables['content']['field_cta_button'][$key]['#attributes'] = [
-          'target' => [
-            '_blank',
-          ],
-          'class' => [
-            'button',
-            'button--secondary',
-          ],
-        ];
+        $cta_button_attributes['target'] = ['_blank'];
       }
+      $variables['content']['field_cta_button'][$key]['#attributes'] = $cta_button_attributes;
     }
   }
 
