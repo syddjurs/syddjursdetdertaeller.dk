@@ -11,4 +11,4 @@ master:
 
 gmap:
   js:
-    //maps.googleapis.com/maps/api/js: { type: external, minified: true }
+    //maps.googleapis.com/maps/api/js?key=AIzaSyAv33QER8xOYDFbQc175r4Chmyk7ZHGf-0: { type: external, minified: true }
