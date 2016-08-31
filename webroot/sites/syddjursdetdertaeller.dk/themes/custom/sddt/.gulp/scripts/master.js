@@ -56,6 +56,10 @@ jQuery(window).resize(function () {
 
   Drupal.behaviors.googleMaps = {
     attach: function (context) {
+      if(typeof google == 'undefined'){
+        return false;
+      }
+
       var bounds = new google.maps.LatLngBounds();
       var infowindow = new google.maps.InfoWindow();
 
