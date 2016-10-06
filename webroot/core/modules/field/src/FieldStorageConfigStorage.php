@@ -64,7 +64,7 @@ class FieldStorageConfigStorage extends ConfigEntityStorage {
    *   The module handler.
    * @param \Drupal\Core\State\StateInterface $state
    *   The state key value store.
-   * @param \Drupal\Component\Plugin\PluginManagerInterface\FieldTypePluginManagerInterface
+   * @param \Drupal\Component\Plugin\PluginManagerInterface\FieldTypePluginManagerInterface $field_type_manager
    *   The field type plugin manager.
    */
   public function __construct(EntityTypeInterface $entity_type, ConfigFactoryInterface $config_factory, UuidInterface $uuid_service, LanguageManagerInterface $language_manager, EntityManagerInterface $entity_manager, ModuleHandlerInterface $module_handler, StateInterface $state, FieldTypePluginManagerInterface $field_type_manager) {
@@ -152,9 +152,7 @@ class FieldStorageConfigStorage extends ConfigEntityStorage {
   protected function mapFromStorageRecords(array $records) {
     foreach ($records as &$record) {
       $class = $this->fieldTypeManager->getPluginClass($record['type']);
-      if (!empty($class)) {
-        $record['settings'] = $class::storageSettingsFromConfigData($record['settings']);
-      }
+      $record['settings'] = $class::storageSettingsFromConfigData($record['settings']);
     }
     return parent::mapFromStorageRecords($records);
   }
