@@ -1,0 +1,19 @@
+uuid: 0f2d10e5-edc2-4183-9558-981291f977d8
+langcode: da
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.paragraph.preview
+    - field.field.paragraph.map.field_html
+    - field.field.paragraph.map.field_insert_space
+    - paragraphs.paragraphs_type.map
+id: paragraph.map.preview
+targetEntityType: paragraph
+bundle: map
+mode: preview
+content: {  }
+hidden:
+  created: true
+  field_html: true
+  field_insert_space: true
+  uid: true
