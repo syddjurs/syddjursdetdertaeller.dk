@@ -10,3 +10,5 @@ recipients:
   - drupal@novicell.dk
 reply: ''
 weight: 0
+message: 'Your message has been sent.'
+redirect: ''

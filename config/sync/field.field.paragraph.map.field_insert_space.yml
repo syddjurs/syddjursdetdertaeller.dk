@@ -1,0 +1,23 @@
+uuid: c118c67d-bb4f-49a6-a5fe-bba775d9e548
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_insert_space
+    - paragraphs.paragraphs_type.map
+id: paragraph.map.field_insert_space
+field_name: field_insert_space
+entity_type: paragraph
+bundle: map
+label: 'Indsæt luft over bånd'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Tilsluttet
+  off_label: Afbrudt
+field_type: boolean

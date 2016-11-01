@@ -244,6 +244,13 @@ function sddt_preprocess_paragraph(&$variables) {
       ];
 
       break;
+    case 'map':
+      // Set attributes
+      $variables['attributes']['class'][] = 'map';
+
+      $variables['html'] = $paragraph->get('field_html')->value;
+
+      break;
 
   }
 

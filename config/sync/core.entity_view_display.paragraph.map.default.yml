@@ -1,0 +1,23 @@
+uuid: b8c15ec4-a80b-43cf-ad97-de052da52c81
+langcode: da
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.map.field_html
+    - field.field.paragraph.map.field_insert_space
+    - paragraphs.paragraphs_type.map
+id: paragraph.map.default
+targetEntityType: paragraph
+bundle: map
+mode: default
+content:
+  field_html:
+    weight: 0
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  created: true
+  field_insert_space: true
+  uid: true
