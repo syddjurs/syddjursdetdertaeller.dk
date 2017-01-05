@@ -5,10 +5,13 @@ description: 'Provides effects and operations for the Image API.'
 package: Media
 configure: image_effects.settings
 dependencies:
- - image
+  - image
+  - system (>=8.2.0)
+test_dependencies:
+  - imagemagick
 
-# Information added by Drupal.org packaging script on 2016-04-03
-version: '8.x-1.0-alpha2'
+# Information added by Drupal.org packaging script on 2016-11-21
+version: '8.x-1.0-alpha3'
 core: '8.x'
 project: 'image_effects'
-datestamp: 1459699441
+datestamp: 1479725950
