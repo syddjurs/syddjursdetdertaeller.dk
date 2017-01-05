@@ -5,7 +5,9 @@
  * Provides effects and operations for the Image API.
  */
 
+use Drupal\Component\Utility\Html;
 use Drupal\Component\Utility\Unicode;
+use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ColorUtility;
 
 /**
@@ -65,7 +67,51 @@ function image_effects_theme() {
     'image_effects_convolution_sharpen_summary' => [
       'variables' => ['data' => NULL, 'effect' => []],
     ],
+    // Interlace image effect - summary
+    'image_effects_interlace_summary' => [
+      'variables' => ['data' => NULL, 'effect' => []],
+    ],
   ];
+}
+
+/**
+ * Implements hook_image_effects_text_overlay_text_alter().
+ */
+function image_effects_image_effects_text_overlay_text_alter(&$text, ConfigurableImageEffectBase $image_effect) {
+  // Skip if the effect is not TextOverlayImageEffect or an alternative
+  // implementation.
+  if ($image_effect->getPluginId() !== "image_effects_text_overlay") {
+    return;
+  }
+
+  // Get effect data.
+  $effect_data = $image_effect->getConfiguration()['data'];
+
+  // Strip HTML tags, if requested.
+  if ($effect_data['text']['strip_tags'] === TRUE) {
+    $text = strip_tags($text);
+  }
+
+  // Decode HTML entities, if requested.
+  if ($effect_data['text']['decode_entities'] === TRUE) {
+    $text = Html::decodeEntities($text);
+  }
+
+  // Convert case, if requested.
+  if ($effect_data['text']['case_format']) {
+     $method_map = [
+      'upper' => 'strtoupper',
+      'lower' => 'strtolower',
+      'ucwords' => 'ucwords',
+      'ucfirst' => 'ucfirst',
+    ];
+    $text = Unicode::{$method_map[$effect_data['text']['case_format']]}($text);
+  }
+
+  // Limit the maximum number of characters.
+  if ($effect_data['text']['maximum_chars'] > 0 && Unicode::strlen($text) > $effect_data['text']['maximum_chars']) {
+    $text = Unicode::substr($text, 0, $effect_data['text']['maximum_chars']) . $effect_data['text']['excess_chars_text'];
+  }
 }
 
 /**

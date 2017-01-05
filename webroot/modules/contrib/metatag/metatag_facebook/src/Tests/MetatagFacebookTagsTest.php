@@ -8,7 +8,7 @@ use Drupal\metatag\Tests\MetatagTagsTestBase;
 /**
  * Tests that each of the Metatag Facebook tags work correctly.
  *
- * @group Metatag
+ * @group metatag
  */
 class MetatagFacebookTagsTest extends MetatagTagsTestBase {
 
@@ -37,7 +37,7 @@ class MetatagFacebookTagsTest extends MetatagTagsTestBase {
   /**
    * Each of these meta tags has a different tag name vs its internal name.
    */
-  public function get_test_tag_name($tag_name) {
+  public function getTestTagName($tag_name) {
     $tag_name = str_replace('fb_', 'fb:', $tag_name);
     return $tag_name;
   }

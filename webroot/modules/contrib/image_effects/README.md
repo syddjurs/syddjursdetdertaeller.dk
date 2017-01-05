@@ -27,6 +27,7 @@ Brightness       | Supports changing brightness settings of an image. Also suppo
 Color shift      | Colorizes image.                                                                             | X          | X                   |
 Contrast         | Supports changing contrast settings of an image. Also supports negative values.              | X          | X                   |
 Convolution      | Allows to build custom image filters like blur, emboss, sharpen and others (see http://docs.gimp.org/en/plug-in-convmatrix.html). | X          | X                   |
+Interlace        | Used to specify the type of interlacing scheme for raw image formats.                        | X          | X                   |
 Set canvas       | Places the source image over a colored or a transparent background of a defined size.        | X          | X                   |
 Set transparent color | Defines the color to be used for transparency in GIF images.                            | X          | X                   |
 Sharpen          | Sharpens an image (using convolution).                                                       | X          | X                   |
@@ -133,4 +134,3 @@ Current and past maintainers for Image Effects:
 Past maintainers for Imagecache Actions:
 - [dman](https://drupal.org/user/33240)
 - [sidneyshan](https://drupal.org/user/652426)
-
