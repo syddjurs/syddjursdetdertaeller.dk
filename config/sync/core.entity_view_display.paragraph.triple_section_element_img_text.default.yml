@@ -27,6 +27,7 @@ content:
       link_to_entity: false
     third_party_settings: {  }
     type: string
+    region: content
   field_image:
     weight: 0
     label: hidden
@@ -35,12 +36,14 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: responsive_image
+    region: content
   field_text:
     weight: 2
     label: hidden
     settings: {  }
     third_party_settings: {  }
     type: text_default
+    region: content
   field_video:
     weight: 3
     label: hidden
@@ -51,6 +54,7 @@ content:
       autoplay: false
     third_party_settings: {  }
     type: video_embed_field_video
+    region: content
 hidden:
   created: true
   field_image_link: true

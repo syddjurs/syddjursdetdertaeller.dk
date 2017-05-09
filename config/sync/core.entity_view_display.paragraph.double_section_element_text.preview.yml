@@ -26,6 +26,7 @@ content:
       image_link: ''
     third_party_settings: {  }
     type: image
+    region: content
   field_text:
     weight: 1
     label: hidden
@@ -41,6 +42,7 @@ content:
       summary_handler: full
     third_party_settings: {  }
     type: smart_trim
+    region: content
 hidden:
   created: true
   field_image_link: true

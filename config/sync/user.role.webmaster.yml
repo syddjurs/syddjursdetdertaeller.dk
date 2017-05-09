@@ -7,16 +7,16 @@ label: Webmaster
 weight: -8
 is_admin: null
 permissions:
-  - 'use text format full_html'
-  - 'administer meta tags'
   - 'access content overview'
+  - 'access toolbar'
+  - 'administer cookieinfo'
+  - 'administer menu'
+  - 'administer meta tags'
   - 'create page content'
+  - 'create url aliases'
   - 'delete any page content'
   - 'delete own page content'
   - 'edit any page content'
   - 'edit own page content'
-  - 'administer cookieinfo'
-  - 'create url aliases'
-  - 'administer menu'
+  - 'use text format full_html'
   - 'view the administration theme'
-  - 'access toolbar'
