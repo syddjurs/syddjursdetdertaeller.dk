@@ -38,11 +38,13 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
   field_video:
     weight: 2
     settings: {  }
     third_party_settings: {  }
     type: video_embed_field_textfield
+    region: content
 hidden:
   created: true
   status: true

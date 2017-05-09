@@ -25,6 +25,7 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_section_element:
     type: entity_reference_revisions_entity_view
     weight: 1
@@ -33,10 +34,12 @@ content:
       view_mode: default
       link: ''
     third_party_settings: {  }
+    region: content
   links:
     weight: 2
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   field_meta_tags: true
   field_show_page_title: true

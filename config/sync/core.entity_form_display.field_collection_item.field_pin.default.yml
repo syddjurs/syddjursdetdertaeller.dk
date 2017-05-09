@@ -25,6 +25,7 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: text_textarea
+    region: content
   field_image:
     weight: 3
     settings:
@@ -32,18 +33,21 @@ content:
       progress_indicator: throbber
     third_party_settings: {  }
     type: image_image
+    region: content
   field_latitude:
     weight: 1
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
   field_longitude:
     weight: 2
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: number
+    region: content
   field_pin_name:
     weight: 0
     settings:
@@ -51,4 +55,5 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: string_textfield
+    region: content
 hidden: {  }

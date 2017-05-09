@@ -19,6 +19,7 @@ content:
       display_label: true
     third_party_settings: {  }
     type: boolean_checkbox
+    region: content
   field_section_element:
     type: entity_reference_paragraphs
     weight: 1
@@ -29,6 +30,8 @@ content:
       add_mode: dropdown
       form_display_mode: default
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
+  status: true
   uid: true

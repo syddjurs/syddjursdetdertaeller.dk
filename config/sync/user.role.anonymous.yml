@@ -9,8 +9,8 @@ label: 'Anonym bruger'
 weight: -10
 is_admin: false
 permissions:
-  0: 'access content'
-  1: 'use text format restricted_html'
-  2: 'access comments'
-  4: 'search content'
-  5: 'view cookie info'
+  - 'access comments'
+  - 'access content'
+  - 'search content'
+  - 'use text format restricted_html'
+  - 'view cookie info'

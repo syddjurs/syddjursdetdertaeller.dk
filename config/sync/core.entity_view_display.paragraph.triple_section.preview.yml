@@ -22,6 +22,7 @@ content:
       view_mode: preview
       link: ''
     third_party_settings: {  }
+    region: content
 hidden:
   created: true
   field_insert_space: true
