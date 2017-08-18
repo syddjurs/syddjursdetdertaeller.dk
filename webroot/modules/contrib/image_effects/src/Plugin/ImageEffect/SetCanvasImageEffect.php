@@ -9,7 +9,7 @@ use Drupal\image\ConfigurableImageEffectBase;
 use Drupal\image_effects\Component\ImageUtility;
 
 /**
- * Class SetCanvasImageEffect
+ * Class SetCanvasImageEffect.
  *
  * @ImageEffect(
  *   id = "image_effects_set_canvas",
@@ -212,13 +212,6 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
-    parent::submitConfigurationForm($form, $form_state);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function applyEffect(ImageInterface $image) {
     $data = [];
     $data['canvas_color'] = $this->configuration['canvas_color'];
@@ -252,7 +245,6 @@ class SetCanvasImageEffect extends ConfigurableImageEffectBase {
       $dimensions['width'] = $d['width'];
       $dimensions['height'] = $d['height'];
     }
-    return;
   }
 
   /**

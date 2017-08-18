@@ -15,8 +15,8 @@ use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
  * Automatically adjusts the orientation of an image resource.
  *
  * Uses EXIF Orientation tags to determine the image orientation.
- * EXIF: https://en.wikipedia.org/wiki/Exchangeable_image_file_format
- * EXIF orientation tag: http://sylvana.net/jpegcrop/exif_orientation.html
+ * EXIF: https://en.wikipedia.org/wiki/Exchangeable_image_file_format.
+ * EXIF orientation tag: http://sylvana.net/jpegcrop/exif_orientation.html.
  *
  * Originally contributed to the imagecache_actions module by jonathan_hunt
  * https://drupal.org/user/28976, September 1, 2009.
@@ -59,7 +59,7 @@ class AutoOrientImageEffect extends ConfigurableImageEffectBase implements Conta
    * @param \Drupal\Core\File\FileSystemInterface $file_system
    *   The file system service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, LoggerInterface $logger, MimeTypeGuesserInterface $mime_type_guesser, FileSystemInterface $file_system) {
+  public function __construct(array $configuration, $plugin_id, array $plugin_definition, LoggerInterface $logger, MimeTypeGuesserInterface $mime_type_guesser, FileSystemInterface $file_system) {
     parent::__construct($configuration, $plugin_id, $plugin_definition, $logger);
     $this->mimeTypeGuesser = $mime_type_guesser;
     $this->fileSystem = $file_system;

@@ -1,12 +1,13 @@
-name: 'Image Effects test module'
 type: module
+# core: 8.x
+name: 'Image Effects test module'
 description: 'Provides implementations for testing Image Effects module functionality.'
 package: Testing
-# version: VERSION
-# core: 8.x
+dependencies:
+  - image_effects:image_effects
 
-# Information added by Drupal.org packaging script on 2016-11-21
-version: '8.x-1.0-alpha3'
+# Information added by Drupal.org packaging script on 2017-04-17
+version: '8.x-1.0'
 core: '8.x'
 project: 'image_effects'
-datestamp: 1479725950
+datestamp: 1492431845

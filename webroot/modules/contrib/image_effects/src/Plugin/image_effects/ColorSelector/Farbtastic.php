@@ -15,10 +15,11 @@ use Drupal\image_effects\Plugin\ImageEffectsPluginBase;
  * )
  */
 class Farbtastic extends ImageEffectsPluginBase {
+
   /**
    * {@inheritdoc}
    */
-  public function selectionElement(array $options = array()) {
+  public function selectionElement(array $options = []) {
     return [
       '#type' => 'textfield',
       '#title' => isset($options['#title']) ? $options['#title'] : $this->t('Color'),
@@ -32,4 +33,5 @@ class Farbtastic extends ImageEffectsPluginBase {
       '#attached' => ['library' => ['image_effects/image_effects.farbtastic_color_selector']],
     ];
   }
+
 }

@@ -5,7 +5,6 @@ namespace Drupal\image_effects\Plugin;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\PluginBase;
-use Drupal\Core\Routing\UrlGeneratorInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -22,14 +21,7 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   protected $pluginType;
 
   /**
-   * The URL generator.
-   *
-   * @var \Drupal\Core\Routing\UrlGeneratorInterface
-   */
-  protected $urlGenerator;
-
-  /**
-   * image_effects configuration object.
+   * Configuration object for image_effects.
    *
    * @var \Drupal\Core\Config\Config
    */
@@ -38,7 +30,7 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   /**
    * The image_effects logger.
    *
-   * @var \Psr\Log\LoggerInterface.
+   * @var \Psr\Log\LoggerInterface
    */
   protected $logger;
 
@@ -53,18 +45,15 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
    *   The plugin implementation definition.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory.
-   * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
-   *   The URL generator.
    * @param \Psr\Log\LoggerInterface $logger
    *   The image_effects logger.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, UrlGeneratorInterface $url_generator, LoggerInterface $logger) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, LoggerInterface $logger) {
     $this->config = $config_factory->getEditable('image_effects.settings');
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->pluginType = $configuration['plugin_type'];
     $config = $this->config->get($this->pluginType . '.plugin_settings.' . $plugin_id);
-    $this->setConfiguration(array_merge($this->defaultConfiguration(), is_array($config) ? $config : array()));
-    $this->urlGenerator = $url_generator;
+    $this->setConfiguration(array_merge($this->defaultConfiguration(), is_array($config) ? $config : []));
     $this->logger = $logger;
   }
 
@@ -77,7 +66,6 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
       $plugin_id,
       $plugin_definition,
       $container->get('config.factory'),
-      $container->get('url_generator'),
       $container->get('logger.channel.image_effects')
     );
   }
@@ -107,7 +95,7 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
    * {@inheritdoc}
    */
   public function calculateDependencies() {
-    return parent::calculateDependencies();
+    return [];
   }
 
   /**
@@ -134,17 +122,20 @@ abstract class ImageEffectsPluginBase extends PluginBase implements ImageEffects
   /**
    * {@inheritdoc}
    */
-  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) { }
+  public function validateConfigurationForm(array &$form, FormStateInterface $form_state) {
+  }
 
   /**
    * {@inheritdoc}
    */
-  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) { }
+  public function submitConfigurationForm(array &$form, FormStateInterface $form_state) {
+  }
 
   /**
    * {@inheritdoc}
    */
-  public function selectionElement(array $options = array()) {
+  public function selectionElement(array $options = []) {
     return [];
   }
+
 }

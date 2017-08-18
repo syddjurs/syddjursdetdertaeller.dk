@@ -15,10 +15,11 @@ use Drupal\image_effects\Plugin\ImageEffectsPluginBase;
  * )
  */
 class HtmlColor extends ImageEffectsPluginBase {
+
   /**
    * {@inheritdoc}
    */
-  public function selectionElement(array $options = array()) {
+  public function selectionElement(array $options = []) {
     return [
       '#type' => 'color',
       '#title'   => isset($options['#title']) ? $options['#title'] : $this->t('Color'),
@@ -31,4 +32,5 @@ class HtmlColor extends ImageEffectsPluginBase {
       '#attached' => ['library' => ['image_effects/image_effects.html_color_selector']],
     ];
   }
+
 }
