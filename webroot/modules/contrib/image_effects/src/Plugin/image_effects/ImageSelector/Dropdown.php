@@ -5,7 +5,6 @@ namespace Drupal\image_effects\Plugin\image_effects\ImageSelector;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Image\ImageFactory;
-use Drupal\Core\Routing\UrlGeneratorInterface;
 use Drupal\Core\Url;
 use Drupal\image_effects\Plugin\ImageEffectsPluginBase;
 use Psr\Log\LoggerInterface;
@@ -44,15 +43,13 @@ class Dropdown extends ImageEffectsPluginBase {
    *   The plugin implementation definition.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The configuration factory.
-   * @param \Drupal\Core\Routing\UrlGeneratorInterface $url_generator
-   *   The URL generator.
    * @param \Psr\Log\LoggerInterface $logger
    *   The image_effects logger.
    * @param \Drupal\Core\Image\ImageFactory $image_factory
    *   The image factory service.
    */
-  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, UrlGeneratorInterface $url_generator, LoggerInterface $logger, ImageFactory $image_factory) {
-    parent::__construct($configuration, $plugin_id, $plugin_definition, $config_factory, $url_generator, $logger);
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory, LoggerInterface $logger, ImageFactory $image_factory) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition, $config_factory, $logger);
     $this->imageFactory = $image_factory;
   }
 
@@ -65,7 +62,6 @@ class Dropdown extends ImageEffectsPluginBase {
       $plugin_id,
       $plugin_definition,
       $container->get('config.factory'),
-      $container->get('url_generator'),
       $container->get('logger.channel.image_effects'),
       $container->get('image.factory')
     );
@@ -75,23 +71,21 @@ class Dropdown extends ImageEffectsPluginBase {
    * {@inheritdoc}
    */
   public function defaultConfiguration() {
-    return array('path' => '');
+    return ['path' => ''];
   }
 
   /**
    * {@inheritdoc}
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state, array $ajax_settings = []) {
-    $element['path'] = array(
+    $element['path'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Path'),
       '#default_value' => $this->configuration['path'],
-      '#element_validate' => array(array($this, 'validatePath')),
+      '#element_validate' => [[$this, 'validatePath']],
       '#maxlength' => 255,
-      '#description' =>
-        $this->t('Location of the directory where the background images are stored.') . ' ' .
-        $this->t('Relative paths will be resolved relative to the Drupal installation directory.'),
-    );
+      '#description' => $this->t('Location of the directory where the background images are stored.') . ' ' . $this->t('Relative paths will be resolved relative to the Drupal installation directory.'),
+    ];
     return $element;
   }
 
@@ -107,7 +101,7 @@ class Dropdown extends ImageEffectsPluginBase {
   /**
    * {@inheritdoc}
    */
-  public function selectionElement(array $options = array()) {
+  public function selectionElement(array $options = []) {
     // Get list of images.
     $image_files = $this->getList();
     if (empty($image_files)) {
@@ -127,7 +121,7 @@ class Dropdown extends ImageEffectsPluginBase {
       '#title' => $this->t('Image'),
       '#description' => $this->t('Select an image.'),
       '#options' => array_combine($image_files, $image_files),
-      '#element_validate' => array(array($this, 'validateSelectorUri')),
+      '#element_validate' => [[$this, 'validateSelectorUri']],
     ], $options);
   }
 
@@ -152,7 +146,7 @@ class Dropdown extends ImageEffectsPluginBase {
    *   Array of image files.
    */
   protected function getList() {
-    $filelist = array();
+    $filelist = [];
     if (is_dir($this->configuration['path']) && $handle = opendir($this->configuration['path'])) {
       while ($file = readdir($handle)) {
         $extension = pathinfo($file, PATHINFO_EXTENSION);

@@ -13,7 +13,7 @@ use Drupal\image_effects\Plugin\ImageToolkit\Operation\WatermarkTrait;
  *   toolkit = "imagemagick",
  *   operation = "watermark",
  *   label = @Translation("Watermark"),
- *   description = @Translation("Add watermark image efect.")
+ *   description = @Translation("Add watermark image effect.")
  * )
  */
 class Watermark extends ImagemagickImageToolkitOperationBase {
@@ -24,30 +24,40 @@ class Watermark extends ImagemagickImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function execute(array $arguments) {
-    // Reset any gravity settings from earlier effects.
-    $op = '-gravity None ';
+    // Watermark image local path.
+    $local_path = $arguments['watermark_image']->getToolkit()->getSourceLocalPath();
+    if ($local_path !== '') {
+      $image_path = $this->getToolkit()->escapeShellArg($local_path);
+    }
+    else {
+      $source_path = $arguments['watermark_image']->getToolkit()->getSource();
+      throw new \InvalidArgumentException("Missing local path for image at {$source_path}");
+    }
 
-    // Add the overlay image.
-    $op .= $this->getToolkit()->escapeShellArg($arguments['watermark_image']->getToolkit()->getSourceLocalPath());
-
-    // Set the dimensions of the overlay. Use of the scale option means that we
-    // need to change the dimensions: always set them, they don't harm when the
-    // scale option is not used.
-    $w = $arguments['watermark_image']->getWidth();
-    $h = $arguments['watermark_image']->getHeight();
+    // Set the dimensions of the overlay.
+    $w = $arguments['watermark_width'] ?: $arguments['watermark_image']->getToolkit()->getWidth();
+    $h = $arguments['watermark_height'] ?: $arguments['watermark_image']->getToolkit()->getHeight();
 
     // Set offset. Offset arguments require a sign in front.
     $x = $arguments['x_offset'] >= 0 ? ('+' . $arguments['x_offset']) : $arguments['x_offset'];
     $y = $arguments['y_offset'] >= 0 ? ('+' . $arguments['y_offset']) : $arguments['y_offset'];
 
-    $op .= " -geometry {$w}x{$h}{$x}{$y}";
-
     // Compose it with the destination.
-    if ($arguments['opacity'] == 100) {
-      $op .= ' -compose src-over -composite';
-    }
-    else {
-      $op .= " -compose blend -define compose:args={$arguments['opacity']} -composite";
+    switch ($this->getToolkit()->getPackage()) {
+      case 'imagemagick':
+        if ($arguments['opacity'] == 100) {
+          $op = "-gravity None {$image_path} -geometry {$w}x{$h}!{$x}{$y} -compose src-over -composite";
+        }
+        else {
+          $op = "-gravity None {$image_path} -geometry {$w}x{$h}!{$x}{$y} -compose blend -define compose:args={$arguments['opacity']} -composite";
+        }
+        break;
+
+      case 'graphicsmagick':
+        // @todo see if GraphicsMagick can support opacity setting.
+        $op = "-draw 'image Over {$arguments['x_offset']},{$arguments['y_offset']} {$w},{$h} {$image_path}'";
+        break;
+
     }
 
     $this->getToolkit()->addArgument($op);

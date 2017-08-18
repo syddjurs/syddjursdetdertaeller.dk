@@ -24,7 +24,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
   public function defaultConfiguration() {
     return [
       'level' => 10,
-      ] + parent::defaultConfiguration();
+    ] + parent::defaultConfiguration();
   }
 
   /**
@@ -34,7 +34,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
     return [
       '#theme' => 'image_effects_convolution_sharpen_summary',
       '#data' => $this->configuration,
-      ] + parent::getSummary();
+    ] + parent::getSummary();
   }
 
   /**
@@ -42,14 +42,14 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
    */
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
 
-    $form['level'] = array(
+    $form['level'] = [
       '#type' => 'number',
       '#title' => t('Sharpen level'),
       '#description' => t('Typically 1 - 50.'),
       '#default_value' => $this->configuration['level'],
       '#required' => TRUE,
       '#allow_negative' => FALSE,
-    );
+    ];
     return $form;
   }
 
@@ -69,7 +69,7 @@ class ConvolutionSharpenImageEffect extends ConfigurableImageEffectBase implemen
     $kernel = [
       [-$sharpenlevel, -$sharpenlevel, -$sharpenlevel],
       [-$sharpenlevel, 8 * $sharpenlevel + 1, -$sharpenlevel],
-      [-$sharpenlevel, -$sharpenlevel, -$sharpenlevel]
+      [-$sharpenlevel, -$sharpenlevel, -$sharpenlevel],
     ];
     return $image->apply('convolution', [
       'kernel' => $kernel,

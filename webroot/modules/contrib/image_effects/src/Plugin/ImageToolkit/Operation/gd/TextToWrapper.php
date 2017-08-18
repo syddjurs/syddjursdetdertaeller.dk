@@ -3,14 +3,12 @@
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
 use Drupal\Component\Utility\Unicode;
-use Drupal\Core\Image\ImageInterface;
 use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Component\ColorUtility;
 use Drupal\image_effects\Component\PositionedRectangle;
 use Drupal\image_effects\Component\TextUtility;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\FontOperationTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\TextToWrapperTrait;
-use Drupal\image_effects\Plugin\ImageToolkit\Operation\gd\GDOperationTrait;
 
 /**
  * Defines GD Text Overlay text-to-wrapper operation.
@@ -79,12 +77,11 @@ class TextToWrapper extends GDImageToolkitOperationBase {
 
     // Calculate bounding boxes.
     // ---------------------------------------
-    // Inner box   - the exact bounding box of the text.
-    // Outer box   - the box where the inner box is - can be different because
-    //               of padding.
-    // Wrapper     - the canvas where the outer box is laid.
+    // Inner box - the exact bounding box of the text.
+    // Outer box - the box where the inner box is - can be different because
+    // of padding.
+    // Wrapper - the canvas where the outer box is laid.
     // ---------------------------------------
-
     // Get inner box details, for horizontal text, unpadded.
     // If fixed width, set to configuration, otherwise get width from the font
     // bounding box.
@@ -128,34 +125,34 @@ class TextToWrapper extends GDImageToolkitOperationBase {
 
     // Draw and fill the outer text box, if required.
     if ($arguments['layout_background_color']) {
-      $data_rectangle = array(
+      $data_rectangle = [
         'rectangle' => $outer_rect,
         'fill_color' => $arguments['layout_background_color'],
-      );
+      ];
       $this->getToolkit()->apply('draw_rectangle', $data_rectangle);
     }
 
     // In debug mode, visually display the text boxes.
     if ($arguments['debug_visuals']) {
       // Inner box.
-      $data = array(
+      $data = [
         'rectangle' => $inner_rect,
         'border_color' => $arguments['layout_background_color'] ?: '#FFFFFF',
         'border_color_luma' => TRUE,
-      );
+      ];
       $this->getToolkit()->apply('draw_rectangle', $data);
       // Outer box.
-      $data = array(
+      $data = [
         'rectangle' => $outer_rect,
         'border_color' => $arguments['layout_background_color'] ?: '#FFFFFF',
         'border_color_luma' => TRUE,
-      );
+      ];
       $this->getToolkit()->apply('draw_rectangle', $data);
       // Wrapper.
-      $data = array(
+      $data = [
         'rectangle' => new PositionedRectangle($this->getToolkit()->getWidth(), $this->getToolkit()->getHeight()),
         'border_color' => '#000000',
-      );
+      ];
       $this->getToolkit()->apply('draw_rectangle', $data);
     }
 
@@ -192,7 +189,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       $text_line_rect->translate($outer_rect->getRotationOffset());
 
       // Overlay the text onto the image.
-      $data = array(
+      $data = [
         'text'                     => $text_line,
         'basepoint'                => $text_line_rect->getPoint('basepoint'),
         'font_uri'                 => $arguments['font_uri'],
@@ -209,7 +206,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
         'font_shadow_y_offset'     => $arguments['font_shadow_y_offset'],
         'font_shadow_width'        => $arguments['font_shadow_width'],
         'font_shadow_height'       => $arguments['font_shadow_height'],
-      );
+      ];
       $this->getToolkit()->apply('text_overlay', $data);
 
       // In debug mode, display a polygon enclosing the text line.
@@ -289,7 +286,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
   /**
    * Display a polygon enclosing the text line, and conspicuous points.
    *
-   * Credit to Ruquay K Calloway
+   * Credit to Ruquay K Calloway.
    *
    * @param \Drupal\image_effects\Component\PositionedRectangle $rect
    *   A PositionedRectangle object, including basepoint.
@@ -314,50 +311,50 @@ class TextToWrapper extends GDImageToolkitOperationBase {
     $points = $this->getRectangleCorners($rect);
 
     // Draw box.
-    $data = array(
+    $data = [
       'rectangle' => $rect,
       'border_color' => $rgba,
-    );
+    ];
     $this->getToolkit()->apply('draw_rectangle', $data);
 
     // Draw diagonal.
-    $data = array(
+    $data = [
       'x1' => $points[0],
       'y1' => $points[1],
       'x2' => $points[4],
       'y2' => $points[5],
       'color' => $rgba,
-    );
+    ];
     $this->getToolkit()->apply('draw_line', $data);
 
     // Conspicuous points.
     $orange = '#FF6400FF';
     $yellow = '#FFFF00FF';
-    $green  = '#00FF00FF';
+    $green = '#00FF00FF';
     $dotsize = 6;
 
     // Box corners.
     for ($i = 0; $i < 8; $i += 2) {
       $col = $i < 4 ? $orange : $yellow;
-      $data = array(
+      $data = [
         'cx' => $points[$i],
         'cy' => $points[$i + 1],
         'width' => $dotsize,
         'height' => $dotsize,
         'color' => $col,
-      );
+      ];
       $this->getToolkit()->apply('draw_ellipse', $data);
     }
 
     // Font baseline.
     $basepoint = $rect->getPoint('basepoint');
-    $data = array(
+    $data = [
       'cx' => $basepoint[0],
       'cy' => $basepoint[1],
       'width' => $dotsize,
       'height' => $dotsize,
       'color' => $green,
-    );
+    ];
     $this->getToolkit()->apply('draw_ellipse', $data);
   }
 
@@ -386,6 +383,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
     // boundaries.
     while (TRUE) {
       // Find the next wrap point (always after trailing whitespace).
+      $match = [];
       if (TextUtility::unicodePregMatch('/[' . TextUtility::PREG_CLASS_PUNCTUATION . '][' . TextUtility::PREG_CLASS_SEPARATOR . ']*|[' . TextUtility::PREG_CLASS_SEPARATOR . ']+/u', $text, $match, PREG_OFFSET_CAPTURE, $end)) {
         $end = $match[0][1] + Unicode::strlen($match[0][0]);
       }
@@ -394,7 +392,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       }
 
       // Fetch text, removing trailing white-space, and measure it.
-      $line  = preg_replace('/[' . TextUtility::PREG_CLASS_SEPARATOR . ']+$/u', '', Unicode::substr($text, $begin, $end - $begin));
+      $line = preg_replace('/[' . TextUtility::PREG_CLASS_SEPARATOR . ']+$/u', '', Unicode::substr($text, $begin, $end - $begin));
       $width = $this->getTextWidth($line, $font_size, $font_uri);
 
       // See if line extends past the available space.
@@ -403,7 +401,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
         if ($fit == $begin) {
           // Cut off letters until it fits.
           while (Unicode::strlen($line) > 0 && $width > $maximum_width) {
-            $line  = Unicode::substr($line, 0, -1);
+            $line = Unicode::substr($line, 0, -1);
             $width = $this->getTextWidth($line, $font_size, $font_uri);
           }
           // If no fit was found, the image is too narrow.
@@ -417,10 +415,10 @@ class TextToWrapper extends GDImageToolkitOperationBase {
         else {
           $first_part = Unicode::substr($text, 0, $fit);
         }
-        $last_part  = Unicode::substr($text, $fit);
-        $text  = $first_part . "\n" . $last_part;
+        $last_part = Unicode::substr($text, $fit);
+        $text = $first_part . "\n" . $last_part;
         $begin = ++$fit;
-        $end   = $begin;
+        $end = $begin;
       }
       else {
         // We can fit this text. Wait for now.
@@ -454,7 +452,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       return NULL;
     }
     // Get the bounding box for $text to get width.
-    $points = $this->_imagettfbbox($font_size, 0, $font_file, $text);
+    $points = $this->imagettfbboxWrapper($font_size, 0, $font_file, $text);
     // Return bounding box width.
     return (abs($points[4] - $points[6]) + 1);
   }
@@ -483,7 +481,7 @@ class TextToWrapper extends GDImageToolkitOperationBase {
       return NULL;
     }
     // Get the bounding box for $text to get height.
-    $points = $this->_imagettfbbox($font_size, 0, $font_file, 'bdfhkltgjpqyBDFHKLTGJPQY§@çÅÀÈÉÌÒÇ');
+    $points = $this->imagettfbboxWrapper($font_size, 0, $font_file, 'bdfhkltgjpqyBDFHKLTGJPQY§@çÅÀÈÉÌÒÇ');
     $height = (abs($points[5] - $points[1]) + 1);
     return [
       'height' => $height,

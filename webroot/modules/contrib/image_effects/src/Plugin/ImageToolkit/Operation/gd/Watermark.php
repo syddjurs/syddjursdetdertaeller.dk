@@ -3,7 +3,6 @@
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
 use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
-use Drupal\image_effects\Plugin\ImageToolkit\Operation\gd\GDOperationTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\WatermarkTrait;
 
 /**
@@ -14,7 +13,7 @@ use Drupal\image_effects\Plugin\ImageToolkit\Operation\WatermarkTrait;
  *   toolkit = "gd",
  *   operation = "watermark",
  *   label = @Translation("Watermark"),
- *   description = @Translation("Add watermark image efect.")
+ *   description = @Translation("Add watermark image effect.")
  * )
  */
 class Watermark extends GDImageToolkitOperationBase {
@@ -26,15 +25,22 @@ class Watermark extends GDImageToolkitOperationBase {
    * {@inheritdoc}
    */
   protected function execute(array $arguments) {
+    $watermark = $arguments['watermark_image'];
+
+    // Resize watermark if needed.
+    if ($arguments['watermark_width'] || $arguments['watermark_height']) {
+      $watermark->apply('resize', ['width' => $arguments['watermark_width'], 'height' => $arguments['watermark_height']]);
+    }
+
     return $this->imageCopyMergeAlpha(
       $this->getToolkit()->getResource(),
-      $arguments['watermark_image']->getToolkit()->getResource(),
+      $watermark->getToolkit()->getResource(),
       $arguments['x_offset'],
       $arguments['y_offset'],
       0,
       0,
-      $arguments['watermark_image']->getToolkit()->getWidth(),
-      $arguments['watermark_image']->getToolkit()->getHeight(),
+      $watermark->getToolkit()->getWidth(),
+      $watermark->getToolkit()->getHeight(),
       $arguments['opacity']
     );
   }

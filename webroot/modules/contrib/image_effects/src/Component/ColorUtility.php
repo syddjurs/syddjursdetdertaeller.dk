@@ -6,7 +6,7 @@ use Drupal\Component\Utility\Color;
 use Drupal\Component\Utility\Unicode;
 
 /**
- * image_effects - Color handling methods.
+ * Color handling methods for image_effects.
  */
 abstract class ColorUtility {
 
@@ -30,7 +30,7 @@ abstract class ColorUtility {
       // Dark colors - white.
       $d = 255;
     }
-    return Color::rgbToHex(array($d, $d, $d));
+    return Color::rgbToHex([$d, $d, $d]);
   }
 
   /**

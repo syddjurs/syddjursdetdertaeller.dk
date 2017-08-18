@@ -19,25 +19,45 @@ toolkits.
 
 The effects that this module provides include:
 
-Effect name      | Description                                                                                  | GD toolkit | [ImageMagick](https://drupal.org/project/imagemagick) toolkit |
------------------|----------------------------------------------------------------------------------------------|:----------:|:-------------------:|
-Auto orientation | Uses EXIF Orientation tags to determine the image orientation.                               | X          | X                   |
-Background       | Places the source image anywhere over a selected background image.                           | X          | X                   |
-Brightness       | Supports changing brightness settings of an image. Also supports negative values (darkening).| X          | X                   |
-Color shift      | Colorizes image.                                                                             | X          | X                   |
-Contrast         | Supports changing contrast settings of an image. Also supports negative values.              | X          | X                   |
-Convolution      | Allows to build custom image filters like blur, emboss, sharpen and others (see http://docs.gimp.org/en/plug-in-convmatrix.html). | X          | X                   |
-Interlace        | Used to specify the type of interlacing scheme for raw image formats.                        | X          | X                   |
-Set canvas       | Places the source image over a colored or a transparent background of a defined size.        | X          | X                   |
-Set transparent color | Defines the color to be used for transparency in GIF images.                            | X          | X                   |
-Sharpen          | Sharpens an image (using convolution).                                                       | X          | X                   |
-Strip metadata   | Strips all EXIF metadata from image.                                                         | X          | X                   |
-Text overlay<sup>1</sup> | Overlays text on an image, defining text font, size and positioning.                 | X          | X<sup>2</sup>       |
-Watermark        | Place a image with transparency anywhere over a source picture.                              | X          | X                   |
+Effect name              | Description                                                                                  | GD toolkit | [ImageMagick](https://drupal.org/project/imagemagick) toolkit<sup>1</sup> |
+-------------------------|----------------------------------------------------------------------------------------------|:----------:|:-------------------:|
+Auto orientation         | Uses EXIF Orientation tags to determine the image orientation.                               | X          | X                   |
+Background               | Places the source image anywhere over a selected background image.                           | X          | IM only             |
+Brightness               | Supports changing brightness settings of an image. Also supports negative values (darkening).| X          | IM only             |
+Color shift              | Colorizes image.                                                                             | X          | IM only             |
+Contrast                 | Supports changing contrast settings of an image. Also supports negative values.              | X          | IM only             |
+Convolution              | Allows to build custom image filters like blur, emboss, sharpen and others (see http://docs.gimp.org/en/plug-in-convmatrix.html). | X          | IM only             |
+Gaussian blur            | Uses the Gaussian function to blur the image.                                                | X          | X                   |
+ImageMagick arguments    | Directly enter ImageMagick command line arguments.                                           |            | X                   |
+Interlace                | Used to specify the type of interlacing scheme for raw image formats.                        | X          | IM only             |
+Invert                   | Replace each pixel with its complementary color.                                             | X          | X                   |
+Mask                     | Apply a mask to the image.                                                                   | X          | IM only             |
+Mirror                   | Mirror the image horizontally and/or vertically.                                             | X          | X                   |
+Opacity                  | Change overall image transparency level.                                                     | X          | IM only             |
+Resize percentage        | Resize the image by percentage of its width/height.                                          | X          | X                   |
+Set canvas               | Places the source image over a colored or a transparent background of a defined size.        | X          | IM only             |
+Set transparent color    | Defines the color to be used for transparency in GIF images.                                 | X          | IM only             |
+Sharpen                  | Sharpens an image (using convolution).                                                       | X          | IM only             |
+Strip metadata           | Strips all EXIF metadata from image.                                                         | X          | X                   |
+Text overlay<sup>2</sup> | Overlays text on an image, defining text font, size and positioning.                         | X          | IM only<sup>3</sup> |
+Watermark                | Place a image with transparency anywhere over a source picture.                              | X          | X<sup>4</sup>       |
 
 Notes:
-<sup>1</sup> The [Textimage](https://drupal.org/project/textimage) module, if installed, allows this effect to present a preview of the text overlay.
-<sup>2</sup> The ImageMagick toolkit actually requires the GD toolkit to build the text overlay.
+
+<sup>1</sup> Effect support for ImageMagick also depends on the package in
+use, ImageMagick or GraphicsMagick. 'X' identifies effects that can be executed
+with both IM and GM, 'IM only' effects that can only be executed with
+ImageMagick.
+
+<sup>2</sup> The [Textimage](https://drupal.org/project/textimage) module, if
+installed, allows this effect's configuration UI to present a preview of the
+text overlay.
+
+<sup>3</sup> The ImageMagick toolkit actually requires the GD toolkit to build
+the text overlay.
+
+<sup>4</sup> GraphicsMagick does not support setting transparency level
+(opacity) of the watermark image.
 
 
 ## What Image Effects is not?
@@ -68,18 +88,20 @@ for further information.
 - Check Image Effects configuration page (_Manage > Configuration > Media >
   Image Effects_), and choose the UI components that effects provided by this
   module should use:
-  - _Color selector_ - allows to use either a 'color' HTML element for selecting
-    colors, or a color picker provided by the Farbtastic library. Alternative
-    selectors may be added by other modules.
+  - _Color selector_ - allows to specify a UI component to select colors in the
+    image effects. It can use a 'color' HTML element, or a color picker
+    provided by the Farbtastic library, or a JQuery Colorpicker (if the [_JQuery
+    Colorpicker_](https://www.drupal.org/project/jquery_colorpicker) module is
+    installed). Additional selectors may be added by other modules.
   - _Image selector_ - some effects (e.g. Watermark) require to define an image
     file to be used. This setting allows to use either a basic text field where
     the URI/path to the image can be entered, or a 'dropdown' select that will
     list all the image files stored in a directory specified in configuration.
-    Alternative selectors may be added by other modules.
+    Additional selectors may be added by other modules.
   - _Font selector_ - some effects require to define a font file to be used.
     This setting allows to use either a basic text field where the URI/path to
     the font can be entered, or a 'dropdown' select that will list all the font
-    files stored in a directory specified in configuration. Alternative
+    files stored in a directory specified in configuration. Additional
     selectors may be added by other modules.
 
 
@@ -100,7 +122,8 @@ of this project](https://www.drupal.org/project/issues/image_effects).
 
 This module is the Drupal 8 successor of the [ImageCache Actions](https://www.drupal.org/project/imagecache_actions) module.
 It also incorporates image effects that were part of the Drupal 7 versions of the
-[ImageMagick](https://drupal.org/project/imagemagick), [Textimage](https://drupal.org/project/textimage) and [FiltersIE](https://www.drupal.org/project/filtersie) modules.
+[ImageMagick](https://drupal.org/project/imagemagick), [Textimage](https://drupal.org/project/textimage), [FiltersIE](https://www.drupal.org/project/filtersie)
+and [ImageMagick Raw Effect](https://www.drupal.org/project/im_raw) modules.
 
 
 ## Which toolkit to use?

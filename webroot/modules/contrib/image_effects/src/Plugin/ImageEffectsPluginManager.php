@@ -22,10 +22,19 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
   protected $config;
 
   /**
-   * {@inheritdoc}
+   * Constructs an ImageEffectsPluginManager object.
    *
+   * @param \Traversable $namespaces
+   *   An object that implements \Traversable which contains the root paths
+   *   keyed by the corresponding namespace to look for plugin implementations.
+   * @param \Drupal\Core\Cache\CacheBackendInterface $cache_backend
+   *   Cache backend instance to use.
+   * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+   *   The module handler.
    * @param string $type
    *   The plugin type, for example 'color_selector'.
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
+   *   The configuration factory.
    */
   public function __construct(\Traversable $namespaces, CacheBackendInterface $cache_backend, ModuleHandlerInterface $module_handler, $type, ConfigFactoryInterface $config_factory) {
     $path = Container::camelize($type);
@@ -38,10 +47,25 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
     ];
   }
 
+  /**
+   * Get the 'image_effects' plugin type.
+   *
+   * @return string
+   *   The plugin type.
+   */
   public function getType() {
     return $this->defaults['plugin_type'];
   }
 
+  /**
+   * Returns an instance of the specified 'image_effects' plugin.
+   *
+   * @param string $plugin_id
+   *   The plugin id.
+   *
+   * @return \Drupal\image_effects\Plugin\ImageEffectsPluginBaseInterface
+   *   An instance of the specified 'image_effects' plugin.
+   */
   public function getPlugin($plugin_id = NULL) {
     $plugin_id = $plugin_id ?: $this->config->get($this->getType() . '.plugin_id');
     $plugins = $this->getAvailablePlugins();
@@ -52,7 +76,7 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
       $plugin_id = NULL;
     }
 
-    return $this->createInstance($plugin_id, array('plugin_type' => $this->getType()));
+    return $this->createInstance($plugin_id, ['plugin_type' => $this->getType()]);
   }
 
   /**
@@ -63,7 +87,7 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
    */
   public function getAvailablePlugins() {
     $plugins = $this->getDefinitions();
-    $output = array();
+    $output = [];
     foreach ($plugins as $id => $definition) {
       // Only allow plugins that are available.
       if (call_user_func($definition['class'] . '::isAvailable')) {
@@ -80,7 +104,7 @@ class ImageEffectsPluginManager extends DefaultPluginManager {
    *   An array with the plugin ids as keys and the descriptions as values.
    */
   public function getPluginOptions() {
-    $options = array();
+    $options = [];
     foreach ($this->getAvailablePlugins() as $plugin) {
       $options[$plugin['id']] = SafeMarkup::format('<b>@title</b> - @description', ['@title' => $plugin['short_title'], '@description' => $plugin['help']]);
     }

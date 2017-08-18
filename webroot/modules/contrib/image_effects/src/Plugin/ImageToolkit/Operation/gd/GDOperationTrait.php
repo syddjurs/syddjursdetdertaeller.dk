@@ -5,6 +5,7 @@ namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 use Drupal\Component\Utility\Color;
 use Drupal\Component\Utility\Unicode;
 use Drupal\image_effects\Component\ColorUtility;
+use Drupal\image_effects\Component\GdGaussianBlur;
 use Drupal\image_effects\Component\PositionedRectangle;
 
 /**
@@ -68,7 +69,7 @@ trait GDOperationTrait {
    */
   protected function getRectangleCorners(PositionedRectangle $rect) {
     $points = [];
-    foreach (array('c_d', 'c_c', 'c_b', 'c_a') as $c) {
+    foreach (['c_d', 'c_c', 'c_b', 'c_a'] as $c) {
       $point = $rect->getPoint($c);
       $points[] = $point[0];
       $points[] = $point[1];
@@ -117,7 +118,7 @@ trait GDOperationTrait {
       // If opacity is below 100%, use the approach described in
       // http://php.net/manual/it/function.imagecopymerge.php#92787
       // to preserve watermark alpha.
-
+      // --------------------------------------
       // Create a cut resource.
       // @todo when #2583041 is committed, add a check for memory
       // availability before creating the resource.
@@ -156,7 +157,7 @@ trait GDOperationTrait {
    * @param float $size
    *   The font size.
    * @param float $angle
-   *  The angle in degrees.
+   *   The angle in degrees.
    * @param int $x
    *   The coordinates given by x and y will define the basepoint of the first
    *   character (roughly the lower-left corner of the character).
@@ -176,7 +177,7 @@ trait GDOperationTrait {
    *
    * @see http://php.net/manual/en/function.imagettftext.php
    */
-  protected function _imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text) {
+  protected function imagettftextWrapper($image, $size, $angle, $x, $y, $color, $fontfile, $text) {
     if (function_exists('imagettftext')) {
       return imagettftext($image, $size, $angle, $x, $y, $color, $fontfile, $text);
     }
@@ -197,7 +198,7 @@ trait GDOperationTrait {
    * @param float $size
    *   The font size.
    * @param float $angle
-   *  The angle in degrees.
+   *   The angle in degrees.
    * @param string $fontfile
    *   The path to the TrueType font to use.
    * @param string $text
@@ -209,7 +210,7 @@ trait GDOperationTrait {
    *
    * @see http://php.net/manual/en/function.imagettfbbox.php
    */
-  protected function _imagettfbbox($size, $angle, $fontfile, $text) {
+  protected function imagettfbboxWrapper($size, $angle, $fontfile, $text) {
     if (function_exists('imagettfbbox')) {
       return imagettfbbox($size, $angle, $fontfile, $text);
     }
@@ -219,6 +220,149 @@ trait GDOperationTrait {
       // Change to \RuntimeException when #2583041 is committed.
       throw new \InvalidArgumentException("The imagettfbbox() PHP function is not available, and image effects using fonts cannot be executed");
     }
+  }
+
+  /**
+   * Change overall image transparency level.
+   *
+   * This method implements the algorithm described in
+   * http://php.net/manual/en/function.imagefilter.php#82162
+   *
+   * @param resource $img
+   *   Image resource id.
+   * @param int $pct
+   *   Opacity of the source image in percentage.
+   *
+   * @return bool
+   *   Returns TRUE on success or FALSE on failure.
+   *
+   * @see http://php.net/manual/en/function.imagefilter.php#82162
+   */
+  protected function filterOpacity($img, $pct) {
+    if (!isset($pct)) {
+      return FALSE;
+    }
+    $pct /= 100;
+
+    // Get image width and height.
+    $w = imagesx($img);
+    $h = imagesy($img);
+
+    // Turn alpha blending off.
+    imagealphablending($img, FALSE);
+
+    // Find the most opaque pixel in the image (the one with the smallest alpha
+    // value).
+    $min_alpha = 127;
+    for ($x = 0; $x < $w; $x++) {
+      for ($y = 0; $y < $h; $y++) {
+        $alpha = (imagecolorat($img, $x, $y) >> 24) & 0xFF;
+        if ($alpha < $min_alpha) {
+          $min_alpha = $alpha;
+        }
+      }
+    }
+
+    // Loop through image pixels and modify alpha for each.
+    for ($x = 0; $x < $w; $x++) {
+      for ($y = 0; $y < $h; $y++) {
+        // Get current alpha value (represents the TANSPARENCY!).
+        $color_xy = imagecolorat($img, $x, $y);
+        $alpha = ($color_xy >> 24) & 0xFF;
+        // Calculate new alpha.
+        if ($min_alpha !== 127) {
+          $alpha = 127 + 127 * $pct * ($alpha - 127) / (127 - $min_alpha);
+        }
+        else {
+          $alpha += 127 * $pct;
+        }
+        // Get the color index with new alpha.
+        $alpha_color_xy = imagecolorallocatealpha($img, ($color_xy >> 16) & 0xFF, ($color_xy >> 8) & 0xFF, $color_xy & 0xFF, $alpha);
+        // Set pixel with the new color + opacity.
+        if (!imagesetpixel($img, $x, $y, $alpha_color_xy)) {
+          return FALSE;
+        }
+      }
+    }
+
+    return TRUE;
+  }
+
+  /**
+   * Gets a copy of the source with the Gaussian Blur algorithm applied.
+   *
+   * This method implements in PHP the algorithm described in
+   * https://github.com/libgd/libgd/blob/master/src/gd_filter.c for the
+   * gdImageCopyGaussianBlurred function.
+   *
+   * 'radius' is a radius, not a diameter so a radius of 2 (for example) will
+   * blur across a region 5 pixels across (2 to the center, 1 for the center
+   * itself and another 2 to the other edge).
+   * 'sigma' represents the "fatness" of the curve (lower == fatter). If
+   * 'sigma' is NULL, the fucntions ignores it and instead computes an
+   * "optimal" value.
+   *
+   * More details:
+   * A Gaussian Blur is generated by replacing each pixel's color values with
+   * the average of the surrounding pixels' colors. This region is a circle
+   * whose radius is given by argument 'radius'. Thus, a larger radius will
+   * yield a blurrier image.
+   * This average is not a simple mean of the values. Instead, values are
+   * weighted using the Gaussian function (roughly a bell curve centered around
+   * the destination pixel) giving it much more influence on the result than
+   * its neighbours.  Thus, a fatter curve  will give the center pixel more
+   * weight and make the image less blurry; lower 'sigma' values will yield
+   * flatter curves.
+   * Currently, the default sigma is computed as (2/3)*radius.
+   *
+   * @param resource $src
+   *   The source image resource.
+   * @param int $radius
+   *   The blur radius (*not* diameter: range is 2*radius + 1).
+   * @param float $sigma
+   *   (optional) The sigma value or NULL to use the computed default.
+   *
+   * @return resource
+   *   The computed new image resource, or NULL if an error occurred.
+   */
+  protected function imageCopyGaussianBlurred($src, $radius, $sigma = NULL) {
+    // Radius must be a positive integer.
+    if ($radius < 1) {
+      return NULL;
+    }
+
+    // Compute the coefficients.
+    $coeffs = GdGaussianBlur::gaussianCoeffs($radius, $sigma);
+    if (!$coeffs) {
+      return NULL;
+    }
+
+    // Get image width and height.
+    $w = imagesx($src);
+    $h = imagesy($src);
+
+    // Apply the filter horizontally.
+    // @todo when #2583041 is committed, add a check for memory
+    // availability before creating the resource.
+    $tmp = imagecreatetruecolor($w, $h);
+    imagealphablending($tmp, FALSE);
+    if (!$tmp) {
+      return NULL;
+    }
+    GdGaussianBlur::applyCoeffs($src, $tmp, $coeffs, $radius, 'HORIZONTAL');
+
+    // Apply the filter vertically.
+    // @todo when #2583041 is committed, add a check for memory
+    // availability before creating the resource.
+    $result = imagecreatetruecolor($w, $h);
+    imagealphablending($result, FALSE);;
+    if ($result) {
+      GdGaussianBlur::applyCoeffs($tmp, $result, $coeffs, $radius, 'VERTICAL');
+    }
+
+    // Destroy temp resource and return result.
+    imagedestroy($tmp);
+    return $result;
   }
 
 }

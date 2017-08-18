@@ -2,11 +2,9 @@
 
 namespace Drupal\image_effects\Plugin\ImageToolkit\Operation\gd;
 
-use Drupal\image_effects\Component\ColorUtility;
 use Drupal\system\Plugin\ImageToolkit\Operation\gd\GDImageToolkitOperationBase;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\FontOperationTrait;
 use Drupal\image_effects\Plugin\ImageToolkit\Operation\TextOverlayTrait;
-use Drupal\image_effects\Plugin\ImageToolkit\Operation\gd\GDOperationTrait;
 
 /**
  * Defines GD2 text overlay operation.
@@ -61,7 +59,7 @@ class TextOverlay extends GDImageToolkitOperationBase {
       }
       for ($c1 = ($stroke_x_pos - abs($stroke_left)); $c1 <= ($stroke_x_pos + abs($stroke_right)); $c1++) {
         for ($c2 = ($stroke_y_pos - abs($stroke_top)); $c2 <= ($stroke_y_pos + abs($stroke_bottom)); $c2++) {
-          $bg = $this->_imagettftext(
+          $bg = $this->imagettftextWrapper(
             $this->getToolkit()->getResource(),
             $arguments['font_size'],
             -$arguments['font_angle'],
@@ -79,7 +77,7 @@ class TextOverlay extends GDImageToolkitOperationBase {
     }
 
     // Overlays the text.
-    $this->_imagettftext(
+    $this->imagettftextWrapper(
       $this->getToolkit()->getResource(),
       $arguments['font_size'],
       -$arguments['font_angle'],

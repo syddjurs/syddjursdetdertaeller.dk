@@ -149,6 +149,91 @@ image.effect.image_effects_contrast:
       type: integer
       label: 'Level'
 
+image.effect.image_effects_gaussian_blur:
+  type: mapping
+  label: 'Blur the image with a Gaussian operator'
+  mapping:
+    radius:
+      type: integer
+      label: 'Radius'
+    sigma:
+      type: float
+      label: 'Sigma'
+
+image.effect.image_effects_imagemagick_arguments:
+  type: mapping
+  label: 'Directly enter ImageMagick command line arguments'
+  mapping:
+    command_line:
+      type: text
+      label: 'Command line arguments'
+    dimensions_method:
+      type: string
+      label: 'Method for determining dimensions'
+    width:
+      type: string
+      label: 'Width in px or %'
+    height:
+      type: string
+      label: 'Height in px or %'
+
+# The image invert effect has no settings.
+image.effect.image_effects_invert:
+  type: sequence
+
+image.effect.image_effects_mask:
+  type: mapping
+  label: 'Apply a mask to the image'
+  mapping:
+    mask_image:
+      type: string
+      label: 'Mask image path'
+    mask_width:
+      type: string
+      label: 'Mask image horizontal resizing'
+    mask_height:
+      type: string
+      label: 'Mask image vertical resizing'
+    placement:
+      type: string
+      label: 'Position of the mask image on the image'
+    x_offset:
+      type: string
+      label: 'X offset of the mask image vs placement'
+    y_offset:
+      type: string
+      label: 'Y offset of the mask image vs placement'
+
+image.effect.image_effects_mirror:
+  type: mapping
+  label: 'Mirror the image horizontally and/or vertically'
+  mapping:
+    x_axis:
+      type: boolean
+      label: 'Flop the source image horizontally'
+    y_axis:
+      type: boolean
+      label: 'Flip the source image vertically'
+
+image.effect.image_effects_opacity:
+  type: mapping
+  label: 'Adjust image transparency level'
+  mapping:
+    opacity:
+      type: integer
+      label: 'Opacity % of the source image'
+
+image.effect.image_effects_resize_percentage:
+  type: mapping
+  label: 'Resize based on percentage'
+  mapping:
+    width:
+      type: string
+      label: 'Width in px or %'
+    height:
+      type: string
+      label: 'Height in px or %'
+
 image.effect.image_effects_set_canvas:
   type: mapping
   label: 'Set canvas image effect'
@@ -331,32 +416,41 @@ image.effect.image_effects_watermark:
   type: mapping
   label: 'Watermark image effect'
   mapping:
+    watermark_image:
+      type: string
+      label: 'Watermark image path'
+    watermark_width:
+      type: string
+      label: 'Watermark image horizontal resizing'
+    watermark_height:
+      type: string
+      label: 'Watermark image vertical resizing'
     placement:
       type: string
-      label: 'Position of the watermark'
+      label: 'Position of the watermark image on the canvas'
     x_offset:
-      type: integer
-      label: 'x offset'
+      type: string
+      label: 'X offset of the watermark image vs placement'
     y_offset:
-      type: integer
-      label: 'y offset'
+      type: string
+      label: 'Y offset of the watermark image vs placement'
     opacity:
       type: integer
       label: 'opacity'
-    watermark_image:
-      type: string
-      label: 'watermark image path'
-    watermark_scale:
-      type: integer
-      label: 'watermark image scale'
 
 image.effect.image_effects_convolution:
   type: mapping
   label: 'Filter image using convolution'
   mapping:
     kernel:
-      type: array
+      type: sequence
       label: 'Kernel'
+      sequence:
+        type: sequence
+        label: 'Row'
+        sequence:
+          type: integer
+          label: 'Column'
     divisor:
       type: integer
       label: 'Divisor'

@@ -7,9 +7,10 @@ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Plugin\PluginFormInterface;
 
 /**
- * image_effects base plugin interface.
+ * Interface for image_effects base plugin.
  */
 interface ImageEffectsPluginBaseInterface extends ConfigurablePluginInterface, ContainerFactoryPluginInterface, PluginFormInterface {
+
   /**
    * Return a form element to select the plugin content.
    *
@@ -19,7 +20,7 @@ interface ImageEffectsPluginBaseInterface extends ConfigurablePluginInterface, C
    * @return array
    *   Render array of the form element.
    */
-  public function selectionElement(array $options = array());
+  public function selectionElement(array $options = []);
 
   /**
    * Get the image_effects plugin type.
@@ -32,8 +33,9 @@ interface ImageEffectsPluginBaseInterface extends ConfigurablePluginInterface, C
   /**
    * Determines if plugin can be used.
    *
-   * @return boolean
+   * @return bool
    *   TRUE if the plugin is available.
    */
   public static function isAvailable();
+
 }
