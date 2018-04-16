@@ -211,10 +211,11 @@ class PiwikBasicTest extends WebTestBase {
 
     // Test whether the BEFORE and AFTER code is added to the tracker.
     $this->config('piwik.settings')->set('codesnippet.before', '_paq.push(["setLinkTrackingTimer", 250]);')->save();
-    $this->config('piwik.settings')->set('codesnippet.after', '_paq.push(["t2.setSiteId", 2]);_gaq.push(["t2.trackPageView"]);')->save();
+    $this->config('piwik.settings')->set('codesnippet.after', '_paq.push(["t2.setSiteId", 2]);if(1 == 1 && 2 < 3 && 2 > 1){console.log("Piwik: Custom condition works.");}_gaq.push(["t2.trackPageView"]);')->save();
     $this->drupalGet('');
     $this->assertRaw('setLinkTrackingTimer', '[testPiwikTrackingCode]: Before codesnippet has been found with "setLinkTrackingTimer" set.');
     $this->assertRaw('t2.trackPageView', '[testPiwikTrackingCode]: After codesnippet with "t2" tracker has been found.');
+    $this->assertRaw('if(1 == 1 && 2 < 3 && 2 > 1){console.log("Piwik: Custom condition works.");}', '[testPiwikTrackingCode]: JavaScript code is not HTML escaped.');
   }
 
 }

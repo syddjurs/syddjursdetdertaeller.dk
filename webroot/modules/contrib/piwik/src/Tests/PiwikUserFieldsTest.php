@@ -2,7 +2,6 @@
 
 namespace Drupal\piwik\Tests;
 
-use Drupal\Core\Session\AccountInterface;
 use Drupal\simpletest\WebTestBase;
 
 /**
