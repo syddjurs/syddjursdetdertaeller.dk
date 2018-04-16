@@ -254,13 +254,13 @@ class PiwikAdminSettingsForm extends ConfigFormBase {
     $colorbox_dependencies .= t('Requires: @module-list', ['@module-list' => (\Drupal::moduleHandler()->moduleExists('colorbox') ? t('@module (<span class="admin-enabled">enabled</span>)', ['@module' => 'Colorbox']) : t('@module (<span class="admin-missing">disabled</span>)', ['@module' => 'Colorbox']))]);
     $colorbox_dependencies .= '</div>';
 
-    $form['tracking']['linktracking']['piwik_trackcolorbox'] = array(
+    $form['tracking']['linktracking']['piwik_trackcolorbox'] = [
       '#type' => 'checkbox',
       '#title' => t('Track content in colorbox modal dialogs'),
       '#description' => t('Enable to track the content shown in colorbox modal windows.') . $colorbox_dependencies,
       '#default_value' => $config->get('track.colorbox'),
       '#disabled' => (\Drupal::moduleHandler()->moduleExists('colorbox') ? FALSE : TRUE),
-    );
+    ];
 
     // Message specific configurations.
     $form['tracking']['messagetracking'] = [
@@ -653,7 +653,7 @@ class PiwikAdminSettingsForm extends ConfigFormBase {
   }
 
   /**
-   * Validate if a string contains forbidden tokens not allowed by privacy rules.
+   * Validate if string contains forbidden tokens not allowed by privacy rules.
    *
    * @param string $token_string
    *   A string with one or more tokens to be validated.
