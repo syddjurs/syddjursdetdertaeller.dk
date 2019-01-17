@@ -218,7 +218,7 @@ abstract class ImageEffectsTestBase extends BrowserTestBase {
     // GraphicsMagick binaries installed, so the test will be skipped; they can
     // be run locally if binaries are installed.
     if ($toolkit_id === 'imagemagick') {
-      $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->checkPath('');
+      $status = \Drupal::service('image.toolkit.manager')->createInstance('imagemagick')->getExecManager()->checkPath('');
       if (!empty($status['errors'])) {
         $this->markTestSkipped("Tests for '{$toolkit_settings['binaries']}' cannot run because the binaries are not available on the shell path.");
       }
