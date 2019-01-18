@@ -89,7 +89,7 @@ after('success', 'slack:notify:success');
 before('slack:notify:success', 'slack:notify:success:init');
 
 // Additional Drupal release stuff
-after('deploy:update_code', 'deploy:composer:install');
+//after('deploy:update_code', 'deploy:composer:install');
 after('deploy:shared', 'deploy:maintenance_mode:enable');
 before('deploy:symlink', 'deploy:db:dump');
 before('cleanup', 'deploy:db:cleanup');
