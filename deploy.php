@@ -5,8 +5,8 @@ namespace Deployer;
 use Symfony\Component\Console\Input\InputOption;
 
 //require_once __DIR__ . '/common.php';
-require 'webdroot/vendor/deployer/deployer/recipe/drupal8.php';
-require 'webdroot/vendor/deployer/recipes/recipe/slack.php';
+require 'webroot/vendor/deployer/deployer/recipe/drupal8.php';
+require 'webroot/vendor/deployer/recipes/recipe/slack.php';
 //require 'deployer/recipe/composer.php;'
 require 'deployer/recipe/sql.php';
 require 'deployer/recipe/maintenance.php';
