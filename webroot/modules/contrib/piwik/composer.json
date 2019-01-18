@@ -18,5 +18,7 @@
     "source": "http://git.drupal.org/project/piwik.git"
   },
   "license": "GPL-2.0+",
-  "require": {}
+  "require": {
+    "drupal/matomo": "^1.0"
+  }
 }

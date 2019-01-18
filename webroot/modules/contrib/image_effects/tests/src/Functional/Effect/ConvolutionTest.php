@@ -76,8 +76,9 @@ class ConvolutionTest extends ImageEffectsTestBase {
       case 'imagemagick':
         // For the Imagemagick toolkit, check the command line argument has
         // been formatted properly.
-        $argument = $image->getToolkit()->getArguments()[$image->getToolkit()->findArgument('-morphology')];
-        $this->assertEqual("-morphology Convolve '3x3:1,1,1 1,1,1 1,1,1'", $argument);
+        $find = $image->getToolkit()->arguments()->find('/^./', NULL, ['image_toolkit_operation' => 'convolution']);
+        $arg = array_shift($find);
+        $this->assertEquals("-morphology Convolve '3x3:1,1,1 1,1,1 1,1,1'", $arg['argument']);
         break;
 
     }
