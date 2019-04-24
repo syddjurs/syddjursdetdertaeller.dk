@@ -12,7 +12,7 @@
         "deployer/recipes": "^6.1",
         "drupal/admin_toolbar": "^1.25",
         "drupal/ctools": "^3.0",
-        "drupal/devel": "^1.2",
+        "drupal/devel": "^2.0",
         "drupal/editor_advanced_link": "^1.4",
         "drupal/entity_reference_revisions": "^1.6",
         "drupal/field_collection": "^1.0@alpha",

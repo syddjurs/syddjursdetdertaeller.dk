@@ -1,6 +1,6 @@
 
 Module: Matomo Analytics
-Author: Alexander Hass <http://drupal.org/user/85918>
+Author: Alexander Hass <https://drupal.org/user/85918>
 
 
 Description
@@ -46,7 +46,7 @@ user with 'Administer Matomo' permission.
 Like the blocks visibility settings in Drupal core, there is a choice for
 "Add if the following PHP code returns TRUE." Sample PHP snippets that can be
 used in this textarea can be found on the handbook page "Overview-approach to
-block visibility" at http://drupal.org/node/64135.
+block visibility" at https://drupal.org/node/64135.
 
 Custom variables
 =================
@@ -65,7 +65,7 @@ Value: [current-user:matomo-role-ids]
 Scope: Visitor
 
 More details about custom variables can be found in the Matomo API documentation
-at http://matomo.org/docs/javascript-tracking/#toc-custom-variables.
+at https://matomo.org/docs/javascript-tracking/#toc-custom-variables.
 
 
 Advanced Settings
@@ -80,7 +80,7 @@ file locally.
 
 Known issues
 ============
-Drupal requirements (http://drupal.org/requirements) tell you to configure 
+Drupal requirements (https://drupal.org/requirements) tell you to configure 
 PHP with "session.save_handler = user", but your Matomo installation may
 not work with this configuration and gives you a server error 500.
 
