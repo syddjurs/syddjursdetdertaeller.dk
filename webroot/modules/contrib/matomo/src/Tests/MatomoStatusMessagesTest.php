@@ -57,7 +57,11 @@ class MatomoStatusMessagesTest extends WebTestBase {
     $this->assertRaw('_paq.push(["trackEvent", "Messages", "Error message", "Example error message with html tags and link."]);', '[testMatomoStatusMessages]: HTML has been stripped successful from Example error message with html tags and link.');
 
     // Enable logging of status, warnings and errors.
-    $this->config('matomo.settings')->set('track.messages', ['status' => 'status', 'warning' => 'warning', 'error' => 'error'])->save();
+    $this->config('matomo.settings')->set('track.messages', [
+      'status' => 'status',
+      'warning' => 'warning',
+      'error' => 'error',
+    ])->save();
 
     $this->drupalGet('matomo-test/drupal-messenger-add-message');
     $this->assertRaw('_paq.push(["trackEvent", "Messages", "Status message", "Example status message."]);', '[testMatomoStatusMessages]: Example status message is enabled for tracking.');

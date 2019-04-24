@@ -9,5 +9,5 @@ _core:
 id: comment_unpublish_action
 label: 'Skjul kommentarer'
 type: comment
-plugin: comment_unpublish_action
+plugin: 'entity:unpublish_action:comment'
 configuration: {  }

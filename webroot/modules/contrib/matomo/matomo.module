@@ -7,7 +7,7 @@
  * Adds the required Javascript to all your Drupal pages to allow tracking by
  * the Matomo statistics package.
  *
- * @author: Alexander Hass <http://drupal.org/user/85918>
+ * @author: Alexander Hass <https://drupal.org/user/85918>
  */
 
 use Drupal\Component\Serialization\Json;
@@ -19,14 +19,10 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Site\Settings;
 use Drupal\Core\Url;
+use Drupal\matomo\MatomoInterface;
 use Drupal\node\NodeInterface;
 use GuzzleHttp\Exception\RequestException;
 use Drupal\matomo\Component\Render\MatomoJavaScriptSnippet;
-
-/**
- * Define the default file extension list that should be tracked as download.
- */
-define('MATOMO_TRACKFILES_EXTENSIONS', '7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x|m)?|dot(x|m)?|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt(x|m)?|pot(x|m)?|pps(x|m)?|ppam|sld(x|m)?|thmx|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls(x|m|b)?|xlt(x|m)|xlam|xml|z|zip');
 
 /**
  * Implements hook_help().
@@ -34,7 +30,7 @@ define('MATOMO_TRACKFILES_EXTENSIONS', '7z|aac|arc|arj|asf|asx|avi|bin|csv|doc(x
 function matomo_help($route_name, RouteMatchInterface $route_match) {
   switch ($route_name) {
     case 'matomo.admin_settings_form':
-      return t('<a href=":pk_url">Matomo Analytics</a> is an open source (GPL license) web analytics software. It gives interesting reports on your website visitors, your popular pages, the search engines keywords they used, the language they speak... and so much more. Matomo aims to be an open source alternative to Google Analytics.', [':pk_url' => 'http://www.matomo.org/']);
+      return t('<a href=":pk_url">Matomo Analytics</a> is an open source (GPL license) web analytics software. It gives interesting reports on your website visitors, your popular pages, the search engines keywords they used, the language they speak... and so much more. Matomo aims to be an open source alternative to Google Analytics.', [':pk_url' => 'https://www.matomo.org/']);
   }
 }
 
@@ -114,7 +110,7 @@ function matomo_page_attachments(array &$page) {
         'error' => t('Error message'),
       ];
 
-      foreach (drupal_get_messages(NULL, FALSE) as $type => $messages) {
+      foreach (\Drupal::messenger()->all(NULL, FALSE) as $type => $messages) {
         // Track only the selected message types.
         if (in_array($type, $message_types)) {
           foreach ($messages as $message) {
@@ -198,7 +194,7 @@ function matomo_page_attachments(array &$page) {
     $codesnippet_after = $config->get('codesnippet.after');
 
     // Build tracker code.
-    // @see http://matomo.org/docs/javascript-tracking/#toc-asynchronous-tracking
+    // @see https://matomo.org/docs/javascript-tracking/#toc-asynchronous-tracking
     $script = 'var _paq = _paq || [];';
     $script .= '(function(){';
     $script .= 'var u=(("https:" == document.location.protocol) ? "' . UrlHelper::filterBadProtocol($url_https) . '" : "' . UrlHelper::filterBadProtocol($url_http) . '");';
@@ -220,7 +216,7 @@ function matomo_page_attachments(array &$page) {
     }
 
     // Custom file download extensions.
-    if ($config->get('track.files') && !($config->get('track.files_extensions') == MATOMO_TRACKFILES_EXTENSIONS)) {
+    if ($config->get('track.files') && !($config->get('track.files_extensions') == MatomoInterface::MATOMO_TRACKFILES_EXTENSIONS)) {
       $script .= '_paq.push(["setDownloadExtensions", ' . Json::encode($config->get('track.files_extensions')) . ']);';
     }
 
@@ -279,7 +275,7 @@ function matomo_page_attachments(array &$page) {
       ];
       // Disable the download & outlink tracking for specific CSS classes.
       // Custom code snippets with 'setIgnoreClasses' will override the value.
-      // @see http://developer.matomo.org/api-reference/tracking-javascript#disable-the-download-amp-outlink-tracking-for-specific-css-classes
+      // @see https://developer.matomo.org/api-reference/tracking-javascript#disable-the-download-amp-outlink-tracking-for-specific-css-classes
       $script .= '_paq.push(["setIgnoreClasses", ' . Json::encode($ignore_classes) . ']);';
 
       // Enable download & outlink link tracking.
@@ -441,11 +437,12 @@ function matomo_user_profile_form_submit($form, FormStateInterface $form_state) 
  */
 function matomo_cron() {
   $config = \Drupal::config('matomo.settings');
+  $request_time = \Drupal::time()->getRequestTime();
 
   // Regenerate the piwik.js every day.
-  if (REQUEST_TIME - \Drupal::state()->get('matomo.last_cache') >= 86400 && $config->get('cache')) {
+  if ($request_time - \Drupal::state()->get('matomo.last_cache') >= 86400 && $config->get('cache')) {
     _matomo_cache($config->get('url_http') . 'piwik.js', TRUE);
-    \Drupal::state()->set('matomo.last_cache', REQUEST_TIME);
+    \Drupal::state()->set('matomo.last_cache', $request_time);
   }
 }
 

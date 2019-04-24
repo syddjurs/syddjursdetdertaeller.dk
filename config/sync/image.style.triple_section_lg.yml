@@ -16,6 +16,7 @@ effects:
     data:
       width: 390
       height: 240
+      anchor: center-center
   80e79832-1df3-4987-9374-7c5408937a80:
     uuid: 80e79832-1df3-4987-9374-7c5408937a80
     id: image_effects_convolution_sharpen

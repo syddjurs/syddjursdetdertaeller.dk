@@ -4,14 +4,36 @@ namespace Drupal\matomo\Form;
 
 use Drupal\Component\Utility\Unicode;
 use Drupal\Component\Utility\UrlHelper;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\Core\Extension\ModuleHandler;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\matomo\MatomoInterface;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Client;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Configure Matomo settings for this site.
  */
 class MatomoAdminSettingsForm extends ConfigFormBase {
+
+  protected $moduleHandler;
+
+  protected $currentUser;
+
+  protected $httpClient;
+
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(ConfigFactoryInterface $config_factory, AccountInterface $currentUser, ModuleHandler $moduleHandler, Client $httpClient) {
+    parent::__construct($config_factory);
+    $this->currentUser = $currentUser;
+    $this->moduleHandler = $moduleHandler;
+    $this->httpClient = $httpClient;
+  }
 
   /**
    * {@inheritdoc}
@@ -117,7 +139,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     ];
 
     // Page specific visibility configurations.
-    $account = \Drupal::currentUser();
+    $account = $this->currentUser;
     $php_access = $account->hasPermission('use php for matomo tracking visibility');
     $visibility_request_path_pages = $config->get('visibility.request_path_pages');
 
@@ -140,7 +162,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       ];
       $description = $this->t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", ['%blog' => '/blog', '%blog-wildcard' => '/blog/*', '%front' => '<front>']);
 
-      if (\Drupal::moduleHandler()->moduleExists('php') && $php_access) {
+      if ($this->moduleHandler->moduleExists('php') && $php_access) {
         $options[] = $this->t('Pages on which this PHP code returns <code>TRUE</code> (experts only)');
         $title = $this->t('Pages or PHP code');
         $description .= ' ' . $this->t('If the PHP option is chosen, enter PHP code between %php. Note that executing incorrect PHP code can break your Drupal site.', ['%php' => '<?php ?>']);
@@ -207,13 +229,13 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
         1 => $this->t('Tracking on by default, users with %permission permission can opt out', $t_permission),
         2 => $this->t('Tracking off by default, users with %permission permission can opt in', $t_permission),
       ],
-      '#default_value' => !empty($visibility_user_account_mode) ? $visibility_user_account_mode : 1,
+      '#default_value' => !empty($visibility_user_account_mode) ? $visibility_user_account_mode : 0,
     ];
     $form['tracking']['user_visibility_settings']['matomo_trackuserid'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Track User ID'),
       '#default_value' => $config->get('track.userid'),
-      '#description' => $this->t('User ID enables the analysis of groups of sessions, across devices, using a unique, persistent, and non-personally identifiable ID string representing a user. <a href=":url">Learn more about the benefits of using User ID</a>.', [':url' => 'http://matomo.org/docs/user-id/']),
+      '#description' => $this->t('User ID enables the analysis of groups of sessions, across devices, using a unique, persistent, and non-personally identifiable ID string representing a user. <a href=":url">Learn more about the benefits of using User ID</a>.', [':url' => 'https://matomo.org/docs/user-id/']),
     ];
 
     // Link specific configurations.
@@ -237,7 +259,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       '#title_display' => 'invisible',
       '#type' => 'textfield',
       '#default_value' => $config->get('track.files_extensions'),
-      '#description' => $this->t('A file extension list separated by the | character that will be tracked as download when clicked. Regular expressions are supported. For example: @extensions', ['@extensions' => MATOMO_TRACKFILES_EXTENSIONS]),
+      '#description' => $this->t('A file extension list separated by the | character that will be tracked as download when clicked. Regular expressions are supported. For example: @extensions', ['@extensions' => MatomoInterface::MATOMO_TRACKFILES_EXTENSIONS]),
       '#maxlength' => 500,
       '#states' => [
         'enabled' => [
@@ -251,7 +273,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     ];
 
     $colorbox_dependencies = '<div class="admin-requirements">';
-    $colorbox_dependencies .= $this->t('Requires: @module-list', ['@module-list' => (\Drupal::moduleHandler()->moduleExists('colorbox') ? $this->t('@module (<span class="admin-enabled">enabled</span>)', ['@module' => 'Colorbox']) : $this->t('@module (<span class="admin-missing">disabled</span>)', ['@module' => 'Colorbox']))]);
+    $colorbox_dependencies .= $this->t('Requires: @module-list', ['@module-list' => ($this->moduleHandler->moduleExists('colorbox') ? $this->t('@module (<span class="admin-enabled">enabled</span>)', ['@module' => 'Colorbox']) : $this->t('@module (<span class="admin-missing">disabled</span>)', ['@module' => 'Colorbox']))]);
     $colorbox_dependencies .= '</div>';
 
     $form['tracking']['linktracking']['matomo_trackcolorbox'] = [
@@ -259,7 +281,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Track content in colorbox modal dialogs'),
       '#description' => $this->t('Enable to track the content shown in colorbox modal windows.') . $colorbox_dependencies,
       '#default_value' => $config->get('track.colorbox'),
-      '#disabled' => (\Drupal::moduleHandler()->moduleExists('colorbox') ? FALSE : TRUE),
+      '#disabled' => ($this->moduleHandler->moduleExists('colorbox') ? FALSE : TRUE),
     ];
 
     // Message specific configurations.
@@ -288,7 +310,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     ];
 
     $site_search_dependencies = '<div class="admin-requirements">';
-    $site_search_dependencies .= $this->t('Requires: @module-list', ['@module-list' => (\Drupal::moduleHandler()->moduleExists('search') ? $this->t('@module (<span class="admin-enabled">enabled</span>)', ['@module' => 'Search']) : $this->t('@module (<span class="admin-missing">disabled</span>)', ['@module' => 'Search']))]);
+    $site_search_dependencies .= $this->t('Requires: @module-list', ['@module-list' => ($this->moduleHandler->moduleExists('search') ? $this->t('@module (<span class="admin-enabled">enabled</span>)', ['@module' => 'Search']) : $this->t('@module (<span class="admin-missing">disabled</span>)', ['@module' => 'Search']))]);
     $site_search_dependencies .= '</div>';
 
     $form['tracking']['search']['matomo_site_search'] = [
@@ -296,7 +318,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       '#title' => $this->t('Track internal search'),
       '#description' => $this->t('If checked, internal search keywords are tracked.') . $site_search_dependencies,
       '#default_value' => $config->get('track.site_search'),
-      '#disabled' => (\Drupal::moduleHandler()->moduleExists('search') ? FALSE : TRUE),
+      '#disabled' => ($this->moduleHandler->moduleExists('search') ? FALSE : TRUE),
     ];
 
     // Privacy specific configurations.
@@ -308,7 +330,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     $form['tracking']['privacy']['matomo_privacy_donottrack'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Universal web tracking opt-out'),
-      '#description' => $this->t('If enabled and your Matomo server receives the <a href="http://donottrack.us/">Do-Not-Track</a> header from the client browser, the Matomo server will not track the user. Compliance with Do Not Track could be purely voluntary, enforced by industry self-regulation, or mandated by state or federal law. Please accept your visitors privacy. If they have opt-out from tracking and advertising, you should accept their personal decision.'),
+      '#description' => $this->t('If enabled and your Matomo server receives the <a href=":donottrack">Do-Not-Track</a> header from the client browser, the Matomo server will not track the user. Compliance with Do Not Track could be purely voluntary, enforced by industry self-regulation, or mandated by state or federal law. Please accept your visitors privacy. If they have opt-out from tracking and advertising, you should accept their personal decision.', [':donottrack' => 'https://www.eff.org/issues/do-not-track']),
       '#default_value' => $config->get('privacy.donottrack'),
     ];
 
@@ -334,7 +356,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
 
     // Custom variables.
     $form['matomo_custom_var'] = [
-      '#description' => $this->t('You can add Matomos <a href=":custom_var_documentation">Custom Variables</a> here. These will be added to every page that Matomo tracking code appears on. Custom variable names and values are limited to 200 characters in length. Keep the names and values as short as possible and expect long values to get trimmed. You may use tokens in custom variable names and values. Global and user tokens are always available; on node pages, node tokens are also available.', [':custom_var_documentation' => 'http://matomo.org/docs/custom-variables/']),
+      '#description' => $this->t('You can add Matomos <a href=":custom_var_documentation">Custom Variables</a> here. These will be added to every page that Matomo tracking code appears on. Custom variable names and values are limited to 200 characters in length. Keep the names and values as short as possible and expect long values to get trimmed. You may use tokens in custom variable names and values. Global and user tokens are always available; on node pages, node tokens are also available.', [':custom_var_documentation' => 'https://matomo.org/docs/custom-variables/']),
       '#title' => $this->t('Custom variables'),
       '#tree' => TRUE,
       '#type' => 'details',
@@ -382,7 +404,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
         '#element_validate' => [[get_class($this), 'tokenElementValidate']],
         '#token_types' => ['node'],
       ];
-      if (\Drupal::moduleHandler()->moduleExists('token')) {
+      if ($this->moduleHandler->moduleExists('token')) {
         $form['matomo_custom_var']['slots'][$i]['value']['#element_validate'][] = 'token_element_validate';
       }
       $form['matomo_custom_var']['slots'][$i]['scope'] = [
@@ -402,7 +424,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       '#type' => 'item',
       '#description' => $this->t("You can supplement Matomos' basic IP address tracking of visitors by segmenting users based on custom variables. Make sure you will not associate (or permit any third party to associate) any data gathered from your websites (or such third parties' websites) with any personally identifying information from any source as part of your use (or such third parties' use) of the Matomo' service."),
     ];
-    if (\Drupal::moduleHandler()->moduleExists('token')) {
+    if ($this->moduleHandler->moduleExists('token')) {
       $form['matomo_custom_var']['matomo_custom_var_token_tree'] = [
         '#theme' => 'token_tree_link',
         '#token_types' => ['node'],
@@ -424,7 +446,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     ];
 
     // Allow for tracking of the originating node when viewing translation sets.
-    if (\Drupal::moduleHandler()->moduleExists('content_translation')) {
+    if ($this->moduleHandler->moduleExists('content_translation')) {
       $form['advanced']['matomo_translation_set'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Track translation sets as one unit'),
@@ -439,7 +461,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
       '#type' => 'details',
       '#title' => $this->t('Custom JavaScript code'),
       '#open' => TRUE,
-      '#description' => $this->t('You can add custom Matomo <a href=":snippets">code snippets</a> here. These will be added to every page that Matomo appears on. <strong>Do not include the &lt;script&gt; tags</strong>, and always end your code with a semicolon (;).', [':snippets' => 'http://matomo.org/docs/javascript-tracking/']),
+      '#description' => $this->t('You can add custom Matomo <a href=":snippets">code snippets</a> here. These will be added to every page that Matomo appears on. <strong>Do not include the &lt;script&gt; tags</strong>, and always end your code with a semicolon (;).', [':snippets' => 'https://matomo.org/docs/javascript-tracking/']),
     ];
     $form['advanced']['codesnippet']['matomo_codesnippet_before'] = [
       '#type' => 'textarea',
@@ -496,7 +518,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
 
     $url = $form_state->getValue('matomo_url_http') . 'piwik.php';
     try {
-      $result = \Drupal::httpClient()->get($url);
+      $result = $this->httpClient->get($url);
       if ($result->getStatusCode() != 200 && $form_state->getValue('matomo_url_skiperror') == FALSE) {
         $form_state->setErrorByName('matomo_url_http', $this->t('The validation of "@url" failed with error "@error" (HTTP code @code).', [
           '@url' => UrlHelper::filterBadProtocol($url),
@@ -517,7 +539,7 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     if (!empty($matomo_url_https)) {
       $url = $matomo_url_https . 'piwik.php';
       try {
-        $result = \Drupal::httpClient()->get($url);
+        $result = $this->httpClient->get($url);
         if ($result->getStatusCode() != 200 && $form_state->getValue('matomo_url_skiperror') == FALSE) {
           $form_state->setErrorByName('matomo_url_https', $this->t('The validation of "@url" failed with error "@error" (HTTP code @code).', [
             '@url' => UrlHelper::filterBadProtocol($url),
@@ -712,6 +734,19 @@ class MatomoAdminSettingsForm extends ConfigFormBase {
     ];
 
     return preg_match('/' . implode('|', array_map('preg_quote', $token_blacklist)) . '/i', $token_string);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      // Load the service required to construct this class.
+      $container->get('config.factory'),
+      $container->get('current_user'),
+      $container->get('module_handler'),
+      $container->get('http_client')
+    );
   }
 
 }
