@@ -8,24 +8,8 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.double_section_element_image
   module:
-    - field_group
     - image
     - video_embed_field
-third_party_settings:
-  field_group:
-    group_image_video:
-      children:
-        - field_video
-        - field_image
-      parent_name: ''
-      weight: 0
-      label: 'Billede eller video (video rules)'
-      format_type: fieldset
-      format_settings:
-        description: ''
-        classes: ''
-        id: ''
-        required_fields: true
 id: paragraph.double_section_element_image.default
 targetEntityType: paragraph
 bundle: double_section_element_image

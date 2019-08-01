@@ -12,34 +12,17 @@ dependencies:
     - image.style.thumbnail
     - paragraphs.paragraphs_type.triple_section_element_img_text
   module:
-    - field_group
     - image
     - link
     - text
     - video_embed_field
-third_party_settings:
-  field_group:
-    group_image_or_video:
-      children:
-        - field_video
-        - field_image
-        - field_image_link
-      parent_name: ''
-      weight: 1
-      label: 'Billede eller video (video rules)'
-      format_type: fieldset
-      format_settings:
-        label: 'Billede eller video (video rules)'
-        id: ''
-        classes: ''
-        required_fields: false
 id: paragraph.triple_section_element_img_text.default
 targetEntityType: paragraph
 bundle: triple_section_element_img_text
 mode: default
 content:
   field_headline:
-    weight: 2
+    weight: 5
     settings:
       size: 60
       placeholder: ''
@@ -47,7 +30,7 @@ content:
     type: string_textfield
     region: content
   field_image:
-    weight: 4
+    weight: 2
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
@@ -56,7 +39,7 @@ content:
     region: content
   field_image_link:
     type: link_default
-    weight: 5
+    weight: 3
     settings:
       placeholder_url: ''
       placeholder_title: ''
@@ -69,7 +52,7 @@ content:
     type: options_select
     region: content
   field_text:
-    weight: 3
+    weight: 6
     settings:
       rows: 5
       placeholder: ''
@@ -77,11 +60,11 @@ content:
     type: text_textarea
     region: content
   field_video:
-    weight: 3
+    type: video_embed_field_textfield
+    weight: 1
+    region: content
     settings: {  }
     third_party_settings: {  }
-    type: video_embed_field_textfield
-    region: content
 hidden:
   created: true
   status: true
