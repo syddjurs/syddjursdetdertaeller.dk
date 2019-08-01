@@ -12,7 +12,7 @@ field_name: field_video
 entity_type: paragraph
 bundle: double_section_element_image
 label: Video
-description: ''
+description: 'Video overskriver billed-indstillinger'
 required: false
 translatable: true
 default_value: {  }

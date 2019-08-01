@@ -7,5 +7,4 @@ _core:
 name: Tags
 vid: tags
 description: 'Brug tags til at gruppere artikler om samme emne.'
-hierarchy: 0
 weight: 0
