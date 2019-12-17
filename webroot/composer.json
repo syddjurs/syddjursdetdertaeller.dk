@@ -10,7 +10,7 @@
         "drush/drush": "8.1.15",
         "deployer/deployer": "^6.3",
         "deployer/recipes": "^6.1",
-        "drupal/admin_toolbar": "^1.25",
+        "drupal/admin_toolbar": "^2.0",
         "drupal/ctools": "^3.0",
         "drupal/devel": "^2.0",
         "drupal/editor_advanced_link": "^1.4",
