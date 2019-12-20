@@ -108,13 +108,57 @@ task('artisan:view:clear', function () {
     run('{{bin/php}} {{release_path}}/artisan view:clear');
 });
 
+desc('Execute artisan view:cache');
+task('artisan:view:cache', function () {
+    $needsVersion = 5.6;
+    $currentVersion = get('laravel_version');
+
+    if (version_compare($currentVersion, $needsVersion, '>=')) {
+        run('{{bin/php}} {{release_path}}/artisan view:cache');
+    }
+});
+
+desc('Execute artisan event:cache');
+task('artisan:event:cache', function () {
+    $needsVersion = '5.8.9';
+    $currentVersion = get('laravel_version');
+
+    if (version_compare($currentVersion, $needsVersion, '>=')) {
+        run('{{bin/php}} {{release_path}}/artisan event:cache');
+    }
+});
+
+desc('Execute artisan event:clear');
+task('artisan:event:clear', function () {
+    $needsVersion = '5.8.9';
+    $currentVersion = get('laravel_version');
+
+    if (version_compare($currentVersion, $needsVersion, '>=')) {
+        run('{{bin/php}} {{release_path}}/artisan event:clear');
+    }
+});
+
 desc('Execute artisan optimize');
 task('artisan:optimize', function () {
     $deprecatedVersion = 5.5;
+    $readdedInVersion = 5.7;
     $currentVersion = get('laravel_version');
 
-    if (version_compare($currentVersion, $deprecatedVersion, '<')) {
+    if (
+        version_compare($currentVersion, $deprecatedVersion, '<') ||
+        version_compare($currentVersion, $readdedInVersion, '>=')
+    ) {
         run('{{bin/php}} {{release_path}}/artisan optimize');
+    }
+});
+
+desc('Execute artisan optimize:clear');
+task('artisan:optimize:clear', function () {
+    $needsVersion = 5.7;
+    $currentVersion = get('laravel_version');
+
+    if (version_compare($currentVersion, $needsVersion, '>=')) {
+        run('{{bin/php}} {{release_path}}/artisan optimize:clear');
     }
 });
 
@@ -172,7 +216,7 @@ task('deploy', [
     'deploy:vendors',
     'deploy:writable',
     'artisan:storage:link',
-    'artisan:view:clear',
+    'artisan:view:cache',
     'artisan:config:cache',
     'artisan:optimize',
     'deploy:symlink',
