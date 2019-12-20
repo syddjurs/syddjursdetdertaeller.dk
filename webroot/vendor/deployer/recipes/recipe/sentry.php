@@ -14,7 +14,7 @@ use Deployer\Utility\Httpie;
 desc('Notifying Sentry of deployment');
 task(
     'deploy:sentry',
-    function () {
+    static function () {
         $now = date('c');
 
         $defaultConfig = [
@@ -48,16 +48,16 @@ task(
         ) {
             throw new \RuntimeException(
                 <<<EXAMPLE
-Required data missing. Please configure sentry: 
+Required data missing. Please configure sentry:
 set(
-    'sentry', 
+    'sentry',
     [
-        'organization' => 'exampleorg', 
+        'organization' => 'exampleorg',
         'projects' => [
-            'exampleproj', 
+            'exampleproj',
             'exampleproje2'
-        ], 
-        'token' => 'd47828...', 
+        ],
+        'token' => 'd47828...',
     ]
 );"
 EXAMPLE
@@ -82,7 +82,6 @@ EXAMPLE
             $releasesApiUrl
         )
             ->header(sprintf('Authorization: Bearer %s', $config['token']))
-            ->header('Content-Type: application/json')
             ->body($releaseData)
             ->getJson();
 
@@ -113,7 +112,6 @@ EXAMPLE
             $releasesApiUrl . $response['version'] . '/deploys/'
         )
             ->header(sprintf('Authorization: Bearer %s', $config['token']))
-            ->header('Content-Type: application/json')
             ->body($deployData)
             ->getJson();
 
@@ -162,29 +160,33 @@ function getGitCommitsRefs(): Closure
         }
 
         cd('{{release_path}}');
-        $result = run(sprintf('git rev-list --pretty="%s" %s', 'format:%H#%an#%ae#%at', $commitRange));
-        $lines = array_filter(
-        // limit number of commits for first release with many commits
+        try {
+          $result = run(sprintf('git rev-list --pretty="%s" %s', 'format:%H#%an#%ae#%at', $commitRange));
+          $lines = array_filter(
+            // limit number of commits for first release with many commits
             array_map('trim', array_slice(explode("\n", $result), 0, 200)),
             static function (string $line): bool {
-                return !empty($line) && strpos($line, 'commit') !== 0;
+              return !empty($line) && strpos($line, 'commit') !== 0;
             }
-        );
+          );
 
-
-        return array_map(
+          return array_map(
             static function (string $line): array {
-                [$ref, $authorName, $authorEmail, $timestamp] = explode('#', $line);
+              list($ref, $authorName, $authorEmail, $timestamp) = explode('#', $line);
 
-                return [
-                    'id' => $ref,
-                    'author_name' => $authorName,
-                    'author_email' => $authorEmail,
-                    'timestamp' => date(DateTime::ATOM, (int) $timestamp),
-                ];
+              return [
+                'id' => $ref,
+                'author_name' => $authorName,
+                'author_email' => $authorEmail,
+                'timestamp' => date(DateTime::ATOM, (int) $timestamp),
+              ];
             },
             $lines
-        );
+          );
+
+        } catch (\Deployer\Exception\RuntimeException $e) {
+          writeln($e->getMessage());
+          return [];
+        }
     };
 }
-

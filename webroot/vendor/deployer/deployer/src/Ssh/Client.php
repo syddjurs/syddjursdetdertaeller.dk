@@ -68,7 +68,7 @@ class Client
             $command = escapeshellarg($command);
 
             $ssh = "ssh $sshArguments $host $command";
-            $process = new Process($ssh);
+            $process = $this->createProcess($ssh);
             $process
                 ->setTimeout($config['timeout'])
                 ->setTty(true)
@@ -83,9 +83,13 @@ class Client
 
         $shellCommand = $host->getShellCommand();
 
-        $ssh = "ssh $sshArguments $host $become '$shellCommand; printf \"[exit_code:%s]\" $?;'";
+        if (strtolower(substr(PHP_OS, 0, 3)) === 'win') {
+            $ssh = "ssh $sshArguments $host $become \"$shellCommand; printf '[exit_code:%s]' $?;\"";
+        } else {
+            $ssh = "ssh $sshArguments $host $become '$shellCommand; printf \"[exit_code:%s]\" $?;'";
+        }
 
-        $process = new Process($ssh);
+        $process = $this->createProcess($ssh);
         $process
             ->setInput($command)
             ->setTimeout($config['timeout']);
@@ -142,7 +146,7 @@ class Client
 
     private function isMultiplexingInitialized(Host $host, Arguments $sshArguments)
     {
-        $process = new Process("ssh -O check $sshArguments $host 2>&1");
+        $process = $this->createProcess("ssh -O check $sshArguments $host 2>&1");
         $process->run();
         return (bool)preg_match('/Master running/', $process->getOutput());
     }
@@ -169,5 +173,14 @@ class Client
             $exitCode = 1;
         }
         return $output;
+    }
+
+    private function createProcess($command)
+    {
+        if (method_exists('Symfony\Component\Process\Process', 'fromShellCommandline')) {
+            return Process::fromShellCommandline($command);
+        } else {
+            return new Process($command);
+        }
     }
 }

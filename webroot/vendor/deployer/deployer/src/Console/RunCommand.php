@@ -111,5 +111,7 @@ class RunCommand extends Command
         foreach ($hosts as $host) {
             $task->run(new Context($host, $input, $output));
         }
+
+        return 0;
     }
 }
