@@ -64,6 +64,7 @@ $sites['syddjursdetdertaeller.dk.staging.drupal08.novicell.dk'] = 'syddjursdetde
 $sites['www.syddjursdetdertaeller.dk.staging.drupal08.novicell.dk'] = 'syddjursdetdertaeller.dk';
 $sites['syddjursdetdertaeller.ditnyewebsite.dk'] = 'syddjursdetdertaeller.dk';
 $sites['www.syddjursdetdertaeller.ditnyewebsite.dk'] = 'syddjursdetdertaeller.dk';
+$sites['syddjursdetdertaeller.php01.stagingsite.dk'] = 'syddjursdetdertaeller.dk';
 
 # live
 $sites['syddjursdetdertaeller.dk'] = 'syddjursdetdertaeller.dk';
