@@ -5,7 +5,7 @@
 In most cases you don't need more than one production server.
 It's better to build your release files (as cache, js/css bundles) on that machine as well. 
 So your builds don't depend on your local configuration and can be deployed from everywhere.
-By default Deployer recipes are designed to fullfill these kind of deployments.  
+By default Deployer recipes are designed to fulfill these kind of deployments.  
 
 ~~~php
 desc('Deploy your project');
@@ -104,3 +104,11 @@ task('upload', function () {
 ~~~
 
 This task takes content from the current symlink of `deploy_path` from the build step and then uploads it to the application `release_path` path.
+
+### Prevent unnecessary deployment
+
+If your deployment goal is only to pull down the latest changes from your git repo, you can prevent redundant deployments with the `deploy:check_remote` task. This will compare your remote head with the last deployed and cancel the deployment if they match. This can provide a helpful hint if you've forgotten to push your latest commits.
+
+~~~php
+after('deploy:prepare', 'deploy:check_remote');
+~~~
