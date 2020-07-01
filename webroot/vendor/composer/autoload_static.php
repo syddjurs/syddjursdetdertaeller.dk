@@ -353,7 +353,7 @@ class ComposerStaticInitDrupal8
         ),
         'Egulias\\EmailValidator\\' => 
         array (
-            0 => __DIR__ . '/..' . '/egulias/email-validator/EmailValidator',
+            0 => __DIR__ . '/..' . '/egulias/email-validator/src',
         ),
         'Drupal\\Driver\\' => 
         array (
