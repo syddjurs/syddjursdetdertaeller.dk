@@ -302,7 +302,7 @@ function matomo_page_attachments(array &$page) {
     $script .= 'g.async=true;';
 
     // Should a local cached copy of the tracking code be used?
-    if ($config->get('cache') && $url = _matomo_cache($url_http . 'js/')) {
+    if ($config->get('cache') && $url = _matomo_cache($url_http . 'matomo.js')) {
       // A dummy query-string is added to filenames, to gain control over
       // browser-caching. The string changes on every update or full cache
       // flush, forcing browsers to load a new copy of the files, as the
@@ -312,7 +312,7 @@ function matomo_page_attachments(array &$page) {
       $script .= 'g.src="' . $url . $query_string . '";';
     }
     else {
-      $script .= 'g.src=u+"js/";';
+      $script .= 'g.src=u+"matomo.js";';
     }
 
     $script .= 's.parentNode.insertBefore(g,s);';
@@ -446,7 +446,7 @@ function matomo_cron() {
 
   // Regenerate the matomo.js every day.
   if ($request_time - \Drupal::state()->get('matomo.last_cache') >= 86400 && $config->get('cache')) {
-    _matomo_cache($config->get('url_http') . 'js/', TRUE);
+    _matomo_cache($config->get('url_http') . 'matomo.js', TRUE);
     \Drupal::state()->set('matomo.last_cache', $request_time);
   }
 }
