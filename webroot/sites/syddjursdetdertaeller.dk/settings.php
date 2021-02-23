@@ -522,6 +522,19 @@ if ($settings['hash_salt']) {
 # $settings['file_private_path'] = '';
 
 /**
+ * Temporary file path:
+ *
+ * A local file system path where temporary files will be stored. This directory
+ * must be absolute, outside of the Drupal installation directory and not
+ * accessible over the web.
+ *
+ * If this is not set, the default for the operating system will be used.
+ *
+ * @see \Drupal\Component\FileSystem\FileSystem::getOsTemporaryDirectory()
+ */
+$settings['file_temp_path'] = '/tmp';
+
+/**
  * Session write interval:
  *
  * Set the minimum interval between each session write to database.
