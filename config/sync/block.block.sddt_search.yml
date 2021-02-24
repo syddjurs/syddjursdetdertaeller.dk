@@ -19,4 +19,5 @@ settings:
   label: Søg
   provider: search
   label_display: visible
+  page_id: ''
 visibility: {  }

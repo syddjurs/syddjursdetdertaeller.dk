@@ -30,6 +30,11 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  matomo:
+    weight: 3
+    settings: {  }
+    third_party_settings: {  }
+    region: content
   piwik:
     weight: 3
     region: content
