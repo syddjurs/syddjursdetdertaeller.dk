@@ -44,8 +44,6 @@
     "glob": "^7.1.2",
     "minimist": "^1.2.2",
     "mkdirp": "^0.5.1",
-    "nightwatch": "^1.2.1",
-    "postcss": "^8.2.10",
     "nightwatch": "^1.6.3",
     "postcss": "^7.0.18",
     "postcss-calc": "^7.0.1",
